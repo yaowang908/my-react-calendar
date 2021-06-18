@@ -1,0 +1,112 @@
+import React from "react";
+import { nanoid  } from "nanoid";
+import { useRecoilValue } from "recoil";
+
+import {
+    targetYear as targetYearState,
+    targetMonth as targetMonthState,
+    fetchStatus as fetchStatusState,
+} from "Recoil/calendar.atom";
+import ListEntry from "components/ListEntry/ListEntry";
+import Loading from "components/Loading/Loading";
+import ErrorScreen from "components/ErrorScreen/ErrorScreen";
+
+export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
+    // const normalEvents = useRecoilValue(normalEventsAtom);
+    // const multiDayEvents = useRecoilValue(multiDayEventsAtom);
+    const targetMonth = useRecoilValue(targetMonthState);
+    const targetYear = useRecoilValue(targetYearState);
+    const fetchStatus = useRecoilValue(fetchStatusState);
+
+    const [normal, setNormal] = React.useState(eventsData);
+    const [multi, setMulti] = React.useState(multiDayEvents);
+
+    React.useEffect(() => {
+        setNormal(eventsData);
+        setMulti(multiDayEvents);
+    }, [eventsData, multiDayEvents]);
+
+
+    //  DONE: make it sticky after header
+
+    //DONE: only show evens on the targeted month
+
+    const shouldMultiDayEventShow = (
+        startDateDetails,
+        endDateDetails,
+        targetMonth,
+        targetYear
+    ) => {
+        if (!(startDateDetails && endDateDetails && targetMonth && targetYear))
+            return false;
+
+        const [startDateMonth, startDateYear] = [
+            Number(startDateDetails?.month),
+            Number(startDateDetails?.year),
+        ];
+        const [endDateMonth, endDateYear] = [
+            Number(endDateDetails?.month),
+            Number(endDateDetails?.year),
+        ];
+
+        if (endDateYear < targetYear || startDateYear > targetYear)
+            return false;
+        if (endDateMonth < targetMonth || startDateMonth > targetMonth)
+            return false;
+
+        return true;
+    };
+
+    return (
+        <>
+            <div className="relative w-full border-b border-gray-900 mb-12 z-10 bg-white sticky top-80 shadow-xl">
+                {/* <h3>MultiDayEvents</h3> */}
+                {multi?.map((x, index) => {
+                    if (
+                        shouldMultiDayEventShow(
+                            x?.start_date_details,
+                            x?.end_date_details,
+                            targetMonth,
+                            targetYear
+                        )
+                    ) {
+                        return (
+                            <ListEntry
+                                key={nanoid()}
+                                date={`${x?.start_date_details?.year}-${x?.start_date_details?.month}-${x?.start_date_details?.day} - ${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.day}`}
+                                link={x?.url}
+                                title={x?.title}
+                                imgSrc={x?.imgUrl}
+                            />
+                        );
+                    }
+                    return "";
+                })}
+            </div>
+            <div className="relative w-full">
+                {fetchStatus.isProcessing ? <Loading /> : ""}
+                {!fetchStatus.isProcessing &&
+                fetchStatus.isFinished &&
+                !fetchStatus.succeed ? (
+                    <ErrorScreen />
+                ) : (
+                    ""
+                )}
+                {normal?.map((x) => {
+                    if (Number(x?.end_date_details?.month) === targetMonth) {
+                        return (
+                            <ListEntry
+                                key={nanoid()}
+                                date={`${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.day}`}
+                                link={x?.url}
+                                title={x?.title}
+                                imgSrc={x?.imgUrl}
+                            />
+                        );
+                    }
+                    return "";
+                })}
+            </div>
+        </>
+    );
+}
