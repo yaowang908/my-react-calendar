@@ -18,6 +18,16 @@ Default.args = {
 
 export const Primary = Template.bind({});
 
+// TODO:
+/**
+ *  1. streamline data structure for events
+ *      1. auto generate multi_day attributes
+ *      2. rename the attributes, make it short
+ *  2. timezone conversion
+ *  3. handle empty input or in-valid ones
+ *  4. update README file
+ * */
+
 Primary.args = {
     events: [
         {
