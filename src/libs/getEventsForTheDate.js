@@ -1,4 +1,4 @@
-import { eventsPlaceholder } from "api/placeholder";
+import { eventsPlaceholder } from "libs/placeholder";
 
 const stringTo2Digits = (t) => {
     if (typeof t !== "string" && typeof t !== "number") return false;

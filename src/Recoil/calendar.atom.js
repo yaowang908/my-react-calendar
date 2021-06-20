@@ -1,4 +1,4 @@
-import { eventsPlaceholder } from "api/placeholder";
+import { eventsPlaceholder } from "libs/placeholder";
 import { atom, selector, DefaultValue } from "recoil";
 
 const calendarStart = atom({

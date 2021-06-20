@@ -1,7 +1,7 @@
 import React from 'react'
 import { Calendar } from 'index.js'
 
-import {eventsPlaceholder} from 'api/placeholder'
+import {eventsPlaceholder} from 'libs/placeholder'
 
 export default {
     component: Calendar,
