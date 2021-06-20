@@ -4,7 +4,6 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import { monthArray } from "libs/getWeeks";
 import {
     selectedDay as selectedDayState,
-    fetchStatus as fetchStatusState,
     eventsDataAtom,
     multiDayEventsAtom,
     normalEventsAtom,
@@ -24,7 +23,6 @@ export default function Calendar({events, otherProps}) {
     const [multiDayEvents, setMultiDayEventsState] =
         useRecoilState(multiDayEventsAtom);
     const [normalEvents, setNormalEvents] = useRecoilState(normalEventsAtom);
-    const fetchStatus = useRecoilValue(fetchStatusState);
     const calendarView = useRecoilValue(calendarViewSelector);
 
     const getMobileViewMonthName = (selected) => {
@@ -37,6 +35,7 @@ export default function Calendar({events, otherProps}) {
     // console.log(`${year}-${month}-${date}`, events)
 
     React.useEffect(() => {
+        // console.log(events)
         if(events) {
             setEventsData(events)
         }
@@ -62,19 +61,17 @@ export default function Calendar({events, otherProps}) {
 
         const [normalEvents, multiDayEvents] = eventsFilter(eventsData);
 
-        if (fetchStatus.isFinished) {
-            // console.log('normalEvents', normalEvents);
-            // console.log('multiDayEvents', multiDayEvents);
+        // console.log('normalEvents', normalEvents);
+        // console.log('multiDayEvents', multiDayEvents);
 
-            setNormalEvents(normalEvents);
-            setMultiDayEventsState(multiDayEvents);
-            // setMultiDayEventsState([...multiDayEvents, ...multiDayEvents]);
-        }
+        setNormalEvents(normalEvents);
+        setMultiDayEventsState(multiDayEvents);
+        // setMultiDayEventsState([...multiDayEvents, ...multiDayEvents]);
 
         // DONE: multi day events are hidden now
         //DONE: mobile events also
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [eventsData, fetchStatus, setMultiDayEventsState]);
+    }, [eventsData, setMultiDayEventsState]);
 
     if (calendarView === "MONTH") {
         return (

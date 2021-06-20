@@ -96,51 +96,6 @@ const eventsDataAtom = atom({
     default: eventsPlaceholder.events,
 });
 
-const fetchStatusAtom = atom({
-    key: "fetchStatusAtom",
-    default: {
-        isProcessing: false,
-        isFinished: true,
-        succeed: true,
-    },
-});
-
-const fetchStatus = selector({
-    key: "fetchStatus",
-    get: ({ get }) => get(fetchStatusAtom),
-    set: ({ set, get }, status) => {
-        console.log(status);
-        switch (status) {
-            case "FETCHING":
-                set(fetchStatusAtom, {
-                    isProcessing: true,
-                    isFinished: false,
-                    succeed: false,
-                });
-                break;
-            case "ERROR":
-                set(fetchStatusAtom, {
-                    isProcessing: false,
-                    isFinished: true,
-                    succeed: false,
-                });
-                break;
-            case "FINISHED":
-                set(fetchStatusAtom, {
-                    isProcessing: false,
-                    isFinished: true,
-                    succeed: true,
-                });
-                break;
-            default:
-                if (status instanceof DefaultValue) {
-                    set(fetchStatusAtom, status);
-                }
-                break;
-        }
-    },
-});
-
 const isMonthSelectorHidden = atom({
     key: "isMonthSelectorHidden",
     default: true,
@@ -195,7 +150,6 @@ export {
     selectedDay,
     eventsBufferAtom,
     eventsDataAtom,
-    fetchStatus,
     isMonthSelectorHidden,
     multiDayEventsAtom,
     normalEventsAtom,

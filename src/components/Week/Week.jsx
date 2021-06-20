@@ -5,7 +5,6 @@ import renderHTML from "react-render-html";
 
 import {
     selectedDay as selectedDayState,
-    fetchStatus as fetchStatusState,
     multiDayEventsAtom,
 } from "Recoil/calendar.atom";
 import Day from "components/Day/Day";
@@ -14,7 +13,6 @@ import MultiDayEvent from "components/MultiDayEvents/MultiDayEvent";
 
 export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     const selectedDay = useRecoilValue(selectedDayState);
-    const fetchStatus = useRecoilValue(fetchStatusState);
     const multiDayEventsState = useRecoilValue(multiDayEventsAtom);
 
     const [localMultiDayEvents, setLocalMultiDayEvents] = React.useState([]);
@@ -68,7 +66,7 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
             new Date(weekLastDay)?.getTime(),
         ];
         // console.log(eventFirstDay, weekLastDay)
-        // console.log( (eventFirst > weekLast))
+        // console.log(eventLast < weekFirst);
         if (eventLast < weekFirst || eventFirst > weekLast) {
             return false;
         }
@@ -150,31 +148,28 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     };
 
     React.useEffect(() => {
-        if (fetchStatus.isFinished) {
-            // fetched real data
-            // console.log('dates in week component: ', datesArray);
-            const firstDay = datesArray[0];
-            const lastDay = datesArray[datesArray.length - 1];
-            const weekFirstDay = `${firstDay.year}-${firstDay.month}-${firstDay.date}`;
-            const weekLastDay = `${lastDay.year}-${lastDay.month}-${lastDay.date}`;
-            // console.log('First and Last day: ', firstDay, lastDay);
-            // console.log('multidayEventsArr', multiDayEventsState)
-            const arr = barsToShowMultiDayEvents(
-                multiDayEventsState,
-                weekFirstDay,
-                weekLastDay
-            );
+        // console.log('dates in week component: ', datesArray);
+        const firstDay = datesArray[0];
+        const lastDay = datesArray[datesArray.length - 1];
+        const weekFirstDay = `${firstDay.year}-${firstDay.month}-${firstDay.date}`;
+        const weekLastDay = `${lastDay.year}-${lastDay.month}-${lastDay.date}`;
+        // console.log('First and Last day: ', firstDay, lastDay);
+        // console.log('multidayEventsArr', multiDayEventsState)
+        const arr = barsToShowMultiDayEvents(
+            multiDayEventsState,
+            weekFirstDay,
+            weekLastDay
+        );
 
-            if (arr.length > 0) {
-                // console.log('dates in week component: ', datesArray);
-                // console.log(arr);
-                // setLocalMultiDayEvents([...arr, ...arr]);
-                setLocalMultiDayEvents(arr);
-                // console.log('bar position: ', )
-            }
+        if (arr.length > 0) {
+            // console.log('dates in week component: ', datesArray);
+            // console.log(arr);
+            // setLocalMultiDayEvents([...arr, ...arr]);
+            setLocalMultiDayEvents(arr);
+            // console.log('bar position: ', )
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [datesArray, fetchStatus, multiDayEventsState]);
+    }, [datesArray, multiDayEventsState]);
 
     return (
         <div className="relative grid grid-cols-7 w-full">

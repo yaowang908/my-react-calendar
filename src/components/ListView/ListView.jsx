@@ -5,7 +5,6 @@ import { useRecoilValue } from "recoil";
 import {
     targetYear as targetYearState,
     targetMonth as targetMonthState,
-    fetchStatus as fetchStatusState,
 } from "Recoil/calendar.atom";
 import ListEntry from "components/ListEntry/ListEntry";
 import Loading from "components/Loading/Loading";
@@ -16,7 +15,6 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
     // const multiDayEvents = useRecoilValue(multiDayEventsAtom);
     const targetMonth = useRecoilValue(targetMonthState);
     const targetYear = useRecoilValue(targetYearState);
-    const fetchStatus = useRecoilValue(fetchStatusState);
 
     const [normal, setNormal] = React.useState(eventsData);
     const [multi, setMulti] = React.useState(multiDayEvents);
@@ -84,14 +82,6 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                 })}
             </div>
             <div className="relative w-full">
-                {fetchStatus.isProcessing ? <Loading /> : ""}
-                {!fetchStatus.isProcessing &&
-                fetchStatus.isFinished &&
-                !fetchStatus.succeed ? (
-                    <ErrorScreen />
-                ) : (
-                    ""
-                )}
                 {normal?.map((x) => {
                     if (Number(x?.end_date_details?.month) === targetMonth) {
                         return (
