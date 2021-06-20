@@ -1,12 +1,12 @@
 import React from 'react'
-import App from 'App.js'
+import { Calendar } from 'index.js'
 
 export default {
-    component: App,
+    component: Calendar,
     title: "Calendar",
 };
 
-const Template = (args) => <App {...args} />;
+const Template = (args) => <Calendar {...args} />;
 
 export const Primary = Template.bind({});
 
