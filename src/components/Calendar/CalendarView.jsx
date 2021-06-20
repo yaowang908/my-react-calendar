@@ -11,8 +11,6 @@ import {
 } from "Recoil/calendar.atom";
 import useWindowSize from "hooks/useWindowSize";
 import { eventsPlaceholder as eventsPlaceHolder } from "libs/placeholder";
-import Loading from "components/Loading/Loading";
-import ErrorScreen from "components/ErrorScreen/ErrorScreen";
 
 export default function CalendarView({ eventsData = null, otherProps }) {
     const [cellWidth, setCellWidth] = React.useState(20);
