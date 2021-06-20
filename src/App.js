@@ -3,7 +3,7 @@ import { RecoilRoot } from "recoil";
 
 import Header from "components/Header/Header";
 import Calendar from "components/Calendar/Calendar";
-import "./App.css";
+import "index.css";
 
 function App() {
     return (
