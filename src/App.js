@@ -8,7 +8,7 @@ import "index.css";
 function App() {
     return (
         <RecoilRoot>
-            <div className="max-w-1080 mx-auto px-5 my-10">
+            <div className="max-w-1080 max-h-full mx-auto px-5">
                 <Header />
                 <Calendar />
             </div>

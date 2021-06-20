@@ -10,7 +10,6 @@ import {
     normalEventsAtom,
     calendarView as calendarViewSelector,
 } from "Recoil/calendar.atom";
-// import useEventsBuffer from 'hooks/useEventsBuffer';
 import MobileEvents from "components/MobileEvents/MobileEvents";
 import { getEventsForTheDate } from "libs/getEventsForTheDate";
 import CalendarView from "components/Calendar/CalendarView";
@@ -21,7 +20,6 @@ import DayNames from "components/DayNames/DayNames";
 
 export default function Calendar() {
     const selectedDay = useRecoilValue(selectedDayState);
-    // const eventsData = useEventsBuffer();
     const eventsData = useRecoilValue(eventsDataAtom);
     const [multiDayEvents, setMultiDayEventsState] =
         useRecoilState(multiDayEventsAtom);
