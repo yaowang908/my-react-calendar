@@ -23,7 +23,7 @@ const eventsPlaceholder = {
                 year: year,
                 month: month,
                 day: day,
-                hour: hour + 1,
+                hour: stringTo2Digits(Number(hour) + 1),
                 minutes: minutes,
             },
             start_date: `${year}-${month}-${day}`,
@@ -35,18 +35,17 @@ const eventsPlaceholder = {
                 minutes: minutes,
             },
             url: "https://source.unsplash.com/",
-            title: "Lorem Ipsum is simply dummy text of the printing and typesettin",
+            title:
+                "Lorem Ipsum is simply dummy text of the printing and typesettin",
             image: {
                 url: "https://source.unsplash.com/random/1200x630",
             },
+            imgUrl: "https://source.unsplash.com/random/1200x630",
             status: "published",
             date_utc: "string",
             timezone: "America/New_York",
         },
     ],
-    rest_url: "https://www.google.com",
-    total: 7,
-    total_pages: 1,
 };
 
 export { eventsPlaceholder };

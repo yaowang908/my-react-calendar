@@ -18,9 +18,9 @@ import ListView from "components/ListView/ListView";
 import DayNames from "components/DayNames/DayNames";
 // import { stringTo2Digits } from 'libs/getEventsForTheDate';
 
-export default function Calendar() {
+export default function Calendar({events, otherProps}) {
     const selectedDay = useRecoilValue(selectedDayState);
-    const eventsData = useRecoilValue(eventsDataAtom);
+    const [eventsData, setEventsData] = useRecoilState(eventsDataAtom);
     const [multiDayEvents, setMultiDayEventsState] =
         useRecoilState(multiDayEventsAtom);
     const [normalEvents, setNormalEvents] = useRecoilState(normalEventsAtom);
@@ -35,6 +35,13 @@ export default function Calendar() {
 
     //DONE: multi day events needs to cross a few blocks
     // console.log(`${year}-${month}-${date}`, events)
+
+    React.useEffect(() => {
+        if(events) {
+            setEventsData(events)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [events])
 
     React.useEffect(() => {
         const eventsFilter = (events) => {

@@ -3,22 +3,17 @@ import {
     useRecoilState,
     useRecoilValue,
     useResetRecoilState,
-    useSetRecoilState,
 } from "recoil";
 
 import {
     selectedDay as selectedDayState,
     targetMonth as targetMonthState,
     targetYear as targetYearState,
-    eventsBufferAtom,
-    eventsDataAtom,
-    fetchStatus as fetchStatusState,
     isMonthSelectorHidden as isMonthSelectorHiddenState,
     isViewSelectorHidden as isViewSelectorHiddenState,
     calendarView as calendarViewSelector,
 } from "Recoil/calendar.atom";
 import { monthArray } from "libs/getWeeks";
-import { getEvents } from "libs/getEvents";
 import MonthSelector from "components/MonthSelector/MonthSelector";
 import ViewSelector from "components/ViewSelector/ViewSelector";
 
@@ -28,9 +23,6 @@ export default function Header() {
     const resetMonth = useResetRecoilState(targetMonthState);
     const resetYear = useResetRecoilState(targetYearState);
     const resetSelectedDay = useResetRecoilState(selectedDayState);
-    const [eventsBuffer, setEventsBuffer] = useRecoilState(eventsBufferAtom);
-    const setEventsData = useSetRecoilState(eventsDataAtom);
-    const setFetchStatus = useSetRecoilState(fetchStatusState);
     const [isMonthSelectorHidden, setIsMonthSelectorHidden] = useRecoilState(
         isMonthSelectorHiddenState
     );
@@ -52,39 +44,6 @@ export default function Header() {
         // console.log('clicked', isMonthSelectorHidden);
         setIsMonthSelectorHidden(!isMonthSelectorHidden);
     };
-
-    React.useEffect(() => {
-        (async () => {
-            // to save loading time, fetch data per year
-            const startDate = `${targetYear}-1-1`;
-            const endDate = `${targetYear}-12-31`;
-            const index = `${targetYear}`;
-
-            if (eventsBuffer && eventsBuffer[index]) {
-                console.log("use buffer");
-                setEventsData(eventsBuffer[index]);
-            } else {
-                // console.log('index',index)
-                // console.log('eventsBuffer',eventsBuffer)
-
-                // get data and store them and return
-                // console.log('fetch data', new Date());
-                setFetchStatus("FETCHING");
-                const _events = await getEvents(startDate, endDate);
-                if (!_events) {
-                    setFetchStatus("ERROR");
-                    console.log("There is an Error in fetching process");
-                    return;
-                }
-                setFetchStatus("FINISHED");
-                // console.log('fetch data finished', new Date(), _events);
-                setEventsBuffer({ ...eventsBuffer, [index]: _events });
-                // console.log('_events',_events);
-                setEventsData(_events);
-            }
-        })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [targetYear]);
 
     const resetClickHandler = (event) => {
         event.preventDefault();
