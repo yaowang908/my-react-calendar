@@ -13,6 +13,7 @@ export default function MobileEvents({
     const [eventsState, setEventsState] = React.useState(events);
 
     React.useEffect(() => {
+        // console.log("MobileEvents: ", events)
         setEventsState(events);
     }, [events]);
 

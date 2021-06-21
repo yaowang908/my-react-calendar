@@ -47,6 +47,7 @@ function App({ events, ...otherProps }) {
 
     React.useEffect(() => {
         const temp = [];
+        // console.log("Events: ", events)
         events.map((event) => {
             const _startDetails = getTimeDetails(event?.start);
             const _endDetails = getTimeDetails(event?.end);

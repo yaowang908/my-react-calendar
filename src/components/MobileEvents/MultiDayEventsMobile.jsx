@@ -22,12 +22,13 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
             const targetTimeStamp = new Date(
                 `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`
             ).getTime();
-            const startBoundary = new Date(
+            const startBoundary = new Date(new Date(
                 `${multiDayEvent?.start_date_details?.year}-${multiDayEvent?.start_date_details?.month}-${multiDayEvent?.start_date_details?.date}`
-            ).getTime();
-            const endBoundary = new Date(
+            ).setHours(24, 0, 0, 0)).getTime();
+            const endBoundary = new Date(new Date(
                 `${multiDayEvent?.end_date_details?.year}-${multiDayEvent?.end_date_details?.month}-${multiDayEvent?.end_date_details?.date}`
-            ).getTime();
+            ).setHours(24, 0, 0, 0)).getTime();
+            // console.log("check????", startBoundary, targetTimeStamp, endBoundary);
 
             if (
                 isNaN(targetTimeStamp) ||
@@ -58,6 +59,7 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
             }
             return <></>;
         });
+        // console.log('multidayevents for selected day: ', temp)
         setMultiDayEventsForSelectedDay(temp);
     }, [multiDayEventsState, selectedDay]);
 
