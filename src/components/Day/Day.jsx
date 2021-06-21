@@ -91,7 +91,7 @@ export default function Day({
         // event.preventDefault();
         const _thisNode = event.target.dataset;
         if (!_thisNode || !_thisNode.date) return; //when click on child element, stop handler
-        // console.log(_thisNode);
+        // console.log(event.target.dataset);
         setSelectedDay({
             date: _thisNode.date,
             month: _thisNode.month,

@@ -14,7 +14,10 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
     // show the block
     React.useEffect(() => {
         // console.log("mobileView", multiDayEventsState);
-        // console.log("selectedDay", selectedDay);
+        // console.log(
+        //     "selectedDay",
+        //     `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`
+        // );
         const isSelectedDayInThePeriod = (selectedDay, multiDayEvent) => {
             const targetTimeStamp = new Date(
                 `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`
