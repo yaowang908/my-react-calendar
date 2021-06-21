@@ -17,31 +17,36 @@ export default function EventEntry({
             if (!image) {
                 setLocalImgSrc(local_default_image);
             }
+        } else {
+            setLocalImgSrc(image);
         }
+
     }, [image]);
 
     const mouseEnterHandler = (event) => {
         // console.log('Enter', link, event);
-        const cursorX = event.clientX;
-        const cursorY = event.clientY;
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
-        // console.log('Cursor', cursorX, cursorY);
-        // console.log('Screen', screenWidth, screenHeight);
-        const isRightHalf = screenWidth / 2 < cursorX ? true : false;
-        const isTopHalf = screenHeight / 2 < cursorY ? false : true;
+        if (localImgSrc){
+            const cursorX = event.clientX;
+            const cursorY = event.clientY;
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            // console.log('Cursor', cursorX, cursorY);
+            // console.log('Screen', screenWidth, screenHeight);
+            const isRightHalf = screenWidth / 2 < cursorX ? true : false;
+            const isTopHalf = screenHeight / 2 < cursorY ? false : true;
 
-        eventImage.current.classList.remove("hidden");
-        if (isRightHalf) {
-            eventImage.current.classList.add("block", "-ml-32");
-        } else {
-            eventImage.current.classList.add("block");
-        }
+            eventImage.current.classList.remove("hidden");
+            if (isRightHalf) {
+                eventImage.current.classList.add("block", "-ml-32");
+            } else {
+                eventImage.current.classList.add("block");
+            }
 
-        if (isTopHalf) {
-            eventImage.current.classList.add("mt-16");
-        } else {
-            eventImage.current.classList.add("-mt-32");
+            if (isTopHalf) {
+                eventImage.current.classList.add("mt-16");
+            } else {
+                eventImage.current.classList.add("-mt-32");
+            }
         }
     };
     const mouseLeaveHandler = () => {
@@ -66,7 +71,11 @@ export default function EventEntry({
             </div>
             <div className="mb-1">{time.toUpperCase()}</div>
             <div>
-                <a href={link}>{title}</a>
+                {
+                    link ?
+                    <a href={link}>{title}</a> :
+                    <p>{title}</p>
+                }
             </div>
         </div>
     );

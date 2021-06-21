@@ -17,7 +17,7 @@ OneDayEvent.args = {
         {
             start: "2021-06-22 14:30:00",
             end: "2021-06-22 16:30:00",
-            timezone: "America/New_York",
+            // timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
             url: "https://source.unsplash.com",
@@ -34,7 +34,7 @@ export const MultiDayEvent = Template.bind({});
  *      DONE: 1. auto generate multi_day attributes
  *      DONE: 2. rename the attributes, make it short
  *  2. timezone conversion
- *  3. handle empty input or in-valid ones
+ *  DONE: 3. handle empty input or in-valid ones
  *  4. update README file
  * */
 
