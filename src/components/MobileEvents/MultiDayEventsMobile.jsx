@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import MobileEventEntry from "components/MobileEvents/MobileEventEntry";
 import { multiDayEventsAtom } from "Recoil/calendar.atom";
+import { stringTo2Digits } from "libs/getEventsForTheDate";
 
 export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
     const multiDayEventsState = useRecoilValue(multiDayEventsAtom);
@@ -20,7 +21,7 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
         // );
         const isSelectedDayInThePeriod = (selectedDay, multiDayEvent) => {
             const targetTimeStamp = new Date(
-                `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`
+                `${selectedDay?.year}-${stringTo2Digits(selectedDay?.month)}-${ stringTo2Digits(selectedDay?.date) }`
             ).getTime();
             const startBoundary = new Date(new Date(
                 `${multiDayEvent?.start_date_details?.year}-${multiDayEvent?.start_date_details?.month}-${multiDayEvent?.start_date_details?.date}`
@@ -28,7 +29,7 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
             const endBoundary = new Date(new Date(
                 `${multiDayEvent?.end_date_details?.year}-${multiDayEvent?.end_date_details?.month}-${multiDayEvent?.end_date_details?.date}`
             ).setHours(24, 0, 0, 0)).getTime();
-            // console.log("check????", startBoundary, targetTimeStamp, endBoundary);
+            // console.log("check????", `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`);
 
             if (
                 isNaN(targetTimeStamp) ||

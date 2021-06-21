@@ -26,9 +26,9 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
 
     const isDayPast = (month, date, year) => {
         if (
-            month < todayMonth ||
-            year < todayYear ||
-            (month === todayMonth && date < todayDate)
+            Number(month) < Number(todayMonth) ||
+            Number(year) < Number(todayYear) ||
+            (Number(month) === Number(todayMonth) && Number(date) < Number(todayDate))
         ) {
             return true;
         }
@@ -36,7 +36,7 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     };
 
     const isToday = (month, date, year) => {
-        if (month === todayMonth && date === todayDate && year === todayYear) {
+        if (Number(month) === Number(todayMonth) && Number(date) === Number(todayDate) && Number(year) === Number(todayYear)) {
             return true;
         }
         return false;
@@ -45,9 +45,9 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     const isSelected = (month, date, year, selectedDay) => {
         if (!selectedDay || !selectedDay.date) return false;
         if (
-            Number(selectedDay.date) === date &&
-            Number(selectedDay.month) === month &&
-            Number(selectedDay.year) === year
+            Number(selectedDay.date) === Number(date) &&
+            Number(selectedDay.month) === Number(month) &&
+            Number(selectedDay.year) === Number(year)
         ) {
             return true;
         }
@@ -67,8 +67,8 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
             new Date(weekFirstDay)?.getTime(),
             new Date(weekLastDay)?.getTime(),
         ];
-        // console.log(eventFirstDay, weekLastDay)
-        // console.log(eventLast < weekFirst);
+        console.log(eventFirstDay, weekLastDay)
+        console.log(eventLast < weekFirst);
         if (eventLast < weekFirst || eventFirst > weekLast) {
             return false;
         }
@@ -153,8 +153,8 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
         // console.log('dates in week component: ', datesArray);
         const firstDay = datesArray[0];
         const lastDay = datesArray[datesArray.length - 1];
-        const weekFirstDay = `${firstDay.year}-${firstDay.month}-${firstDay.date}`;
-        const weekLastDay = `${lastDay.year}-${lastDay.month}-${lastDay.date}`;
+        const weekFirstDay = `${firstDay.year}-${stringTo2Digits( firstDay.month )}-${stringTo2Digits(firstDay.date)}`;
+        const weekLastDay = `${lastDay.year}-${stringTo2Digits( lastDay.month )}-${stringTo2Digits(lastDay.date)}`;
         // console.log('First and Last day: ', firstDay, lastDay);
         // console.log('multidayEventsArr', multiDayEventsState)
         const arr = barsToShowMultiDayEvents(

@@ -1,5 +1,6 @@
 import { eventsPlaceholder } from "libs/placeholder";
 import { atom, selector, DefaultValue } from "recoil";
+import { stringTo2Digits } from "libs/getEventsForTheDate";
 
 const calendarStart = atom({
     key: "calendarStart",
@@ -80,9 +81,9 @@ const targetYear = selector({
 const selectedDay = atom({
     key: "selectedDay",
     default: {
-        month: today.getMonth() + 1,
-        date: today.getDate(),
-        year: today.getFullYear(),
+        month: stringTo2Digits(today.getMonth() + 1),
+        date: stringTo2Digits(today.getDate()),
+        year: today.getFullYear().toString(),
     },
 });
 
