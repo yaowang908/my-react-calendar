@@ -32,7 +32,7 @@ export default function MobileEvents({
                 return (
                     <MobileEventEntry
                         key={nanoid()}
-                        time={x.end_date}
+                        time={x.date}
                         title={x.title}
                         link={x.url}
                     />
@@ -45,7 +45,7 @@ export default function MobileEvents({
 MobileEvents.propTypes = {
     events: PropTypes.arrayOf(
         PropTypes.shape({
-            end_date: PropTypes.string.isRequired,
+            date: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             url: PropTypes.string.isRequired,
         })
