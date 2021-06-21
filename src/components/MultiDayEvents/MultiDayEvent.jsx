@@ -3,6 +3,7 @@ import React from "react";
 export default function MultiDayEvent({
     cellWidth,
     barWidthClass,
+    bar_with,
     startBlockIndex,
     endBlockIndex,
     link,
@@ -29,7 +30,10 @@ export default function MultiDayEvent({
     };
 
     const getLeftMargin = () => {
-        return { marginLeft: `${startBlockIndex * cellWidth}px` };
+        return {
+            marginLeft: `${startBlockIndex * cellWidth}px`,
+            width: bar_with ? `${bar_with * cellWidth}px` : "auto",
+        };
     };
 
     return (

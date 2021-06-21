@@ -5,6 +5,8 @@ import { Calendar } from 'index.js'
 import { stringTo2Digits } from 'libs/getEventsForTheDate'
 import { daysInMonth } from 'libs/getWeeks'
 
+import "index.css";
+
 export default {
     component: Calendar,
     title: "Calendar",

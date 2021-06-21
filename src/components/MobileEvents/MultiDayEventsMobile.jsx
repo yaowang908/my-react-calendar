@@ -25,7 +25,7 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
             ).getTime();
             const startBoundary = new Date(new Date(
                 `${multiDayEvent?.start_date_details?.year}-${multiDayEvent?.start_date_details?.month}-${multiDayEvent?.start_date_details?.date}`
-            ).setHours(24, 0, 0, 0)).getTime();
+            ).setHours(0, 0, 0, 0)).getTime();
             const endBoundary = new Date(new Date(
                 `${multiDayEvent?.end_date_details?.year}-${multiDayEvent?.end_date_details?.month}-${multiDayEvent?.end_date_details?.date}`
             ).setHours(24, 0, 0, 0)).getTime();

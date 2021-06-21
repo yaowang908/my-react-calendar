@@ -93,20 +93,33 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
             ending_index = 6;
 
         if (eventFirst > getDateTimeStamp(datesArray[0])) {
-            datesArray.map((x, i) => {
-                if (getDateTimeStamp(x) === eventFirst) {
+            // datesArray.map((x, i) => {
+            //     if (getDateTimeStamp(x) === eventFirst) {
+            //         beginning_index = i;
+            //     }
+            //     return <></>;
+            // });
+            for (let i = 0; i<datesArray.length; i++) {
+                if(getDateTimeStamp(datesArray[i]) >= eventFirst) {
                     beginning_index = i;
+                    break;
                 }
-                return <></>;
-            });
+            }
         }
         if (eventLast < getDateTimeStamp(datesArray[6])) {
-            datesArray.map((x, i) => {
-                if (getDateTimeStamp(x) === eventLast) {
+            // datesArray.map((x, i) => {
+            //     if (getDateTimeStamp(x) === eventLast) {
+            //         ending_index = i;
+            //     }
+            //     return <></>;
+            // });
+            for (let i = datesArray.length - 1; i >= 0; i--) {
+                if (getDateTimeStamp(datesArray[i]) <= eventLast) {
                     ending_index = i;
+                    break;
                 }
-                return <></>;
-            });
+            }
+            // console.log("eventLast < getDateTimeStamp(datesArray[6])");
         }
 
         // return a array [beginning_index, ending_index]
@@ -168,7 +181,7 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
             // console.log(arr);
             // setLocalMultiDayEvents([...arr, ...arr]);
             setLocalMultiDayEvents(arr);
-            // console.log('bar position: ', )
+            // console.log('bar position: ', arr)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [datesArray, multiDayEventsState]);
@@ -186,12 +199,9 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
                             cellWidth={cellWidth}
                             startBlockIndex={x.barPositionInThisWeek[0]}
                             endBlockIndex={x.barPositionInThisWeek[1]}
-                            barWidthClass={`${
-                                x.barPositionInThisWeek
-                                    ? "w-" + (x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1) + "/7"
-                                    : ""
-                            }`}
+                            barWidthClass={`${ x.barPositionInThisWeek ? "w-" + (x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1) + "/7" : "" }`}
                             link={x.url}
+                            bar_with={ x.barPositionInThisWeek ? x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1 : "" }
                             key={nanoid()}
                         >
                             {renderHTML(x.title)}
