@@ -67,8 +67,8 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
             new Date(weekFirstDay)?.getTime(),
             new Date(weekLastDay)?.getTime(),
         ];
-        console.log(eventFirstDay, weekLastDay)
-        console.log(eventLast < weekFirst);
+        // console.log(eventFirstDay, weekLastDay)
+        // console.log(eventLast < weekFirst);
         if (eventLast < weekFirst || eventFirst > weekLast) {
             return false;
         }
