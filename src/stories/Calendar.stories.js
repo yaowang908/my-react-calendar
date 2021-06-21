@@ -1,4 +1,6 @@
 import React from 'react'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+
 import { Calendar } from 'index.js'
 
 import {eventsPlaceholder} from 'libs/placeholder'
@@ -10,13 +12,13 @@ export default {
 
 const Template = (args) => <Calendar {...args} />;
 
-export const Default = Template.bind({});
+export const OneDayEvent = Template.bind({});
 
-Default.args = {
+OneDayEvent.args = {
     events: eventsPlaceholder.events,
 };
 
-export const Primary = Template.bind({});
+export const MultiDayEvent = Template.bind({});
 
 // TODO:
 /**
@@ -28,7 +30,7 @@ export const Primary = Template.bind({});
  *  4. update README file
  * */
 
-Primary.args = {
+MultiDayEvent.args = {
     events: [
         {
             id: "001",
@@ -40,24 +42,37 @@ Primary.args = {
             start_date_details: {
                 year: "2021",
                 month: "06",
-                day: "20",
+                day: "22",
                 hour: "14",
                 minute: "30",
             },
             end_date_details: {
                 year: "2021",
                 month: "06",
-                day: "22",
+                day: "29",
                 hour: "14",
                 minute: "30",
             },
             timezone: "America/New York",
             multi_day: true,
-            multi_day_first: "2021-06-20",
-            multi_day_last: "2021-06-22",
+            multi_day_first: "2021-06-22",
+            multi_day_last: "2021-06-29",
         },
     ],
 };
+
+export const MobileView = Template.bind({});
+
+MobileView.args = {
+    events: [...MultiDayEvent.args.events, ...eventsPlaceholder.events]
+}
+
+MobileView.parameters = {
+    viewport: {
+        viewports: INITIAL_VIEWPORTS,
+        defaultViewport: 'iphonex'
+    }
+}
 
 // {
 //     id: event.id,
