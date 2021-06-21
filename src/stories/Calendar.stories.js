@@ -3,8 +3,6 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import { Calendar } from 'index.js'
 
-import {eventsPlaceholder} from 'libs/placeholder'
-
 export default {
     component: Calendar,
     title: "Calendar",
