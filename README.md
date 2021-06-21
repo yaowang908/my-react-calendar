@@ -2,26 +2,37 @@
 
 This project is created by Create-react-app, using TailwindCSS for styling, gulp for bundling files.
 
+[Demo](https://github.com/yaowang908)
 
-### `yarn start`
+```js
+import { Calendar } from "my-react-calendar"
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+const events = [
+        {
+            start: `${year}-${month}-${day} 14:30:00`,
+            end: `${year}-${month}-${day} 16:30:00`,
+            // timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: "2008-11-22 14:30:00",
+            end: "2008-11-22 16:30:00",
+            // timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+    ];
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const Calendar = () => (
+    <Calendar events={events}/>
+)
+```
 
 ### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
 `yarn build` also create a single HTML file to `single_html` that you can copy and paste.

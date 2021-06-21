@@ -5,7 +5,6 @@ import renderHTML from "react-render-html";
 
 import {
     selectedDay as selectedDayState,
-    fetchStatus as fetchStatusState,
     multiDayEventsAtom,
 } from "Recoil/calendar.atom";
 import Day from "components/Day/Day";
@@ -14,7 +13,6 @@ import MultiDayEvent from "components/MultiDayEvents/MultiDayEvent";
 
 export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     const selectedDay = useRecoilValue(selectedDayState);
-    const fetchStatus = useRecoilValue(fetchStatusState);
     const multiDayEventsState = useRecoilValue(multiDayEventsAtom);
 
     const [localMultiDayEvents, setLocalMultiDayEvents] = React.useState([]);
@@ -24,11 +22,13 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     const todayDate = today.getDate();
     const todayYear = today.getFullYear();
 
+    // console.log('Week events: ', events)
+
     const isDayPast = (month, date, year) => {
         if (
-            month < todayMonth ||
-            year < todayYear ||
-            (month === todayMonth && date < todayDate)
+            Number(month) < Number(todayMonth) ||
+            Number(year) < Number(todayYear) ||
+            (Number(month) === Number(todayMonth) && Number(date) < Number(todayDate))
         ) {
             return true;
         }
@@ -36,7 +36,7 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     };
 
     const isToday = (month, date, year) => {
-        if (month === todayMonth && date === todayDate && year === todayYear) {
+        if (Number(month) === Number(todayMonth) && Number(date) === Number(todayDate) && Number(year) === Number(todayYear)) {
             return true;
         }
         return false;
@@ -45,9 +45,9 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     const isSelected = (month, date, year, selectedDay) => {
         if (!selectedDay || !selectedDay.date) return false;
         if (
-            Number(selectedDay.date) === date &&
-            Number(selectedDay.month) === month &&
-            Number(selectedDay.year) === year
+            Number(selectedDay.date) === Number(date) &&
+            Number(selectedDay.month) === Number(month) &&
+            Number(selectedDay.year) === Number(year)
         ) {
             return true;
         }
@@ -68,7 +68,7 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
             new Date(weekLastDay)?.getTime(),
         ];
         // console.log(eventFirstDay, weekLastDay)
-        // console.log( (eventFirst > weekLast))
+        // console.log(eventLast < weekFirst);
         if (eventLast < weekFirst || eventFirst > weekLast) {
             return false;
         }
@@ -93,20 +93,33 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
             ending_index = 6;
 
         if (eventFirst > getDateTimeStamp(datesArray[0])) {
-            datesArray.map((x, i) => {
-                if (getDateTimeStamp(x) === eventFirst) {
+            // datesArray.map((x, i) => {
+            //     if (getDateTimeStamp(x) === eventFirst) {
+            //         beginning_index = i;
+            //     }
+            //     return <></>;
+            // });
+            for (let i = 0; i<datesArray.length; i++) {
+                if(getDateTimeStamp(datesArray[i]) >= eventFirst) {
                     beginning_index = i;
+                    break;
                 }
-                return <></>;
-            });
+            }
         }
         if (eventLast < getDateTimeStamp(datesArray[6])) {
-            datesArray.map((x, i) => {
-                if (getDateTimeStamp(x) === eventLast) {
+            // datesArray.map((x, i) => {
+            //     if (getDateTimeStamp(x) === eventLast) {
+            //         ending_index = i;
+            //     }
+            //     return <></>;
+            // });
+            for (let i = datesArray.length - 1; i >= 0; i--) {
+                if (getDateTimeStamp(datesArray[i]) <= eventLast) {
                     ending_index = i;
+                    break;
                 }
-                return <></>;
-            });
+            }
+            // console.log("eventLast < getDateTimeStamp(datesArray[6])");
         }
 
         // return a array [beginning_index, ending_index]
@@ -150,31 +163,28 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     };
 
     React.useEffect(() => {
-        if (fetchStatus.isFinished) {
-            // fetched real data
-            // console.log('dates in week component: ', datesArray);
-            const firstDay = datesArray[0];
-            const lastDay = datesArray[datesArray.length - 1];
-            const weekFirstDay = `${firstDay.year}-${firstDay.month}-${firstDay.date}`;
-            const weekLastDay = `${lastDay.year}-${lastDay.month}-${lastDay.date}`;
-            // console.log('First and Last day: ', firstDay, lastDay);
-            // console.log('multidayEventsArr', multiDayEventsState)
-            const arr = barsToShowMultiDayEvents(
-                multiDayEventsState,
-                weekFirstDay,
-                weekLastDay
-            );
+        // console.log('dates in week component: ', datesArray);
+        const firstDay = datesArray[0];
+        const lastDay = datesArray[datesArray.length - 1];
+        const weekFirstDay = `${firstDay.year}-${stringTo2Digits( firstDay.month )}-${stringTo2Digits(firstDay.date)}`;
+        const weekLastDay = `${lastDay.year}-${stringTo2Digits( lastDay.month )}-${stringTo2Digits(lastDay.date)}`;
+        // console.log('First and Last day: ', firstDay, lastDay);
+        // console.log('multidayEventsArr', multiDayEventsState)
+        const arr = barsToShowMultiDayEvents(
+            multiDayEventsState,
+            weekFirstDay,
+            weekLastDay
+        );
 
-            if (arr.length > 0) {
-                // console.log('dates in week component: ', datesArray);
-                // console.log(arr);
-                // setLocalMultiDayEvents([...arr, ...arr]);
-                setLocalMultiDayEvents(arr);
-                // console.log('bar position: ', )
-            }
+        if (arr.length > 0) {
+            // console.log('dates in week component: ', datesArray);
+            // console.log(arr);
+            // setLocalMultiDayEvents([...arr, ...arr]);
+            setLocalMultiDayEvents(arr);
+            // console.log('bar position: ', arr)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [datesArray, fetchStatus, multiDayEventsState]);
+    }, [datesArray, multiDayEventsState]);
 
     return (
         <div className="relative grid grid-cols-7 w-full">
@@ -189,12 +199,9 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
                             cellWidth={cellWidth}
                             startBlockIndex={x.barPositionInThisWeek[0]}
                             endBlockIndex={x.barPositionInThisWeek[1]}
-                            barWidthClass={`${
-                                x.barPositionInThisWeek
-                                    ? "w-" + (x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1) + "/7"
-                                    : ""
-                            }`}
+                            barWidthClass={`${ x.barPositionInThisWeek ? "w-" + (x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1) + "/7" : "" }`}
                             link={x.url}
+                            bar_with={ x.barPositionInThisWeek ? x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1 : "" }
                             key={nanoid()}
                         >
                             {renderHTML(x.title)}

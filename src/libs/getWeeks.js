@@ -122,7 +122,7 @@ const completeWeek = (arr, startingIndex, currentYear) => {
         for (let i = 1; i <= missingDays; i++) {
             _arr.push({
                 date: i,
-                month: _thisMonth + 1,
+                month: Number(_thisMonth) + 1,
                 year: currentYear,
                 dayNameNumber: _lastDay.dayNameNumber + i,
                 dayName: dayArray[_lastDay.dayNameNumber + i], //when number reaches 7, it should return Sunday
@@ -138,7 +138,7 @@ const completeWeek = (arr, startingIndex, currentYear) => {
         // console.log(_lastMonthLastDay - i);
         _arr.unshift({
             date: _lastMonthLastDay - i,
-            month: _thisMonth - 1,
+            month: Number(_thisMonth) - 1,
             year: currentYear,
             dayNameNumber: _firstDay.dayNameNumber - 1 - i, // the starting index is either 0 or 1
             dayName: dayArray[_firstDay.dayNameNumber - 1 - i],

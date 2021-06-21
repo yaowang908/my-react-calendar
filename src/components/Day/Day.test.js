@@ -4,7 +4,7 @@ import { snapshot_UNSTABLE } from "recoil";
 
 import { selectedDay as selectedDayState } from "Recoil/calendar.atom";
 import Day from "components/Day/Day";
-import { eventsPlaceholder } from "api/placeholder";
+import { eventsPlaceholder } from "libs/placeholder";
 
 test("normal day component should have classes", () => {
     render(

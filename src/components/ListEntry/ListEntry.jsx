@@ -2,12 +2,6 @@ import React from 'react';
 import renderHTML from 'react-render-html';
 
 let local_default_image = null;
-try {
-    const { default_image } = require("api/ci_api_endpoint.js");
-    local_default_image = default_image;
-} catch (ex) {
-    console.log("You need to know the CI_api to show real-time data");
-}
 
 export default function ListEntry({date, title, link, imgSrc, ...otherProps}) {
     const [localImgSrc, setLocalImgSrc] = React.useState(imgSrc);

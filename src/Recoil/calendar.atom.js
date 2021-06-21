@@ -1,5 +1,6 @@
-import { eventsPlaceholder } from "api/placeholder";
+import { eventsPlaceholder } from "libs/placeholder";
 import { atom, selector, DefaultValue } from "recoil";
+import { stringTo2Digits } from "libs/getEventsForTheDate";
 
 const calendarStart = atom({
     key: "calendarStart",
@@ -80,9 +81,9 @@ const targetYear = selector({
 const selectedDay = atom({
     key: "selectedDay",
     default: {
-        month: today.getMonth() + 1,
-        date: today.getDate(),
-        year: today.getFullYear(),
+        month: stringTo2Digits(today.getMonth() + 1),
+        date: stringTo2Digits(today.getDate()),
+        year: today.getFullYear().toString(),
     },
 });
 
@@ -94,51 +95,6 @@ const eventsBufferAtom = atom({
 const eventsDataAtom = atom({
     key: "eventsDataAtom",
     default: eventsPlaceholder.events,
-});
-
-const fetchStatusAtom = atom({
-    key: "fetchStatusAtom",
-    default: {
-        isProcessing: false,
-        isFinished: true,
-        succeed: true,
-    },
-});
-
-const fetchStatus = selector({
-    key: "fetchStatus",
-    get: ({ get }) => get(fetchStatusAtom),
-    set: ({ set, get }, status) => {
-        console.log(status);
-        switch (status) {
-            case "FETCHING":
-                set(fetchStatusAtom, {
-                    isProcessing: true,
-                    isFinished: false,
-                    succeed: false,
-                });
-                break;
-            case "ERROR":
-                set(fetchStatusAtom, {
-                    isProcessing: false,
-                    isFinished: true,
-                    succeed: false,
-                });
-                break;
-            case "FINISHED":
-                set(fetchStatusAtom, {
-                    isProcessing: false,
-                    isFinished: true,
-                    succeed: true,
-                });
-                break;
-            default:
-                if (status instanceof DefaultValue) {
-                    set(fetchStatusAtom, status);
-                }
-                break;
-        }
-    },
 });
 
 const isMonthSelectorHidden = atom({
@@ -195,7 +151,6 @@ export {
     selectedDay,
     eventsBufferAtom,
     eventsDataAtom,
-    fetchStatus,
     isMonthSelectorHidden,
     multiDayEventsAtom,
     normalEventsAtom,

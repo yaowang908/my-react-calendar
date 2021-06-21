@@ -5,18 +5,14 @@ import { useRecoilValue } from "recoil";
 import {
     targetYear as targetYearState,
     targetMonth as targetMonthState,
-    fetchStatus as fetchStatusState,
 } from "Recoil/calendar.atom";
 import ListEntry from "components/ListEntry/ListEntry";
-import Loading from "components/Loading/Loading";
-import ErrorScreen from "components/ErrorScreen/ErrorScreen";
 
 export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
     // const normalEvents = useRecoilValue(normalEventsAtom);
     // const multiDayEvents = useRecoilValue(multiDayEventsAtom);
     const targetMonth = useRecoilValue(targetMonthState);
     const targetYear = useRecoilValue(targetYearState);
-    const fetchStatus = useRecoilValue(fetchStatusState);
 
     const [normal, setNormal] = React.useState(eventsData);
     const [multi, setMulti] = React.useState(multiDayEvents);
@@ -70,10 +66,12 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                             targetYear
                         )
                     ) {
+                        console.log("targetDate: ", targetMonth, targetYear);
+                        console.log("multi: ", multi)
                         return (
                             <ListEntry
                                 key={nanoid()}
-                                date={`${x?.start_date_details?.year}-${x?.start_date_details?.month}-${x?.start_date_details?.day} - ${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.day}`}
+                                date={`${x?.start_date_details?.year}-${x?.start_date_details?.month}-${x?.start_date_details?.date} - ${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.date}`}
                                 link={x?.url}
                                 title={x?.title}
                                 imgSrc={x?.imgUrl}
@@ -84,20 +82,15 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                 })}
             </div>
             <div className="relative w-full">
-                {fetchStatus.isProcessing ? <Loading /> : ""}
-                {!fetchStatus.isProcessing &&
-                fetchStatus.isFinished &&
-                !fetchStatus.succeed ? (
-                    <ErrorScreen />
-                ) : (
-                    ""
-                )}
                 {normal?.map((x) => {
-                    if (Number(x?.end_date_details?.month) === targetMonth) {
+                    if (
+                        Number(x?.end_date_details?.year) === Number(targetYear) &&
+                        Number(x?.end_date_details?.month) === Number(targetMonth)
+                    ) {
                         return (
                             <ListEntry
                                 key={nanoid()}
-                                date={`${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.day}`}
+                                date={`${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.date}`}
                                 link={x?.url}
                                 title={x?.title}
                                 imgSrc={x?.imgUrl}

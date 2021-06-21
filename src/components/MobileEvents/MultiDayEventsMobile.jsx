@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import MobileEventEntry from "components/MobileEvents/MobileEventEntry";
 import { multiDayEventsAtom } from "Recoil/calendar.atom";
+import { stringTo2Digits } from "libs/getEventsForTheDate";
 
 export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
     const multiDayEventsState = useRecoilValue(multiDayEventsAtom);
@@ -14,24 +15,30 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
     // show the block
     React.useEffect(() => {
         // console.log("mobileView", multiDayEventsState);
-        // console.log("selectedDay", selectedDay);
+        // console.log(
+        //     "selectedDay",
+        //     `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`
+        // );
         const isSelectedDayInThePeriod = (selectedDay, multiDayEvent) => {
             const targetTimeStamp = new Date(
-                `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`
+                `${selectedDay?.year}-${stringTo2Digits(selectedDay?.month)}-${ stringTo2Digits(selectedDay?.date) }`
             ).getTime();
-            const startBoundary = new Date(
-                `${multiDayEvent?.start_date_details?.year}-${multiDayEvent?.start_date_details?.month}-${multiDayEvent?.start_date_details?.day}`
-            ).getTime();
-            const endBoundary = new Date(
-                `${multiDayEvent?.end_date_details?.year}-${multiDayEvent?.end_date_details?.month}-${multiDayEvent?.end_date_details?.day}`
-            ).getTime();
+            const startBoundary = new Date(new Date(
+                `${multiDayEvent?.start_date_details?.year}-${multiDayEvent?.start_date_details?.month}-${multiDayEvent?.start_date_details?.date}`
+            ).setHours(0, 0, 0, 0)).getTime();
+            const endBoundary = new Date(new Date(
+                `${multiDayEvent?.end_date_details?.year}-${multiDayEvent?.end_date_details?.month}-${multiDayEvent?.end_date_details?.date}`
+            ).setHours(24, 0, 0, 0)).getTime();
+            // console.log("check????", `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`);
 
             if (
                 isNaN(targetTimeStamp) ||
                 isNaN(startBoundary) ||
                 isNaN(endBoundary)
             ) {
-                console.error("invalid input for isSelectedDayInThePeriod");
+                console.error(
+                    "invalid input for isSelectedDayInThePeriod",
+                    targetTimeStamp, startBoundary, endBoundary);
                 return false;
             }
 
@@ -47,11 +54,13 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
         };
         const temp = []
         multiDayEventsState.map((x) => {
+            // console.log('MultiDayEvent: ', x);
             if (isSelectedDayInThePeriod(selectedDay, x)) {
                 temp.push(x);
             }
             return <></>;
         });
+        // console.log('multidayevents for selected day: ', temp)
         setMultiDayEventsForSelectedDay(temp);
     }, [multiDayEventsState, selectedDay]);
 
@@ -64,7 +73,7 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
                         className="block relative md:hidden mt-5 border-t border-b border-gray-700 py-3"
                     >
                         <div className="absolute -top-3 bg-white px-5">
-                            {`${x.start_date_details.year}-${x.start_date_details.month}-${x.start_date_details.day} - ${x.end_date_details.year}-${x.end_date_details.month}-${x.end_date_details.day}`}
+                            {`${x.start_date_details.year}-${x.start_date_details.month}-${x.start_date_details.date} - ${x.end_date_details.year}-${x.end_date_details.month}-${x.end_date_details.date}`}
                         </div>
                         <MobileEventEntry title={x.title} link={x.url} />
                     </div>
