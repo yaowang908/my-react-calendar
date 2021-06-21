@@ -69,7 +69,7 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                         return (
                             <ListEntry
                                 key={nanoid()}
-                                date={`${x?.start_date_details?.year}-${x?.start_date_details?.month}-${x?.start_date_details?.day} - ${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.day}`}
+                                date={`${x?.start_date_details?.year}-${x?.start_date_details?.month}-${x?.start_date_details?.date} - ${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.date}`}
                                 link={x?.url}
                                 title={x?.title}
                                 imgSrc={x?.imgUrl}

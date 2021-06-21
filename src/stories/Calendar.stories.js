@@ -15,16 +15,26 @@ const Template = (args) => <Calendar {...args} />;
 export const OneDayEvent = Template.bind({});
 
 OneDayEvent.args = {
-    events: eventsPlaceholder.events,
+    events: [
+        {
+            start: "2021-06-22 14:30:00",
+            end: "2021-06-22 16:30:00",
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://source.unsplash.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+    ],
 };
 
 export const MultiDayEvent = Template.bind({});
 
 // TODO:
 /**
- *  1. streamline data structure for events
- *      1. auto generate multi_day attributes
- *      2. rename the attributes, make it short
+ *  DONE: 1. streamline data structure for events
+ *      DONE: 1. auto generate multi_day attributes
+ *      DONE: 2. rename the attributes, make it short
  *  2. timezone conversion
  *  3. handle empty input or in-valid ones
  *  4. update README file
@@ -33,30 +43,13 @@ export const MultiDayEvent = Template.bind({});
 MultiDayEvent.args = {
     events: [
         {
-            id: "001",
-            date: "2021-06-21",
-            url: "https://source.unsplash.com",
+            start: "2021-06-22 14:30:00",
+            end: "2021-06-24 16:30:00",
+            timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://source.unsplash.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
-            start_date_details: {
-                year: "2021",
-                month: "06",
-                day: "22",
-                hour: "14",
-                minute: "30",
-            },
-            end_date_details: {
-                year: "2021",
-                month: "06",
-                day: "29",
-                hour: "14",
-                minute: "30",
-            },
-            timezone: "America/New York",
-            multi_day: true,
-            multi_day_first: "2021-06-22",
-            multi_day_last: "2021-06-29",
         },
     ],
 };
@@ -64,8 +57,28 @@ MultiDayEvent.args = {
 export const MobileView = Template.bind({});
 
 MobileView.args = {
-    events: [...MultiDayEvent.args.events, ...eventsPlaceholder.events]
-}
+    // events: [...MultiDayEvent.args.events, ...eventsPlaceholder.events]
+    events: [
+        {
+            start: "2021-06-22 14:30:00",
+            end: "2021-06-22 16:30:00",
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://source.unsplash.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: "2021-06-22 14:30:00",
+            end: "2021-06-23 16:30:00",
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://source.unsplash.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+    ],
+};
 
 MobileView.parameters = {
     viewport: {

@@ -20,10 +20,10 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
                 `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`
             ).getTime();
             const startBoundary = new Date(
-                `${multiDayEvent?.start_date_details?.year}-${multiDayEvent?.start_date_details?.month}-${multiDayEvent?.start_date_details?.day}`
+                `${multiDayEvent?.start_date_details?.year}-${multiDayEvent?.start_date_details?.month}-${multiDayEvent?.start_date_details?.date}`
             ).getTime();
             const endBoundary = new Date(
-                `${multiDayEvent?.end_date_details?.year}-${multiDayEvent?.end_date_details?.month}-${multiDayEvent?.end_date_details?.day}`
+                `${multiDayEvent?.end_date_details?.year}-${multiDayEvent?.end_date_details?.month}-${multiDayEvent?.end_date_details?.date}`
             ).getTime();
 
             if (
@@ -31,7 +31,9 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
                 isNaN(startBoundary) ||
                 isNaN(endBoundary)
             ) {
-                console.error("invalid input for isSelectedDayInThePeriod");
+                console.error(
+                    "invalid input for isSelectedDayInThePeriod",
+                    targetTimeStamp, startBoundary, endBoundary);
                 return false;
             }
 
@@ -47,6 +49,7 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
         };
         const temp = []
         multiDayEventsState.map((x) => {
+            // console.log('MultiDayEvent: ', x);
             if (isSelectedDayInThePeriod(selectedDay, x)) {
                 temp.push(x);
             }
@@ -64,7 +67,7 @@ export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
                         className="block relative md:hidden mt-5 border-t border-b border-gray-700 py-3"
                     >
                         <div className="absolute -top-3 bg-white px-5">
-                            {`${x.start_date_details.year}-${x.start_date_details.month}-${x.start_date_details.day} - ${x.end_date_details.year}-${x.end_date_details.month}-${x.end_date_details.day}`}
+                            {`${x.start_date_details.year}-${x.start_date_details.month}-${x.start_date_details.date} - ${x.end_date_details.year}-${x.end_date_details.month}-${x.end_date_details.date}`}
                         </div>
                         <MobileEventEntry title={x.title} link={x.url} />
                     </div>

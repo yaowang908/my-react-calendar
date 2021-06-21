@@ -15,7 +15,7 @@ const getEventsForTheDate = (month, date, year, arr) => {
 
     const _date = `${year}-${stringTo2Digits(month)}-${stringTo2Digits(date)}`;
     return arr.filter((x) => {
-        if (x?.end_date?.split(" ")[0] === _date) {
+        if (x?.date === _date) {
             // console.log('qualified event:', x);
             return true;
         } else {

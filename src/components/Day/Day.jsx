@@ -24,7 +24,7 @@ export default function Day({
     const [borderColor, setBorderColor] = React.useState("border-gray-300");
     const [backgroundColor, setBackgroundColor] = React.useState("");
     const setSelectedDay = useSetRecoilState(selectedDayState);
-    const [events] = React.useState(eventsProp);
+    const [events, setEvents] = React.useState(eventsProp);
     // const setMultiDayEventsState = useSetRecoilState(multiDayEventsAtom);
 
     const monthArray = [
@@ -59,13 +59,18 @@ export default function Day({
         setMonthState(month);
     }, [month]);
 
+    React.useEffect(() => {
+        // console.log(eventsProp)
+        setEvents(eventsProp);
+    }, [eventsProp]);
+
     const getTextColor = () => {
         if (isToday) return "text-blue-700";
         if (!isToday && isPast) return "text-gray-400";
         return "text-gray-800";
     };
 
-    React.useEffect(() => {
+    React.useEffect(() => { //set border and background color if selected
         // console.log('isSelected', isSelected)
         if (isSelected) {
             setBorderColor(borderColorObj.blue);
@@ -131,7 +136,7 @@ export default function Day({
                             link={x.url}
                             key={nanoid()}
                             image={x?.imgUrl}
-                            time={`${x?.start_date_details?.hour}:${x?.start_date_details?.minutes} - ${x?.end_date_details?.hour}:${x?.end_date_details?.minutes}`}
+                            time={`${x?.start_date_details?.hour}:${x?.start_date_details?.minute} - ${x?.end_date_details?.hour}:${x?.end_date_details?.minute}`}
                         />
                     );
                 })}

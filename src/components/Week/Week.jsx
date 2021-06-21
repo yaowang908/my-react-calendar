@@ -22,6 +22,8 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     const todayDate = today.getDate();
     const todayYear = today.getFullYear();
 
+    // console.log('Week events: ', events)
+
     const isDayPast = (month, date, year) => {
         if (
             month < todayMonth ||
