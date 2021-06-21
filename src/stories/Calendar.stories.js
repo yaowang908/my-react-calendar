@@ -2,11 +2,19 @@ import React from 'react'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import { Calendar } from 'index.js'
+import { stringTo2Digits } from 'libs/getEventsForTheDate'
+import { daysInMonth } from 'libs/getWeeks'
 
 export default {
     component: Calendar,
     title: "Calendar",
 };
+
+const today = new Date();
+const year = today.getFullYear().toString();
+const month = stringTo2Digits(today.getMonth()+1);
+const day = stringTo2Digits(today.getDate());
+const tomorrow = stringTo2Digits(today.getDate()===daysInMonth(today.getMonth()+1, today.getFullYear()) ? 1 : today.getDate()+1);
 
 const Template = (args) => <Calendar {...args} />;
 
@@ -15,12 +23,12 @@ export const OneDayEvent = Template.bind({});
 OneDayEvent.args = {
     events: [
         {
-            start: "2021-06-22 14:30:00",
-            end: "2021-06-22 16:30:00",
+            start: `${year}-${month}-${day} 14:30:00`,
+            end: `${year}-${month}-${day} 16:30:00`,
             // timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
-            url: "https://source.unsplash.com",
+            url: "https://www.google.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
         {
@@ -29,7 +37,7 @@ OneDayEvent.args = {
             // timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
-            url: "https://source.unsplash.com",
+            url: "https://www.google.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
@@ -50,12 +58,12 @@ export const MultiDayEvent = Template.bind({});
 MultiDayEvent.args = {
     events: [
         {
-            start: "2021-06-22 14:30:00",
-            end: "2021-06-24 16:30:00",
+            start: `${year}-${month}-${day} 14:30:00`,
+            end: `${year}-${month}-${tomorrow} 16:30:00`,
             timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
-            url: "https://source.unsplash.com",
+            url: "https://www.google.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
@@ -67,21 +75,21 @@ MobileView.args = {
     // events: [...MultiDayEvent.args.events, ...eventsPlaceholder.events]
     events: [
         {
-            start: "2021-06-22 14:30:00",
-            end: "2021-06-22 16:30:00",
+            start: `${year}-${month}-${day} 14:30:00`,
+            end: `${year}-${month}-${day} 16:30:00`,
             timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
-            url: "https://source.unsplash.com",
+            url: "https://www.google.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
         {
-            start: "2021-06-22 14:30:00",
-            end: "2021-06-23 16:30:00",
+            start: `${year}-${month}-${day} 14:30:00`,
+            end: `${year}-${month}-${tomorrow} 16:30:00`,
             timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
-            url: "https://source.unsplash.com",
+            url: "https://www.google.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
         {
@@ -90,7 +98,7 @@ MobileView.args = {
             timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
-            url: "https://source.unsplash.com",
+            url: "https://www.google.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
