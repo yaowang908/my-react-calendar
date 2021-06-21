@@ -66,6 +66,8 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                             targetYear
                         )
                     ) {
+                        console.log("targetDate: ", targetMonth, targetYear);
+                        console.log("multi: ", multi)
                         return (
                             <ListEntry
                                 key={nanoid()}
@@ -81,11 +83,14 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
             </div>
             <div className="relative w-full">
                 {normal?.map((x) => {
-                    if (Number(x?.end_date_details?.month) === targetMonth) {
+                    if (
+                        Number(x?.end_date_details?.year) === Number(targetYear) &&
+                        Number(x?.end_date_details?.month) === Number(targetMonth)
+                    ) {
                         return (
                             <ListEntry
                                 key={nanoid()}
-                                date={`${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.day}`}
+                                date={`${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.date}`}
                                 link={x?.url}
                                 title={x?.title}
                                 imgSrc={x?.imgUrl}
