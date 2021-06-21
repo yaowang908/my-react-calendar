@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { RecoilRoot } from "recoil";
 
 import Header from "components/Header/Header";
@@ -91,3 +92,16 @@ function App({ events, ...otherProps }) {
 }
 
 export default App;
+
+App.propTypes = {
+    events: PropTypes.arrayOf(
+        PropTypes.shape({
+            start: PropTypes.string.isRequired,
+            end: PropTypes.string.isRequired,
+            timezone: PropTypes.string,
+            title: PropTypes.string.isRequired,
+            url: PropTypes.string,
+            imgUrl: PropTypes.string,
+        })
+    ).isRequired,
+};
