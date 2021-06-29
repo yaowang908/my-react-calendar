@@ -58,7 +58,7 @@ export const MultiDayEvent = Template.bind({});
  *      DONE: 2. rename the attributes, make it short
  *  DONE: 2. timezone conversion
  *  DONE: 3. handle empty input or in-valid ones
- *  4. update README file
+ *  DONE: 4. update README file
  *  5. dark theme support
  *  DONE: 6. should be able to switch between military / regular time format
  * */
