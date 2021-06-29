@@ -67,8 +67,8 @@ export const MultiDayEvent = Template.bind({});
 MultiDayEvent.args = {
     events: [
         {
-            start: `${year}-${month}-${day} 14:30:00`,
-            end: `${year}-${month}-${tomorrow} 16:30:00`,
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-10 16:30:00`,
             timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
@@ -86,8 +86,8 @@ MobileView.args = {
     // events: [...MultiDayEvent.args.events, ...eventsPlaceholder.events]
     events: [
         {
-            start: `${year}-${month}-${day} 14:30:00`,
-            end: `${year}-${month}-${day} 16:30:00`,
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-08 16:30:00`,
             timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
@@ -95,8 +95,8 @@ MobileView.args = {
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
         {
-            start: `${year}-${month}-${day} 14:30:00`,
-            end: `${year}-${month}-${tomorrow} 16:30:00`,
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-09 16:30:00`,
             timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
@@ -125,7 +125,35 @@ MobileView.parameters = {
 export const TimezoneAuto = Template.bind({});
 
 TimezoneAuto.args = {
-    events: [...MultiDayEvent.args.events],
+    events: [
+        {
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-10 16:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: `${year}-${month}-02 10:30:00`,
+            end: `${year}-${month}-02 12:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: `${year}-${month}-05 12:30:00`,
+            end: `${year}-${month}-05 15:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+    ],
     use24Hour: false, 
     enableTimezone: 'auto',
 };
