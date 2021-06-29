@@ -144,6 +144,11 @@ const calendarView = selector({
     }
 })
 
+const clientTimezone = atom({
+    key: "clientTimezone",
+    default: "America/New_York"
+})
+
 export {
     calendarStart,
     targetMonth,
@@ -156,4 +161,5 @@ export {
     normalEventsAtom,
     isViewSelectorHidden,
     calendarView,
+    clientTimezone,
 };

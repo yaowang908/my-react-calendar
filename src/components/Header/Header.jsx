@@ -12,6 +12,7 @@ import {
     isMonthSelectorHidden as isMonthSelectorHiddenState,
     isViewSelectorHidden as isViewSelectorHiddenState,
     calendarView as calendarViewSelector,
+    clientTimezone as clientTimezoneState,
 } from "Recoil/calendar.atom";
 import { monthArray } from "libs/getWeeks";
 import MonthSelector from "components/MonthSelector/MonthSelector";
@@ -28,6 +29,7 @@ export default function Header() {
     );
     const [ isViewSelectorHidden, setIsViewSelectorHidden ] = useRecoilState(isViewSelectorHiddenState);
     const calendarView = useRecoilValue(calendarViewSelector);
+    const [clientTimezone, setClientTimezone] = useRecoilState(clientTimezoneState)
 
     const prevMonthClickHandler = (event) => {
         event.preventDefault();
@@ -53,6 +55,12 @@ export default function Header() {
         resetSelectedDay();
         // setIsViewSelectorHidden(true);
     };
+
+    React.useEffect(() => {
+        // get client timezone
+        setClientTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     React.useEffect(() => {
         const hideMonthSelector = (event) => {
@@ -133,6 +141,7 @@ export default function Header() {
                 </div>
             </div>
             <div className="relative flex flex-row flex-nowrap justify-end items-center w-1/5 md:w-1/3 h-20">
+                <div className="hidden md:block mr-4 text-gray-300" >{clientTimezone}</div>
                 <div
                     className="w-5 cursor-pointer"
                     onClick={viewSelectorClickHandler}

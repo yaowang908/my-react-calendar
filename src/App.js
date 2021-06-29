@@ -46,6 +46,7 @@ function App({ events, ...otherProps }) {
     };
 
     React.useEffect(() => {
+        // TODO: convert timezone here, if necessary
         const temp = [];
         // console.log("Events: ", events)
         events.map((event) => {
