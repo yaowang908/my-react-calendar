@@ -1,14 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { RecoilRoot } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Header from "components/Header/Header";
 import Calendar from "components/Calendar/Calendar";
 import "index.css";
 import { stringTo2Digits } from "libs/getEventsForTheDate";
+import { 
+    clientTimezone as clientTimezoneState
+} from "Recoil/calendar.atom";
 
 function App({ events, ...otherProps }) {
     const [formattedEvents, setFormattedEvents] = React.useState([]);
+    const clientTimezone = useRecoilValue(clientTimezoneState);
     /**
      *  start(year,month,day,hour,minute), end(...), title, link, imgUrl, timezone
      */
@@ -81,15 +85,14 @@ function App({ events, ...otherProps }) {
         });
         // console.log('temp: ', temp)
         setFormattedEvents(temp);
-    }, [events]);
+        console.log(clientTimezone)
+    }, [events, clientTimezone]);
 
     return (
-        <RecoilRoot>
-            <div className="max-w-1080 max-h-full mx-auto px-5">
-                <Header />
-                <Calendar events={formattedEvents} {...otherProps} />
-            </div>
-        </RecoilRoot>
+        <div className="max-w-1080 max-h-full mx-auto px-5">
+            <Header />
+            <Calendar events={formattedEvents} {...otherProps} />
+        </div>
     );
 }
 

@@ -4,6 +4,7 @@ import {
     useRecoilValue,
     useResetRecoilState,
 } from "recoil";
+import TimezoneSelect from "react-timezone-select";
 
 import {
     selectedDay as selectedDayState,
@@ -55,12 +56,6 @@ export default function Header() {
         resetSelectedDay();
         // setIsViewSelectorHidden(true);
     };
-
-    React.useEffect(() => {
-        // get client timezone
-        setClientTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
     React.useEffect(() => {
         const hideMonthSelector = (event) => {
@@ -141,7 +136,9 @@ export default function Header() {
                 </div>
             </div>
             <div className="relative flex flex-row flex-nowrap justify-end items-center w-1/5 md:w-1/3 h-20">
-                <div className="hidden md:block mr-4 text-gray-300" >{clientTimezone}</div>
+                <div className="hidden md:block mr-4 w-64 text-gray-300" >
+                    <TimezoneSelect value={clientTimezone} onChange={setClientTimezone}/>
+                </div>
                 <div
                     className="w-5 cursor-pointer"
                     onClick={viewSelectorClickHandler}

@@ -146,7 +146,7 @@ const calendarView = selector({
 
 const clientTimezone = atom({
     key: "clientTimezone",
-    default: "America/New_York"
+    default: Intl.DateTimeFormat().resolvedOptions().timeZone
 })
 
 export {
