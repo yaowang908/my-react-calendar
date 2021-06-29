@@ -1,7 +1,7 @@
 import React from 'react'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
-import { Calendar } from 'index.js'
+import Calendar from 'index.js'
 import { stringTo2Digits } from 'libs/getEventsForTheDate'
 import { daysInMonth } from 'libs/getWeeks'
 
