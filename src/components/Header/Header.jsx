@@ -79,9 +79,11 @@ export default function Header() {
         setIsViewSelectorHidden(!isViewSelectorHidden);
     }
 
+    // TODO: add indicator that the timezone is display timezone
+
     return (
         <div className={`flex flex-row flex-nowrap justify-between w-full bg-white z-30 ${calendarView === 'LIST' ? 'sticky top-0' : ''}`}>
-            <div className="flex flex-row flex-nowrap justify-start items-center w-4/5 md:w-2/3 h-20">
+            <div className="flex flex-row flex-nowrap justify-start items-center w-4/5 md:w-6/12 h-20">
                 <div className="flex flex-row flex-nowrap">
                     <button
                         className="mr-3 md:mr-5 hover:bg-blue-400 hover:text-white"
@@ -137,10 +139,13 @@ export default function Header() {
                     <MonthSelector />
                 </div>
             </div>
-            <div className="relative flex flex-row flex-nowrap justify-end items-center w-1/5 md:w-1/3 h-20">
-                <div className={`hidden mr-4 w-64 text-gray-300 ${enableTimezone ? 'md:block' : ''}`} >
-                    <TimezoneSelect value={clientTimezone} onChange={setClientTimezone}/>
+            <div className={`flex-row flex-nowrap items-center ml-4 hidden ${enableTimezone ? 'md:flex md:w-5/12' : ''}`}>
+                    <div className="flex flex-row flex-nowrap items-center text-xs">Time zone: </div>
+                    <div className={`mx-4 w-full max-w-xxs text-xs text-gray-600 `} >
+                        <TimezoneSelect value={clientTimezone} onChange={setClientTimezone}/>
+                    </div>
                 </div>
+            <div className="relative flex flex-row flex-nowrap justify-end items-center w-1/5 md:w-1/12 h-20">
                 <div
                     className="w-5 cursor-pointer"
                     onClick={viewSelectorClickHandler}

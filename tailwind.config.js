@@ -9,6 +9,7 @@ module.exports = {
             maxWidth: {
                 1080: "1080px",
                 800: "800px",
+                xxs: "16rem",
             },
             margin: {
                 '18': '4.5rem',
