@@ -13,7 +13,8 @@ import {
     isMonthSelectorHidden as isMonthSelectorHiddenState,
     isViewSelectorHidden as isViewSelectorHiddenState,
     calendarView as calendarViewSelector,
-    clientTimezone as clientTimezoneState,
+    clientTimezoneSelector,
+    enableTimezoneAtom,
 } from "Recoil/calendar.atom";
 import { monthArray } from "libs/getWeeks";
 import MonthSelector from "components/MonthSelector/MonthSelector";
@@ -30,7 +31,8 @@ export default function Header() {
     );
     const [ isViewSelectorHidden, setIsViewSelectorHidden ] = useRecoilState(isViewSelectorHiddenState);
     const calendarView = useRecoilValue(calendarViewSelector);
-    const [clientTimezone, setClientTimezone] = useRecoilState(clientTimezoneState)
+    const [clientTimezone, setClientTimezone] = useRecoilState(clientTimezoneSelector);
+    const enableTimezone = useRecoilValue(enableTimezoneAtom);
 
     const prevMonthClickHandler = (event) => {
         event.preventDefault();
@@ -136,7 +138,7 @@ export default function Header() {
                 </div>
             </div>
             <div className="relative flex flex-row flex-nowrap justify-end items-center w-1/5 md:w-1/3 h-20">
-                <div className="hidden md:block mr-4 w-64 text-gray-300" >
+                <div className={`hidden mr-4 w-64 text-gray-300 ${enableTimezone ? 'md:block' : ''}`} >
                     <TimezoneSelect value={clientTimezone} onChange={setClientTimezone}/>
                 </div>
                 <div

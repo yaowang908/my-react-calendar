@@ -19,7 +19,7 @@ export default function MobileEvents({
     const use24HourState = useRecoilValue(use24HourAtom);
 
     React.useEffect(() => {
-        console.log("MobileEvents: ", events)
+        // console.log("MobileEvents: ", events)
         setEventsState(events);
     }, [events]);
 

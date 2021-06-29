@@ -150,6 +150,22 @@ const clientTimezone = atom({
     default: moment.tz.guess()
 })
 
+const clientTimezoneSelector = selector({
+    key: "clientTimezoneSelector",
+    get: ({get}) => get(clientTimezone),
+    set: ({set, get}, timezoneObject) => {
+        if (timezoneObject instanceof DefaultValue) {
+            set(clientTimezone, timezoneObject);
+            return;
+        }
+        if (timezoneObject?.value) {
+            set(clientTimezone, timezoneObject?.value)
+        } else {
+            console.error("There is something wrong with the timezone selector");
+        }
+    }
+})
+
 const use24HourAtom = atom({
     key: "use24Hour",
     default: false
@@ -173,6 +189,7 @@ export {
     isViewSelectorHidden,
     calendarView,
     clientTimezone,
+    clientTimezoneSelector,
     use24HourAtom,
     enableTimezoneAtom,
 };

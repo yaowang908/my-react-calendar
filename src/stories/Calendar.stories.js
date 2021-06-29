@@ -45,6 +45,8 @@ OneDayEvent.args = {
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
+    use24Hour: false, 
+    enableTimezone: true,
 };
 
 export const MultiDayEvent = Template.bind({});
@@ -54,7 +56,7 @@ export const MultiDayEvent = Template.bind({});
  *  DONE: 1. streamline data structure for events
  *      DONE: 1. auto generate multi_day attributes
  *      DONE: 2. rename the attributes, make it short
- *  2. timezone conversion
+ *  DONE: 2. timezone conversion
  *  DONE: 3. handle empty input or in-valid ones
  *  4. update README file
  *  5. dark theme support
