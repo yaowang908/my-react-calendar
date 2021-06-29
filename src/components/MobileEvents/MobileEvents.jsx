@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
+import { useRecoilValue } from "recoil";
 
 import MobileEventEntry from "components/MobileEvents/MobileEventEntry";
+import { 
+    use24HourAtom
+ } from "Recoil/calendar.atom";
+import { getEventEntryTime } from "libs/getEventEntryTime";
 
 export default function MobileEvents({
     events,
@@ -11,6 +16,7 @@ export default function MobileEvents({
     ...otherProps
 }) {
     const [eventsState, setEventsState] = React.useState(events);
+    const use24HourState = useRecoilValue(use24HourAtom);
 
     React.useEffect(() => {
         // console.log("MobileEvents: ", events)
@@ -33,7 +39,7 @@ export default function MobileEvents({
                 return (
                     <MobileEventEntry
                         key={nanoid()}
-                        time={x.date}
+                        time={getEventEntryTime(x, use24HourState)}
                         title={x.title}
                         link={x.url}
                     />

@@ -1,6 +1,7 @@
 import { eventsPlaceholder } from "libs/placeholder";
 import { atom, selector, DefaultValue } from "recoil";
 import { stringTo2Digits } from "libs/getEventsForTheDate";
+import moment from "moment-timezone";
 
 const calendarStart = atom({
     key: "calendarStart",
@@ -144,6 +145,37 @@ const calendarView = selector({
     }
 })
 
+const clientTimezone = atom({
+    key: "clientTimezone",
+    default: moment.tz.guess()
+})
+
+const clientTimezoneSelector = selector({
+    key: "clientTimezoneSelector",
+    get: ({get}) => get(clientTimezone),
+    set: ({set, get}, timezoneObject) => {
+        if (timezoneObject instanceof DefaultValue) {
+            set(clientTimezone, timezoneObject);
+            return;
+        }
+        if (timezoneObject?.value) {
+            set(clientTimezone, timezoneObject?.value)
+        } else {
+            console.error("There is something wrong with the timezone selector");
+        }
+    }
+})
+
+const use24HourAtom = atom({
+    key: "use24Hour",
+    default: false
+})
+
+const enableTimezoneAtom = atom({
+    key: "enableTimezone",
+    default: true,
+})
+
 export {
     calendarStart,
     targetMonth,
@@ -156,4 +188,8 @@ export {
     normalEventsAtom,
     isViewSelectorHidden,
     calendarView,
+    clientTimezone,
+    clientTimezoneSelector,
+    use24HourAtom,
+    enableTimezoneAtom,
 };

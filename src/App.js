@@ -1,14 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { RecoilRoot } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 
 import Header from "components/Header/Header";
 import Calendar from "components/Calendar/Calendar";
 import "index.css";
 import { stringTo2Digits } from "libs/getEventsForTheDate";
+import { 
+    clientTimezone as clientTimezoneState,
+    use24HourAtom,
+    enableTimezoneAtom,
+} from "Recoil/calendar.atom";
+import moment from "moment-timezone";
 
 function App({ events, ...otherProps }) {
     const [formattedEvents, setFormattedEvents] = React.useState([]);
+    const clientTimezone = useRecoilValue(clientTimezoneState);
+    const setUse24HourState = useSetRecoilState(use24HourAtom);
+    const [enableTimezoneState, setEnableTimezoneAtom] = useRecoilState(enableTimezoneAtom);
+    const { use24Hour, enableTimezone } = {...otherProps};
+
+    React.useEffect(() => {
+        // console.log(use24Hour)
+        setUse24HourState(use24Hour);
+    }, [use24Hour])
+
+    React.useEffect(() => {
+        // console.log(enableTimezone)
+        setEnableTimezoneAtom(enableTimezone)
+    }, [enableTimezone])
+
     /**
      *  start(year,month,day,hour,minute), end(...), title, link, imgUrl, timezone
      */
@@ -45,10 +66,56 @@ function App({ events, ...otherProps }) {
         return true;
     };
 
+    const converTimeOnTimezone = (events, enableTimezone, targetTimezone) => {
+        /**
+         * events = events
+         *      end: "2021-06-29 16:30:00"
+         *      imgUrl: "https://source.unsplash.com/random/1200x630"
+         *      start: "2021-06-29 14:30:00"
+         *      timezone: "America/New_York"
+         *      title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur"
+         *      url: "https://www.google.com"
+         * enableTimezone = enableTimezoneState
+         * targetTimezone = clientTimezone e.g. America/New_York
+         * 
+         * moment-timezone is also required here
+         */
+        const result = [];
+        if(enableTimezone) {
+            // DONE: calculate time base on timezone
+            //REFERENCE: var b = moment.tz("May 12th 2014 8PM", "MMM Do YYYY hA", "America/Toronto");
+            events.map((event) => {
+                if(event.timezone !== targetTimezone) {
+                    const _startMoment = moment.tz(event.start, "YYYY-MM-DD HH:mm:ss", event.timezone);
+                    const _endMoment = moment.tz(event.end, "YYYY-MM-DD HH:mm:ss", event.timezone);
+    
+                    const _startMomentAtTargetTimezone = _startMoment.tz(targetTimezone).format("YYYY-MM-DD HH:mm:ss");
+                    const _endMomentAtTargetTimezone = _endMoment.tz(targetTimezone).format("YYYY-MM-DD HH:mm:ss");
+    
+                    // console.log("startMoment", _startMomentAtTargetTimezone)
+
+                    result.push(Object.assign({}, event, {end: _endMomentAtTargetTimezone, start: _startMomentAtTargetTimezone, targetTimezone: targetTimezone }))
+                    
+                } else {
+                    result.push(event);
+                }
+            })
+            return result;
+        } else {
+            // return original data
+            return events
+        }
+    }
+
     React.useEffect(() => {
+        // TODO: convert timezone here, if necessary
         const temp = [];
-        // console.log("Events: ", events)
-        events.map((event) => {
+        // console.log("Events: ", events);
+
+        const eventsConvertedToClientTimezone = converTimeOnTimezone(events,enableTimezoneState,clientTimezone);
+        // console.log("!!!", eventsConvertedToClientTimezone)
+
+        eventsConvertedToClientTimezone.map((event) => {
             const _startDetails = getTimeDetails(event?.start);
             const _endDetails = getTimeDetails(event?.end);
             if(isMultiDay(_startDetails, _endDetails)) {
@@ -80,15 +147,14 @@ function App({ events, ...otherProps }) {
         });
         // console.log('temp: ', temp)
         setFormattedEvents(temp);
-    }, [events]);
+        // console.log(clientTimezone)
+    }, [events, clientTimezone, enableTimezoneState]);
 
     return (
-        <RecoilRoot>
-            <div className="max-w-1080 max-h-full mx-auto px-5">
-                <Header />
-                <Calendar events={formattedEvents} {...otherProps} />
-            </div>
-        </RecoilRoot>
+        <div className="max-w-1080 max-h-full mx-auto px-5">
+            <Header />
+            <Calendar events={formattedEvents} {...otherProps} />
+        </div>
     );
 }
 

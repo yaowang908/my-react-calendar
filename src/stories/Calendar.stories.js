@@ -1,7 +1,7 @@
 import React from 'react'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
-import { Calendar } from 'index.js'
+import Calendar from 'index.js'
 import { stringTo2Digits } from 'libs/getEventsForTheDate'
 import { daysInMonth } from 'libs/getWeeks'
 
@@ -18,6 +18,8 @@ const month = stringTo2Digits(today.getMonth()+1);
 const day = stringTo2Digits(today.getDate());
 const tomorrow = stringTo2Digits(today.getDate()===daysInMonth(today.getMonth()+1, today.getFullYear()) ? 1 : today.getDate()+1);
 
+// console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+
 const Template = (args) => <Calendar {...args} />;
 
 export const OneDayEvent = Template.bind({});
@@ -27,7 +29,7 @@ OneDayEvent.args = {
         {
             start: `${year}-${month}-${day} 14:30:00`,
             end: `${year}-${month}-${day} 16:30:00`,
-            // timezone: "America/New_York",
+            timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
             url: "https://www.google.com",
@@ -36,13 +38,15 @@ OneDayEvent.args = {
         {
             start: "2008-11-22 14:30:00",
             end: "2008-11-22 16:30:00",
-            // timezone: "America/New_York",
+            timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
             url: "https://www.google.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
+    use24Hour: false, 
+    enableTimezone: true,
 };
 
 export const MultiDayEvent = Template.bind({});
@@ -52,9 +56,11 @@ export const MultiDayEvent = Template.bind({});
  *  DONE: 1. streamline data structure for events
  *      DONE: 1. auto generate multi_day attributes
  *      DONE: 2. rename the attributes, make it short
- *  2. timezone conversion
+ *  DONE: 2. timezone conversion
  *  DONE: 3. handle empty input or in-valid ones
  *  4. update README file
+ *  5. dark theme support
+ *  DONE: 6. should be able to switch between military / regular time format
  * */
 
 MultiDayEvent.args = {
@@ -69,6 +75,8 @@ MultiDayEvent.args = {
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
+    use24Hour: true, 
+    enableTimezone: true,
 };
 
 export const MobileView = Template.bind({});
