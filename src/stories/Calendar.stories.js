@@ -18,7 +18,7 @@ const month = stringTo2Digits(today.getMonth()+1);
 const day = stringTo2Digits(today.getDate());
 const tomorrow = stringTo2Digits(today.getDate()===daysInMonth(today.getMonth()+1, today.getFullYear()) ? 1 : today.getDate()+1);
 
-console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+// console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
 const Template = (args) => <Calendar {...args} />;
 
@@ -58,7 +58,7 @@ export const MultiDayEvent = Template.bind({});
  *  DONE: 3. handle empty input or in-valid ones
  *  4. update README file
  *  5. dark theme support
- *  6. should be able to switch between military / regular time format
+ *  DONE: 6. should be able to switch between military / regular time format
  * */
 
 MultiDayEvent.args = {
