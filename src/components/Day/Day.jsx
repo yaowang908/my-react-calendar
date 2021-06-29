@@ -1,10 +1,14 @@
 import React from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import renderHTML from "react-render-html";
-
-import { selectedDay as selectedDayState } from "Recoil/calendar.atom";
-import EventEntry from "components/EventEntry/EventEntry";
 import { nanoid } from "nanoid";
+
+import { 
+    selectedDay as selectedDayState,
+    use24HourAtom
+ } from "Recoil/calendar.atom";
+import EventEntry from "components/EventEntry/EventEntry";
+import { getEventEntryTime } from "libs/getEventEntryTime";
 
 export default function Day({
     date = 1,
@@ -26,6 +30,7 @@ export default function Day({
     const setSelectedDay = useSetRecoilState(selectedDayState);
     const [events, setEvents] = React.useState(eventsProp);
     // const setMultiDayEventsState = useSetRecoilState(multiDayEventsAtom);
+    const use24HourState = useRecoilValue(use24HourAtom);
 
     const monthArray = [
         "January",
@@ -99,6 +104,24 @@ export default function Day({
         });
     };
 
+    // const getEventEntryTime = (event) => {
+    //     //moment('24/12/2019 09:15:00', "DD MM YYYY hh:mm:ss", true);
+    //     const momentParser = (timeString) => {
+    //         return moment(timeString, "HH:mm", true).format("hh:mm A"); //HH stands for 24hour format
+    //     }
+
+    //     const _start = use24HourState 
+    //                     ? `${event?.start_date_details?.hour}:${event?.start_date_details?.minute}` 
+    //                     : momentParser(`${event?.start_date_details?.hour}:${event?.start_date_details?.minute}`);
+    //     const _end = use24HourState 
+    //                     ? `${event?.end_date_details?.hour}:${event?.end_date_details?.minute}`
+    //                     : momentParser(`${event?.end_date_details?.hour}:${event?.end_date_details?.minute}`);
+
+    //     // console.log(_start)
+
+    //     return `${_start} - ${_end}`
+    // }
+
     return (
         <div
             className={`border ${borderColor} ${backgroundColor} pl-1 pt-1 md:pl-3 md:pt-3 ${getTextColor()}`}
@@ -136,7 +159,7 @@ export default function Day({
                             link={x.url}
                             key={nanoid()}
                             image={x?.imgUrl}
-                            time={`${x?.start_date_details?.hour}:${x?.start_date_details?.minute} - ${x?.end_date_details?.hour}:${x?.end_date_details?.minute}`}
+                            time={getEventEntryTime(x, use24HourState)}
                         />
                     );
                 })}

@@ -1,18 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 import Header from "components/Header/Header";
 import Calendar from "components/Calendar/Calendar";
 import "index.css";
 import { stringTo2Digits } from "libs/getEventsForTheDate";
 import { 
-    clientTimezone as clientTimezoneState
+    clientTimezone as clientTimezoneState,
+    use24HourAtom,
+    enableTimezoneAtom,
 } from "Recoil/calendar.atom";
 
 function App({ events, ...otherProps }) {
     const [formattedEvents, setFormattedEvents] = React.useState([]);
     const clientTimezone = useRecoilValue(clientTimezoneState);
+    const [use24HourState, setUse24HourState] = useRecoilState(use24HourAtom);
+    const [enableTimezoneState, setEnableTimezoneAtom] = useRecoilState(enableTimezoneAtom);
+    const { use24Hour, enableTimezone } = {...otherProps};
+
+    React.useEffect(() => {
+        // console.log(use24Hour)
+        setUse24HourState(use24Hour);
+    }, [use24Hour])
+
+    React.useEffect(() => {
+        // console.log(enableTimezone)
+        setEnableTimezoneAtom(enableTimezone)
+    }, [enableTimezone])
+
     /**
      *  start(year,month,day,hour,minute), end(...), title, link, imgUrl, timezone
      */
@@ -52,7 +68,7 @@ function App({ events, ...otherProps }) {
     React.useEffect(() => {
         // TODO: convert timezone here, if necessary
         const temp = [];
-        // console.log("Events: ", events)
+        console.log("Events: ", events)
         events.map((event) => {
             const _startDetails = getTimeDetails(event?.start);
             const _endDetails = getTimeDetails(event?.end);
@@ -83,7 +99,7 @@ function App({ events, ...otherProps }) {
             }
             return <></>
         });
-        // console.log('temp: ', temp)
+        console.log('temp: ', temp)
         setFormattedEvents(temp);
         console.log(clientTimezone)
     }, [events, clientTimezone]);

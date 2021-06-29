@@ -29,7 +29,7 @@ OneDayEvent.args = {
         {
             start: `${year}-${month}-${day} 14:30:00`,
             end: `${year}-${month}-${day} 16:30:00`,
-            // timezone: "America/New_York",
+            timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
             url: "https://www.google.com",
@@ -38,7 +38,7 @@ OneDayEvent.args = {
         {
             start: "2008-11-22 14:30:00",
             end: "2008-11-22 16:30:00",
-            // timezone: "America/New_York",
+            timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
             url: "https://www.google.com",
@@ -73,6 +73,8 @@ MultiDayEvent.args = {
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
+    use24Hour: true, 
+    enableTimezone: true,
 };
 
 export const MobileView = Template.bind({});

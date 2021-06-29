@@ -5,7 +5,7 @@ import { RecoilRoot } from "recoil";
 export default function Calendar ({events, ...otherProps}) {
     return (
         <RecoilRoot>
-            <App events={events} otherProps={otherProps}/>
+            <App events={events} {...otherProps}/>
         </RecoilRoot>
     )
 };
