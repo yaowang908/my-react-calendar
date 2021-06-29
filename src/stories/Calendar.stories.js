@@ -46,7 +46,7 @@ OneDayEvent.args = {
         },
     ],
     use24Hour: false, 
-    enableTimezone: 'auto',
+    enableTimezone: true,
 };
 
 export const MultiDayEvent = Template.bind({});
@@ -120,6 +120,15 @@ MobileView.parameters = {
         defaultViewport: 'iphonex'
     }
 }
+
+export const TimezoneAuto = Template.bind({});
+
+TimezoneAuto.args = {
+    events: [...MultiDayEvent.args.events],
+    use24Hour: false, 
+    enableTimezone: 'auto',
+};
+
 
 // {
 //     id: event.id,
