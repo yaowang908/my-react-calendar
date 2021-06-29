@@ -22,12 +22,12 @@ function App({ events, ...otherProps }) {
 
     React.useEffect(() => {
         // console.log(use24Hour)
-        setUse24HourState(use24Hour);
+        setUse24HourState(!!use24Hour); //if it's undefined, !!undefined is false
     }, [use24Hour])
 
     React.useEffect(() => {
         // console.log(enableTimezone)
-        setEnableTimezoneAtom(enableTimezone)
+        setEnableTimezoneAtom(!!enableTimezone); //if it's undefined, !!undefined is false
     }, [enableTimezone])
 
     /**

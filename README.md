@@ -5,13 +5,13 @@ This project is created by Create-react-app, using TailwindCSS for styling, gulp
 [Demo](http://www.yaow.me/my-react-calendar/)
 
 ```js
-import { Calendar } from "my-react-calendar"
+import Calendar from "my-react-calendar"
 
 const events = [
         {
             start: `${year}-${month}-${day} 14:30:00`,
             end: `${year}-${month}-${day} 16:30:00`,
-            // timezone: "America/New_York",
+            timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
             url: "https://www.google.com",
@@ -20,7 +20,7 @@ const events = [
         {
             start: "2008-11-22 14:30:00",
             end: "2008-11-22 16:30:00",
-            // timezone: "America/New_York",
+            timezone: "America/New_York",
             title:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
             url: "https://www.google.com",
@@ -29,7 +29,7 @@ const events = [
     ];
 
 const Calendar = () => (
-    <Calendar events={events}/>
+    <Calendar events={events} use24Hour={false} enableTimezone={true}/>
 )
 ```
 
