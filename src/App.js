@@ -27,7 +27,11 @@ function App({ events, ...otherProps }) {
 
     React.useEffect(() => {
         // console.log(enableTimezone)
-        setEnableTimezoneAtom(!!enableTimezone); //if it's undefined, !!undefined is false
+        if(enableTimezone === 'auto') {
+            setEnableTimezoneAtom('auto');
+        } else {
+            setEnableTimezoneAtom(!!enableTimezone); //if it's undefined, !!undefined is false
+        }
     }, [enableTimezone])
 
     /**
@@ -81,7 +85,12 @@ function App({ events, ...otherProps }) {
          * moment-timezone is also required here
          */
         const result = [];
-        if(enableTimezone) {
+        if(!enableTimezone) {
+           // return original data
+           return events
+        } else {
+            // enableTimezone: true or auto
+            if(enableTimezone === 'auto') console.log('Using default timezone setting, but not showing')
             // DONE: calculate time base on timezone
             //REFERENCE: var b = moment.tz("May 12th 2014 8PM", "MMM Do YYYY hA", "America/Toronto");
             events.map((event) => {
@@ -101,9 +110,6 @@ function App({ events, ...otherProps }) {
                 }
             })
             return result;
-        } else {
-            // return original data
-            return events
         }
     }
 

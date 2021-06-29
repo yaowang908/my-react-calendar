@@ -79,7 +79,7 @@ export default function Header() {
         setIsViewSelectorHidden(!isViewSelectorHidden);
     }
 
-    // TODO: add indicator that the timezone is display timezone
+    // DONE: add indicator that the timezone is display timezone
 
     return (
         <div className={`flex flex-row flex-nowrap justify-between w-full bg-white z-30 ${calendarView === 'LIST' ? 'sticky top-0' : ''}`}>
@@ -139,7 +139,7 @@ export default function Header() {
                     <MonthSelector />
                 </div>
             </div>
-            <div className={`flex-row flex-nowrap items-center ml-4 hidden ${enableTimezone ? 'md:flex md:w-5/12' : ''}`}>
+            <div className={`flex-row flex-nowrap items-center ml-4 hidden ${(enableTimezone && enableTimezone !== 'auto') ? 'md:flex md:w-5/12' : ''}`}>
                     <div className="flex flex-row flex-nowrap items-center text-xs">Time zone: </div>
                     <div className={`mx-4 w-full max-w-xxs text-xs text-gray-600 `} >
                         <TimezoneSelect value={clientTimezone} onChange={setClientTimezone}/>

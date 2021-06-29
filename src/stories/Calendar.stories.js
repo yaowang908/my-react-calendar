@@ -46,7 +46,7 @@ OneDayEvent.args = {
         },
     ],
     use24Hour: false, 
-    enableTimezone: true,
+    enableTimezone: 'auto',
 };
 
 export const MultiDayEvent = Template.bind({});
@@ -76,7 +76,7 @@ MultiDayEvent.args = {
         },
     ],
     use24Hour: true, 
-    enableTimezone: true,
+    enableTimezone: false,
 };
 
 export const MobileView = Template.bind({});

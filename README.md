@@ -31,6 +31,10 @@ const events = [
 const Calendar = () => (
     <Calendar events={events} use24Hour={false} enableTimezone={true}/>
 )
+// use24Hour: true, false
+
+// enableTimezone: true, false, auto
+// true: user can select timezone, false: disable timezone function, auto: quietly run timezone function without displaying
 ```
 
 ### `yarn build`
