@@ -5,7 +5,7 @@ This project is created by Create-react-app, using TailwindCSS for styling, gulp
 [Demo](http://www.yaow.me/my-react-calendar/)
 
 ```js
-import Calendar from "my-react-calendar"
+import Calendar from "my-react-calendar/src"
 
 const events = [
         {
