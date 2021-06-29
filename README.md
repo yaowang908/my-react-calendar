@@ -34,7 +34,7 @@ const Calendar = () => (
 // use24Hour: true, false
 
 // enableTimezone: true, false, auto
-// true: user can select timezone, false: disable timezone function, auto: quietly run timezone function without displaying
+// true: user can select timezone, false: disable timezone function, auto: only show client timezone without changing
 ```
 
 ### `yarn build`

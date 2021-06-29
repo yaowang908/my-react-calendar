@@ -140,11 +140,17 @@ export default function Header() {
                 </div>
             </div>
             <div className={`flex-row flex-nowrap items-center ml-4 hidden ${(enableTimezone && enableTimezone !== 'auto') ? 'md:flex md:w-5/12' : ''}`}>
-                    <div className="flex flex-row flex-nowrap items-center text-xs">Time zone: </div>
-                    <div className={`mx-4 w-full max-w-xxs text-xs text-gray-600 `} >
-                        <TimezoneSelect value={clientTimezone} onChange={setClientTimezone}/>
-                    </div>
+                <div className="flex flex-row flex-nowrap items-center text-xs">Time zone: </div>
+                <div className={`mx-4 w-full max-w-xxs text-xs text-gray-600 `} >
+                    <TimezoneSelect value={clientTimezone} onChange={setClientTimezone}/>
                 </div>
+            </div>
+            <div className={`flex-row flex-nowrap items-center ml-4 hidden ${(enableTimezone === 'auto') ? 'md:flex md:w-5/12' : ''}`}>
+                <div className="flex flex-row flex-nowrap items-center text-xs">Time zone: </div>
+                <div className={`mx-4 w-full max-w-xxs text-xs text-gray-600 `} >
+                    {clientTimezone}
+                </div>
+            </div>
             <div className="relative flex flex-row flex-nowrap justify-end items-center w-1/5 md:w-1/12 h-20">
                 <div
                     className="w-5 cursor-pointer"

@@ -57,6 +57,7 @@ export const MultiDayEvent = Template.bind({});
  *      DONE: 1. auto generate multi_day attributes
  *      DONE: 2. rename the attributes, make it short
  *  DONE: 2. timezone conversion
+ *            1. when set to auto, only show timezone, not changing it
  *  DONE: 3. handle empty input or in-valid ones
  *  DONE: 4. update README file
  *  5. dark theme support
