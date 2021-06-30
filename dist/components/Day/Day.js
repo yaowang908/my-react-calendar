@@ -19,11 +19,11 @@ var _reactRenderHtml = _interopRequireDefault(require("react-render-html"));
 
 var _nanoid = require("nanoid");
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
-var _EventEntry = _interopRequireDefault(require("@root/components/EventEntry/EventEntry"));
+var _EventEntry = _interopRequireDefault(require("../EventEntry/EventEntry"));
 
-var _getEventEntryTime = require("@root/libs/getEventEntryTime");
+var _getEventEntryTime = require("../../libs/getEventEntryTime");
 
 var _excluded = ["date", "month", "year", "width", "isToday", "isPast", "isSelected", "eventsProp", "eventsGroupMarginTop"];
 

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getEventsForTheDate = exports.stringTo2Digits = void 0;
 
-var _placeholder = require("@root/libs/placeholder");
+var _placeholder = require("./placeholder");
 
 var stringTo2Digits = function stringTo2Digits(t) {
   if (typeof t !== "string" && typeof t !== "number") return false;

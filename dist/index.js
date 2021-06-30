@@ -17,9 +17,9 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _recoil = require("recoil");
 
-var _App = _interopRequireDefault(require("@root/App"));
+var _App = _interopRequireDefault(require("./App"));
 
-var _Calendar = require("@root/stories/Calendar.stories");
+var _Calendar = require("./stories/Calendar.stories");
 
 var _excluded = ["events"];
 

@@ -6,11 +6,11 @@ var _react = require("@testing-library/react");
 
 var _recoil = require("recoil");
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
-var _Day = _interopRequireDefault(require("@root/components/Day/Day"));
+var _Day = _interopRequireDefault(require("./Day"));
 
-var _placeholder = require("@root/libs/placeholder");
+var _placeholder = require("../../libs/placeholder");
 
 test("normal day component should have classes", function () {
   (0, _react.render)( /*#__PURE__*/React.createElement(_Day.default, {

@@ -15,13 +15,13 @@ var _recoil = require("recoil");
 
 var _reactTimezoneSelect = _interopRequireDefault(require("react-timezone-select"));
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
-var _getWeeks = require("@root/libs/getWeeks");
+var _getWeeks = require("../../libs/getWeeks");
 
-var _MonthSelector = _interopRequireDefault(require("@root/components/MonthSelector/MonthSelector"));
+var _MonthSelector = _interopRequireDefault(require("../MonthSelector/MonthSelector"));
 
-var _ViewSelector = _interopRequireDefault(require("@root/components/ViewSelector/ViewSelector"));
+var _ViewSelector = _interopRequireDefault(require("../ViewSelector/ViewSelector"));
 
 function Header() {
   var _useRecoilState = (0, _recoil.useRecoilState)(_calendar.targetMonth),

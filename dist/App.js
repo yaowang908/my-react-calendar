@@ -19,15 +19,15 @@ var _react = _interopRequireDefault(require("react"));
 
 var _recoil = require("recoil");
 
-var _Header = _interopRequireDefault(require("@root/components/Header/Header"));
+var _Header = _interopRequireDefault(require("./components/Header/Header"));
 
-var _Calendar = _interopRequireDefault(require("@root/components/Calendar/Calendar"));
+var _Calendar = _interopRequireDefault(require("./components/Calendar/Calendar"));
 
-require("@root/index.css");
+require("./index.css");
 
-var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+var _getEventsForTheDate = require("./libs/getEventsForTheDate");
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("./Recoil/calendar.atom");
 
 var _momentTimezone = _interopRequireDefault(require("moment-timezone"));
 

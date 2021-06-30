@@ -21,13 +21,13 @@ var _recoil = require("recoil");
 
 var _reactRenderHtml = _interopRequireDefault(require("react-render-html"));
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
-var _Day = _interopRequireDefault(require("@root/components/Day/Day"));
+var _Day = _interopRequireDefault(require("../Day/Day"));
 
-var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+var _getEventsForTheDate = require("../../libs/getEventsForTheDate");
 
-var _MultiDayEvent = _interopRequireDefault(require("@root/components/MultiDayEvents/MultiDayEvent"));
+var _MultiDayEvent = _interopRequireDefault(require("../MultiDayEvents/MultiDayEvent"));
 
 var _excluded = ["datesArray", "cellWidth", "events"];
 

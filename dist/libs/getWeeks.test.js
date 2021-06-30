@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _createForOfIteratorHelper2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/createForOfIteratorHelper"));
 
-var _require = require("@root/libs/getWeeks"),
+var _require = require("./getWeeks"),
     daysInMonth = _require.daysInMonth,
     thisMonth = _require.thisMonth,
     thisDate = _require.thisDate,

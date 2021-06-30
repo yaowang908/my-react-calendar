@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _react = require("@testing-library/react");
 
-var _App = _interopRequireDefault(require("@root/App"));
+var _App = _interopRequireDefault(require("./App"));
 
 test("renders App", function () {
   (0, _react.render)( /*#__PURE__*/React.createElement(_App.default, null));

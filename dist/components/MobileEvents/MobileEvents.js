@@ -17,11 +17,11 @@ var _nanoid = require("nanoid");
 
 var _recoil = require("recoil");
 
-var _MobileEventEntry = _interopRequireDefault(require("@root/components/MobileEvents/MobileEventEntry"));
+var _MobileEventEntry = _interopRequireDefault(require("./MobileEventEntry"));
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
-var _getEventEntryTime = require("@root/libs/getEventEntryTime");
+var _getEventEntryTime = require("../../libs/getEventEntryTime");
 
 var _excluded = ["events", "monthName", "date"];
 

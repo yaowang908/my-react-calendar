@@ -13,21 +13,21 @@ var _react = _interopRequireDefault(require("react"));
 
 var _recoil = require("recoil");
 
-var _getWeeks = require("@root/libs/getWeeks");
+var _getWeeks = require("../../libs/getWeeks");
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
-var _MobileEvents = _interopRequireDefault(require("@root/components/MobileEvents/MobileEvents"));
+var _MobileEvents = _interopRequireDefault(require("../MobileEvents/MobileEvents"));
 
-var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+var _getEventsForTheDate = require("../../libs/getEventsForTheDate");
 
-var _CalendarView = _interopRequireDefault(require("@root/components/Calendar/CalendarView"));
+var _CalendarView = _interopRequireDefault(require("./CalendarView"));
 
-var _MultiDayEventsMobile = _interopRequireDefault(require("@root/components/MobileEvents/MultiDayEventsMobile"));
+var _MultiDayEventsMobile = _interopRequireDefault(require("../MobileEvents/MultiDayEventsMobile"));
 
-var _ListView = _interopRequireDefault(require("@root/components/ListView/ListView"));
+var _ListView = _interopRequireDefault(require("../ListView/ListView"));
 
-var _DayNames = _interopRequireDefault(require("@root/components/DayNames/DayNames"));
+var _DayNames = _interopRequireDefault(require("../DayNames/DayNames"));
 
 // import { stringTo2Digits } from 'libs/getEventsForTheDate';
 function Calendar(_ref) {

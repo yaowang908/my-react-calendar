@@ -31,8 +31,26 @@
     },
     "babel": {
         "presets": [
-            ["react-app", { "absoluteRuntime": false }],
+            [
+                "react-app",
+                {
+                    "absoluteRuntime": false
+                }
+            ],
             "@babel/preset-react"
+        ],
+        "plugins": [
+            [
+                "module-resolver",
+                {
+                    "root": [
+                        "."
+                    ],
+                    "alias": {
+                        "@root": "./src"
+                    }
+                }
+            ]
         ]
     },
     "eslintConfig": {
@@ -73,6 +91,7 @@
         "@storybook/preset-create-react-app": "^3.1.7",
         "@storybook/react": "^6.2.9",
         "autoprefixer": "^9",
+        "babel-plugin-module-resolver": "^4.1.0",
         "craco-alias": "^3.0.1",
         "gulp": "^4.0.2",
         "gulp-inline-source": "^4.0.0",

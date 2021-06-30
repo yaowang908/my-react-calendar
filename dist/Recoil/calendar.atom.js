@@ -7,11 +7,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.enableTimezoneAtom = exports.use24HourAtom = exports.clientTimezoneSelector = exports.clientTimezone = exports.calendarView = exports.isViewSelectorHidden = exports.normalEventsAtom = exports.multiDayEventsAtom = exports.isMonthSelectorHidden = exports.eventsDataAtom = exports.eventsBufferAtom = exports.selectedDay = exports.targetYear = exports.targetMonth = exports.calendarStart = void 0;
 
-var _placeholder = require("@root/libs/placeholder");
+var _placeholder = require("../libs/placeholder");
 
 var _recoil = require("recoil");
 
-var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+var _getEventsForTheDate = require("../libs/getEventsForTheDate");
 
 var _momentTimezone = _interopRequireDefault(require("moment-timezone"));
 

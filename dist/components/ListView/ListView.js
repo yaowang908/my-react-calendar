@@ -17,9 +17,9 @@ var _nanoid = require("nanoid");
 
 var _recoil = require("recoil");
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
-var _ListEntry = _interopRequireDefault(require("@root/components/ListEntry/ListEntry"));
+var _ListEntry = _interopRequireDefault(require("../ListEntry/ListEntry"));
 
 var _excluded = ["eventsData", "multiDayEvents"];
 

@@ -15,7 +15,7 @@ var _nanoid = require("nanoid");
 
 var _recoil = require("recoil");
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
 function MonthSelector() {
   var _useRecoilState = (0, _recoil.useRecoilState)(_calendar.targetYear),

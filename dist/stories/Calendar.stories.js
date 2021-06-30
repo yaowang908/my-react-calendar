@@ -11,13 +11,13 @@ var _react = _interopRequireDefault(require("react"));
 
 var _addonViewport = require("@storybook/addon-viewport");
 
-var _index = _interopRequireDefault(require("@root/index.js"));
+var _index = _interopRequireDefault(require("../index.js"));
 
-var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+var _getEventsForTheDate = require("../libs/getEventsForTheDate");
 
-var _getWeeks = require("@root/libs/getWeeks");
+var _getWeeks = require("../libs/getWeeks");
 
-require("@root/index.css");
+require("../index.css");
 
 var _default = {
   component: _index.default,

@@ -13,7 +13,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _recoil = require("recoil");
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
 function ViewSelector() {
   var _useRecoilState = (0, _recoil.useRecoilState)(_calendar.isViewSelectorHidden),

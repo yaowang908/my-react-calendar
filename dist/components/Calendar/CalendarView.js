@@ -15,15 +15,15 @@ var _nanoid = require("nanoid");
 
 var _recoil = require("recoil");
 
-var _Week = _interopRequireDefault(require("@root/components/Week/Week"));
+var _Week = _interopRequireDefault(require("../Week/Week"));
 
-var _getWeeks = _interopRequireDefault(require("@root/libs/getWeeks"));
+var _getWeeks = _interopRequireDefault(require("../../libs/getWeeks"));
 
-var _calendar = require("@root/Recoil/calendar.atom");
+var _calendar = require("../../Recoil/calendar.atom");
 
-var _useWindowSize3 = _interopRequireDefault(require("@root/hooks/useWindowSize"));
+var _useWindowSize3 = _interopRequireDefault(require("../../hooks/useWindowSize"));
 
-var _placeholder = require("@root/libs/placeholder");
+var _placeholder = require("../../libs/placeholder");
 
 function CalendarView(_ref) {
   var _ref$eventsData = _ref.eventsData,
