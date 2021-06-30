@@ -142,7 +142,7 @@ function Header() {
   }))), /*#__PURE__*/_react.default.createElement(_MonthSelector.default, null))), /*#__PURE__*/_react.default.createElement("div", {
     className: "flex-row flex-nowrap items-center ml-4 hidden ".concat(enableTimezone && enableTimezone !== 'auto' ? 'md:flex md:w-5/12' : '')
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "flex flex-row flex-nowrap items-center text-xs"
+    className: "flex flex-row flex-nowrap items-center text-xs w-24"
   }, "Time zone: "), /*#__PURE__*/_react.default.createElement("div", {
     className: "mx-4 w-full max-w-xxs text-xs text-gray-600 "
   }, /*#__PURE__*/_react.default.createElement(_reactTimezoneSelect.default, {
@@ -151,7 +151,7 @@ function Header() {
   }))), /*#__PURE__*/_react.default.createElement("div", {
     className: "flex-row flex-nowrap items-center ml-4 hidden ".concat(enableTimezone === 'auto' ? 'md:flex md:w-5/12' : '')
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "flex flex-row flex-nowrap items-center text-xs"
+    className: "flex flex-row flex-nowrap items-center text-xs w-24"
   }, "Time zone: "), /*#__PURE__*/_react.default.createElement("div", {
     className: "mx-4 w-full max-w-xxs text-xs text-gray-600 "
   }, clientTimezone)), /*#__PURE__*/_react.default.createElement("div", {
