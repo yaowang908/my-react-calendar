@@ -1,9 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
 
 import App from "@root/App";
-import { OneDayEvent } from "@root/stories/Calendar.stories"
+// import { OneDayEvent } from "stories/Calendar.stories"
 
 export default function Calendar ({events, ...otherProps}) {
     return (
@@ -13,4 +13,4 @@ export default function Calendar ({events, ...otherProps}) {
     )
 };
 
-ReactDOM.render(<Calendar events={OneDayEvent.args.events}/>, document.getElementById('calendar_root'))
+// ReactDOM.render(<Calendar events={OneDayEvent.args.events}/>, document.getElementById('calendar_root'))

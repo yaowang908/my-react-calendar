@@ -13,16 +13,13 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
 var _recoil = require("recoil");
 
 var _App = _interopRequireDefault(require("./App"));
 
-var _Calendar = require("./stories/Calendar.stories");
-
 var _excluded = ["events"];
 
+// import { OneDayEvent } from "stories/Calendar.stories"
 function Calendar(_ref) {
   var events = _ref.events,
       otherProps = (0, _objectWithoutProperties2.default)(_ref, _excluded);
@@ -31,8 +28,4 @@ function Calendar(_ref) {
   }, otherProps)));
 }
 
-;
-
-_reactDom.default.render( /*#__PURE__*/_react.default.createElement(Calendar, {
-  events: _Calendar.OneDayEvent.args.events
-}), document.getElementById('calendar_root'));
+; // ReactDOM.render(<Calendar events={OneDayEvent.args.events}/>, document.getElementById('calendar_root'))
