@@ -1,7 +1,18 @@
-import React from "react";
-import { nanoid } from "nanoid";
-export default function DayNames() {
-  const days = [{
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = DayNames;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _nanoid = require("nanoid");
+
+function DayNames() {
+  var days = [{
     fullName: "Monday",
     abbr: "Mon."
   }, {
@@ -23,17 +34,17 @@ export default function DayNames() {
     fullName: "Sunday",
     abbr: "Sun."
   }];
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     className: "grid grid-cols-7 w-full h-10 mt-5"
-  }, days.map(x => {
-    return /*#__PURE__*/React.createElement("div", {
+  }, days.map(function (x) {
+    return /*#__PURE__*/_react.default.createElement("div", {
       className: "hidden md:block",
-      key: nanoid()
+      key: (0, _nanoid.nanoid)()
     }, x.fullName);
-  }), days.map(x => {
-    return /*#__PURE__*/React.createElement("div", {
+  }), days.map(function (x) {
+    return /*#__PURE__*/_react.default.createElement("div", {
       className: "block md:hidden",
-      key: nanoid()
+      key: (0, _nanoid.nanoid)()
     }, x.abbr);
   }));
 }

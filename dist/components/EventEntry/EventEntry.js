@@ -1,15 +1,37 @@
-import React from "react";
-let local_default_image = null;
-export default function EventEntry({
-  time,
-  title,
-  link,
-  image = "",
-  ...otherProps
-}) {
-  const eventImage = React.useRef(null);
-  const [localImgSrc, setLocalImgSrc] = React.useState(image);
-  React.useEffect(() => {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = EventEntry;
+
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/slicedToArray"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _excluded = ["time", "title", "link", "image"];
+var local_default_image = null;
+
+function EventEntry(_ref) {
+  var time = _ref.time,
+      title = _ref.title,
+      link = _ref.link,
+      _ref$image = _ref.image,
+      image = _ref$image === void 0 ? "" : _ref$image,
+      otherProps = (0, _objectWithoutProperties2.default)(_ref, _excluded);
+
+  var eventImage = _react.default.useRef(null);
+
+  var _React$useState = _react.default.useState(image),
+      _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
+      localImgSrc = _React$useState2[0],
+      setLocalImgSrc = _React$useState2[1];
+
+  _react.default.useEffect(function () {
     if (local_default_image) {
       if (!image) {
         setLocalImgSrc(local_default_image);
@@ -19,17 +41,17 @@ export default function EventEntry({
     }
   }, [image]);
 
-  const mouseEnterHandler = event => {
+  var mouseEnterHandler = function mouseEnterHandler(event) {
     // console.log('Enter', link, event);
     if (localImgSrc) {
-      const cursorX = event.clientX;
-      const cursorY = event.clientY;
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight; // console.log('Cursor', cursorX, cursorY);
+      var cursorX = event.clientX;
+      var cursorY = event.clientY;
+      var screenWidth = window.innerWidth;
+      var screenHeight = window.innerHeight; // console.log('Cursor', cursorX, cursorY);
       // console.log('Screen', screenWidth, screenHeight);
 
-      const isRightHalf = screenWidth / 2 < cursorX ? true : false;
-      const isTopHalf = screenHeight / 2 < cursorY ? false : true;
+      var isRightHalf = screenWidth / 2 < cursorX ? true : false;
+      var isTopHalf = screenHeight / 2 < cursorY ? false : true;
       eventImage.current.classList.remove("hidden");
 
       if (isRightHalf) {
@@ -46,26 +68,26 @@ export default function EventEntry({
     }
   };
 
-  const mouseLeaveHandler = () => {
+  var mouseLeaveHandler = function mouseLeaveHandler() {
     // console.log('Leave');
     eventImage.current.classList.remove("block", "mt-16", "-mt-32", "-ml-32");
     eventImage.current.classList.add("hidden");
   };
 
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     className: "hidden md:block w-full text-xxs lg:text-xs mt-1 border-b border-gray-100 pb-1",
     onMouseEnter: mouseEnterHandler,
     onMouseLeave: mouseLeaveHandler
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "hidden w-72 h-auto absolute z-50",
     ref: eventImage
-  }, /*#__PURE__*/React.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement("img", {
     className: "w-full h-auto",
     src: localImgSrc,
     alt: title
-  })), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/_react.default.createElement("div", {
     className: "mb-1"
-  }, time.toUpperCase()), /*#__PURE__*/React.createElement("div", null, link ? /*#__PURE__*/React.createElement("a", {
+  }, time.toUpperCase()), /*#__PURE__*/_react.default.createElement("div", null, link ? /*#__PURE__*/_react.default.createElement("a", {
     href: link
-  }, title) : /*#__PURE__*/React.createElement("p", null, title)));
+  }, title) : /*#__PURE__*/_react.default.createElement("p", null, title)));
 }

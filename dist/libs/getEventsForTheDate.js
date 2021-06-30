@@ -1,6 +1,13 @@
-import { eventsPlaceholder } from "@root/libs/placeholder";
+"use strict";
 
-const stringTo2Digits = t => {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getEventsForTheDate = exports.stringTo2Digits = void 0;
+
+var _placeholder = require("@root/libs/placeholder");
+
+var stringTo2Digits = function stringTo2Digits(t) {
   if (typeof t !== "string" && typeof t !== "number") return false;
   return Number(t).toLocaleString("en-US", {
     minimumIntegerDigits: 2,
@@ -8,12 +15,16 @@ const stringTo2Digits = t => {
   });
 };
 
-const getEventsForTheDate = (month, date, year, arr) => {
+exports.stringTo2Digits = stringTo2Digits;
+
+var getEventsForTheDate = function getEventsForTheDate(month, date, year, arr) {
   // console.log('arr for mobile view', arr instanceof Array, arr);
-  if (!(arr instanceof Array)) return eventsPlaceholder.events;
-  const _date = `${year}-${stringTo2Digits(month)}-${stringTo2Digits(date)}`;
-  return arr.filter(x => {
-    if (x?.date === _date) {
+  if (!(arr instanceof Array)) return _placeholder.eventsPlaceholder.events;
+
+  var _date = "".concat(year, "-").concat(stringTo2Digits(month), "-").concat(stringTo2Digits(date));
+
+  return arr.filter(function (x) {
+    if ((x === null || x === void 0 ? void 0 : x.date) === _date) {
       // console.log('qualified event:', x);
       return true;
     } else {
@@ -23,4 +34,4 @@ const getEventsForTheDate = (month, date, year, arr) => {
   });
 };
 
-export { stringTo2Digits, getEventsForTheDate };
+exports.getEventsForTheDate = getEventsForTheDate;

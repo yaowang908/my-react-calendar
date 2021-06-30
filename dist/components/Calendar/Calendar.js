@@ -1,46 +1,80 @@
-import React from "react";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { monthArray } from "@root/libs/getWeeks";
-import { selectedDay as selectedDayState, eventsDataAtom, multiDayEventsAtom, normalEventsAtom, calendarView as calendarViewSelector } from "@root/Recoil/calendar.atom";
-import MobileEvents from "@root/components/MobileEvents/MobileEvents";
-import { getEventsForTheDate } from "@root/libs/getEventsForTheDate";
-import CalendarView from "@root/components/Calendar/CalendarView";
-import MultiDayEventsMobile from "@root/components/MobileEvents/MultiDayEventsMobile";
-import ListView from "@root/components/ListView/ListView";
-import DayNames from "@root/components/DayNames/DayNames"; // import { stringTo2Digits } from 'libs/getEventsForTheDate';
+"use strict";
 
-export default function Calendar({
-  events,
-  otherProps
-}) {
-  const selectedDay = useRecoilValue(selectedDayState);
-  const [eventsData, setEventsData] = useRecoilState(eventsDataAtom);
-  const [multiDayEvents, setMultiDayEventsState] = useRecoilState(multiDayEventsAtom);
-  const [normalEvents, setNormalEvents] = useRecoilState(normalEventsAtom);
-  const calendarView = useRecoilValue(calendarViewSelector);
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-  const getMobileViewMonthName = selected => {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Calendar;
+
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/slicedToArray"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _recoil = require("recoil");
+
+var _getWeeks = require("@root/libs/getWeeks");
+
+var _calendar = require("@root/Recoil/calendar.atom");
+
+var _MobileEvents = _interopRequireDefault(require("@root/components/MobileEvents/MobileEvents"));
+
+var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+
+var _CalendarView = _interopRequireDefault(require("@root/components/Calendar/CalendarView"));
+
+var _MultiDayEventsMobile = _interopRequireDefault(require("@root/components/MobileEvents/MultiDayEventsMobile"));
+
+var _ListView = _interopRequireDefault(require("@root/components/ListView/ListView"));
+
+var _DayNames = _interopRequireDefault(require("@root/components/DayNames/DayNames"));
+
+// import { stringTo2Digits } from 'libs/getEventsForTheDate';
+function Calendar(_ref) {
+  var events = _ref.events,
+      otherProps = _ref.otherProps;
+  var selectedDay = (0, _recoil.useRecoilValue)(_calendar.selectedDay);
+
+  var _useRecoilState = (0, _recoil.useRecoilState)(_calendar.eventsDataAtom),
+      _useRecoilState2 = (0, _slicedToArray2.default)(_useRecoilState, 2),
+      eventsData = _useRecoilState2[0],
+      setEventsData = _useRecoilState2[1];
+
+  var _useRecoilState3 = (0, _recoil.useRecoilState)(_calendar.multiDayEventsAtom),
+      _useRecoilState4 = (0, _slicedToArray2.default)(_useRecoilState3, 2),
+      multiDayEvents = _useRecoilState4[0],
+      setMultiDayEventsState = _useRecoilState4[1];
+
+  var _useRecoilState5 = (0, _recoil.useRecoilState)(_calendar.normalEventsAtom),
+      _useRecoilState6 = (0, _slicedToArray2.default)(_useRecoilState5, 2),
+      normalEvents = _useRecoilState6[0],
+      setNormalEvents = _useRecoilState6[1];
+
+  var calendarView = (0, _recoil.useRecoilValue)(_calendar.calendarView);
+
+  var getMobileViewMonthName = function getMobileViewMonthName(selected) {
     // console.log('monthName', selected)
-    const monthNum = selected?.month || new Date().getMonth() + 1;
-    return monthArray[Number(monthNum) - 1];
+    var monthNum = (selected === null || selected === void 0 ? void 0 : selected.month) || new Date().getMonth() + 1;
+    return _getWeeks.monthArray[Number(monthNum) - 1];
   }; //DONE: multi day events needs to cross a few blocks
   // console.log(`${year}-${month}-${date}`, events)
 
 
-  React.useEffect(() => {
+  _react.default.useEffect(function () {
     // console.log(events)
     if (events) {
       setEventsData(events);
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
   }, [events]);
-  React.useEffect(() => {
-    const eventsFilter = events => {
-      const normalEvents = [];
-      const multiDayEvents = []; // eslint-disable-next-line array-callback-return
 
-      events?.map(event => {
-        if (event?.multi_day) {
+  _react.default.useEffect(function () {
+    var eventsFilter = function eventsFilter(events) {
+      var normalEvents = [];
+      var multiDayEvents = []; // eslint-disable-next-line array-callback-return
+
+      events === null || events === void 0 ? void 0 : events.map(function (event) {
+        if (event === null || event === void 0 ? void 0 : event.multi_day) {
           multiDayEvents.push(event);
         } else {
           normalEvents.push(event);
@@ -49,8 +83,12 @@ export default function Calendar({
       return [normalEvents, multiDayEvents];
     };
 
-    const [normalEvents, multiDayEvents] = eventsFilter(eventsData); // console.log('normalEvents', normalEvents);
+    var _eventsFilter = eventsFilter(eventsData),
+        _eventsFilter2 = (0, _slicedToArray2.default)(_eventsFilter, 2),
+        normalEvents = _eventsFilter2[0],
+        multiDayEvents = _eventsFilter2[1]; // console.log('normalEvents', normalEvents);
     // console.log('multiDayEvents', multiDayEvents);
+
 
     setNormalEvents(normalEvents);
     setMultiDayEventsState(multiDayEvents); // setMultiDayEventsState([...multiDayEvents, ...multiDayEvents]);
@@ -60,23 +98,23 @@ export default function Calendar({
   }, [eventsData, setMultiDayEventsState]);
 
   if (calendarView === "MONTH") {
-    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(DayNames, null), /*#__PURE__*/React.createElement(CalendarView, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_DayNames.default, null), /*#__PURE__*/_react.default.createElement(_CalendarView.default, {
       eventsData: normalEvents
-    }), /*#__PURE__*/React.createElement(MultiDayEventsMobile, {
+    }), /*#__PURE__*/_react.default.createElement(_MultiDayEventsMobile.default, {
       selectedDay: selectedDay
-    }), /*#__PURE__*/React.createElement(MobileEvents, {
-      events: getEventsForTheDate(selectedDay?.month, selectedDay?.date, selectedDay?.year, normalEvents),
-      date: selectedDay?.date,
+    }), /*#__PURE__*/_react.default.createElement(_MobileEvents.default, {
+      events: (0, _getEventsForTheDate.getEventsForTheDate)(selectedDay === null || selectedDay === void 0 ? void 0 : selectedDay.month, selectedDay === null || selectedDay === void 0 ? void 0 : selectedDay.date, selectedDay === null || selectedDay === void 0 ? void 0 : selectedDay.year, normalEvents),
+      date: selectedDay === null || selectedDay === void 0 ? void 0 : selectedDay.date,
       monthName: getMobileViewMonthName(selectedDay)
     }));
   }
 
   if (calendarView === "LIST") {
-    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ListView, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ListView.default, {
       eventsData: normalEvents,
       multiDayEvents: multiDayEvents
     }));
   }
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, " ");
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, " ");
 }

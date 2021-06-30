@@ -1,21 +1,34 @@
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+"use strict";
 
-import React from "react";
-export default function MultiDayEvent({
-  cellWidth,
-  barWidthClass,
-  bar_with,
-  startBlockIndex,
-  endBlockIndex,
-  link,
-  children,
-  ...otherProps
-}) {
-  const borderColor = "border-white";
-  const backgroundColor = "bg-blue-400";
-  const textColor = "text-white";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-  const clickHandler = event => {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = MultiDayEvent;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _excluded = ["cellWidth", "barWidthClass", "bar_with", "startBlockIndex", "endBlockIndex", "link", "children"];
+
+function MultiDayEvent(_ref) {
+  var cellWidth = _ref.cellWidth,
+      barWidthClass = _ref.barWidthClass,
+      bar_with = _ref.bar_with,
+      startBlockIndex = _ref.startBlockIndex,
+      endBlockIndex = _ref.endBlockIndex,
+      link = _ref.link,
+      children = _ref.children,
+      otherProps = (0, _objectWithoutProperties2.default)(_ref, _excluded);
+  var borderColor = "border-white";
+  var backgroundColor = "bg-blue-400";
+  var textColor = "text-white";
+
+  var clickHandler = function clickHandler(event) {
     // console.log('Clicked multiDayEvent -> cellWidth: ', cellWidth);
     event.preventDefault();
 
@@ -31,18 +44,18 @@ export default function MultiDayEvent({
     }
   };
 
-  const getLeftMargin = () => {
+  var getLeftMargin = function getLeftMargin() {
     return {
-      marginLeft: `${startBlockIndex * cellWidth}px`,
-      width: bar_with ? `${bar_with * cellWidth}px` : "auto"
+      marginLeft: "".concat(startBlockIndex * cellWidth, "px"),
+      width: bar_with ? "".concat(bar_with * cellWidth, "px") : "auto"
     };
   };
 
-  return /*#__PURE__*/React.createElement("div", _extends({
-    className: `border ${borderColor} ${backgroundColor} ${textColor} h-1 md:h-6 top-2 px-5 cursor-auto pointer-events-none md:cursor-pointer md:pointer-events-auto text-xxs md:text-sm ${barWidthClass ? barWidthClass : "w-full"}`,
+  return /*#__PURE__*/_react.default.createElement("div", (0, _extends2.default)({
+    className: "border ".concat(borderColor, " ").concat(backgroundColor, " ").concat(textColor, " h-1 md:h-6 top-2 px-5 cursor-auto pointer-events-none md:cursor-pointer md:pointer-events-auto text-xxs md:text-sm ").concat(barWidthClass ? barWidthClass : "w-full"),
     style: getLeftMargin(),
     onClick: clickHandler
-  }, otherProps), /*#__PURE__*/React.createElement("span", {
+  }, otherProps), /*#__PURE__*/_react.default.createElement("span", {
     className: "hidden md:block"
   }, children));
 }

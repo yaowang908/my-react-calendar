@@ -1,4 +1,10 @@
-const eventsPlaceholder = {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.eventsPlaceholder = void 0;
+var eventsPlaceholder = {
   events: [{
     start: "2021-06-22 14:30:00",
     end: "2021-06-22 16:30:00",
@@ -38,4 +44,4 @@ const eventsPlaceholder = {
   // },
   ]
 };
-export { eventsPlaceholder };
+exports.eventsPlaceholder = eventsPlaceholder;

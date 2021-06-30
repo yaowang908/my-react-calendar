@@ -1,27 +1,54 @@
-import React from "react";
-import { nanoid } from "nanoid";
-import { useRecoilValue } from "recoil";
-import MobileEventEntry from "@root/components/MobileEvents/MobileEventEntry";
-import { multiDayEventsAtom } from "@root/Recoil/calendar.atom";
-import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
-export default function MultiDayEventsMobile({
-  selectedDay,
-  ...otherProps
-}) {
-  const multiDayEventsState = useRecoilValue(multiDayEventsAtom);
-  const [multiDayEventsForSelectedDay, setMultiDayEventsForSelectedDay] = React.useState([]); // if selectedDay in the period of the multiDayEvents
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = MultiDayEventsMobile;
+
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/slicedToArray"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _nanoid = require("nanoid");
+
+var _recoil = require("recoil");
+
+var _MobileEventEntry = _interopRequireDefault(require("@root/components/MobileEvents/MobileEventEntry"));
+
+var _calendar = require("@root/Recoil/calendar.atom");
+
+var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+
+var _excluded = ["selectedDay"];
+
+function MultiDayEventsMobile(_ref) {
+  var selectedDay = _ref.selectedDay,
+      otherProps = (0, _objectWithoutProperties2.default)(_ref, _excluded);
+  var multiDayEventsState = (0, _recoil.useRecoilValue)(_calendar.multiDayEventsAtom);
+
+  var _React$useState = _react.default.useState([]),
+      _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
+      multiDayEventsForSelectedDay = _React$useState2[0],
+      setMultiDayEventsForSelectedDay = _React$useState2[1]; // if selectedDay in the period of the multiDayEvents
   // show the block
 
-  React.useEffect(() => {
+
+  _react.default.useEffect(function () {
     // console.log("mobileView", multiDayEventsState);
     // console.log(
     //     "selectedDay",
     //     `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`
     // );
-    const isSelectedDayInThePeriod = (selectedDay, multiDayEvent) => {
-      const targetTimeStamp = new Date(`${selectedDay?.year}-${stringTo2Digits(selectedDay?.month)}-${stringTo2Digits(selectedDay?.date)}`).getTime();
-      const startBoundary = new Date(new Date(`${multiDayEvent?.start_date_details?.year}-${multiDayEvent?.start_date_details?.month}-${multiDayEvent?.start_date_details?.date}`).setHours(0, 0, 0, 0)).getTime();
-      const endBoundary = new Date(new Date(`${multiDayEvent?.end_date_details?.year}-${multiDayEvent?.end_date_details?.month}-${multiDayEvent?.end_date_details?.date}`).setHours(24, 0, 0, 0)).getTime(); // console.log("check????", `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`);
+    var isSelectedDayInThePeriod = function isSelectedDayInThePeriod(selectedDay, multiDayEvent) {
+      var _multiDayEvent$start_, _multiDayEvent$start_2, _multiDayEvent$start_3, _multiDayEvent$end_da, _multiDayEvent$end_da2, _multiDayEvent$end_da3;
+
+      var targetTimeStamp = new Date("".concat(selectedDay === null || selectedDay === void 0 ? void 0 : selectedDay.year, "-").concat((0, _getEventsForTheDate.stringTo2Digits)(selectedDay === null || selectedDay === void 0 ? void 0 : selectedDay.month), "-").concat((0, _getEventsForTheDate.stringTo2Digits)(selectedDay === null || selectedDay === void 0 ? void 0 : selectedDay.date))).getTime();
+      var startBoundary = new Date(new Date("".concat(multiDayEvent === null || multiDayEvent === void 0 ? void 0 : (_multiDayEvent$start_ = multiDayEvent.start_date_details) === null || _multiDayEvent$start_ === void 0 ? void 0 : _multiDayEvent$start_.year, "-").concat(multiDayEvent === null || multiDayEvent === void 0 ? void 0 : (_multiDayEvent$start_2 = multiDayEvent.start_date_details) === null || _multiDayEvent$start_2 === void 0 ? void 0 : _multiDayEvent$start_2.month, "-").concat(multiDayEvent === null || multiDayEvent === void 0 ? void 0 : (_multiDayEvent$start_3 = multiDayEvent.start_date_details) === null || _multiDayEvent$start_3 === void 0 ? void 0 : _multiDayEvent$start_3.date)).setHours(0, 0, 0, 0)).getTime();
+      var endBoundary = new Date(new Date("".concat(multiDayEvent === null || multiDayEvent === void 0 ? void 0 : (_multiDayEvent$end_da = multiDayEvent.end_date_details) === null || _multiDayEvent$end_da === void 0 ? void 0 : _multiDayEvent$end_da.year, "-").concat(multiDayEvent === null || multiDayEvent === void 0 ? void 0 : (_multiDayEvent$end_da2 = multiDayEvent.end_date_details) === null || _multiDayEvent$end_da2 === void 0 ? void 0 : _multiDayEvent$end_da2.month, "-").concat(multiDayEvent === null || multiDayEvent === void 0 ? void 0 : (_multiDayEvent$end_da3 = multiDayEvent.end_date_details) === null || _multiDayEvent$end_da3 === void 0 ? void 0 : _multiDayEvent$end_da3.date)).setHours(24, 0, 0, 0)).getTime(); // console.log("check????", `${selectedDay?.year}-${selectedDay?.month}-${selectedDay?.date}`);
 
       if (isNaN(targetTimeStamp) || isNaN(startBoundary) || isNaN(endBoundary)) {
         console.error("invalid input for isSelectedDayInThePeriod", targetTimeStamp, startBoundary, endBoundary);
@@ -37,27 +64,28 @@ export default function MultiDayEventsMobile({
       return false;
     };
 
-    const temp = [];
-    multiDayEventsState.map(x => {
+    var temp = [];
+    multiDayEventsState.map(function (x) {
       // console.log('MultiDayEvent: ', x);
       if (isSelectedDayInThePeriod(selectedDay, x)) {
         temp.push(x);
       }
 
-      return /*#__PURE__*/React.createElement(React.Fragment, null);
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
     }); // console.log('multidayevents for selected day: ', temp)
 
     setMultiDayEventsForSelectedDay(temp);
   }, [multiDayEventsState, selectedDay]);
-  return /*#__PURE__*/React.createElement("div", {
+
+  return /*#__PURE__*/_react.default.createElement("div", {
     className: "mb-12"
-  }, multiDayEventsForSelectedDay?.map(x => {
-    return /*#__PURE__*/React.createElement("div", {
-      key: nanoid(),
+  }, multiDayEventsForSelectedDay === null || multiDayEventsForSelectedDay === void 0 ? void 0 : multiDayEventsForSelectedDay.map(function (x) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: (0, _nanoid.nanoid)(),
       className: "block relative md:hidden mt-5 border-t border-b border-gray-700 py-3"
-    }, /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/_react.default.createElement("div", {
       className: "absolute -top-3 bg-white px-5"
-    }, `${x.start_date_details.year}-${x.start_date_details.month}-${x.start_date_details.date} - ${x.end_date_details.year}-${x.end_date_details.month}-${x.end_date_details.date}`), /*#__PURE__*/React.createElement(MobileEventEntry, {
+    }, "".concat(x.start_date_details.year, "-").concat(x.start_date_details.month, "-").concat(x.start_date_details.date, " - ").concat(x.end_date_details.year, "-").concat(x.end_date_details.month, "-").concat(x.end_date_details.date)), /*#__PURE__*/_react.default.createElement(_MobileEventEntry.default, {
       title: x.title,
       link: x.url
     }));

@@ -1,26 +1,45 @@
-import React from 'react';
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
-import Calendar from "@root/index.js";
-import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
-import { daysInMonth } from "@root/libs/getWeeks";
-import "@root/index.css";
-export default {
-  component: Calendar,
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TimezoneAuto = exports.MobileView = exports.MultiDayEvent = exports.OneDayEvent = exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _addonViewport = require("@storybook/addon-viewport");
+
+var _index = _interopRequireDefault(require("@root/index.js"));
+
+var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+
+var _getWeeks = require("@root/libs/getWeeks");
+
+require("@root/index.css");
+
+var _default = {
+  component: _index.default,
   title: "Calendar"
 };
-const today = new Date();
-const year = today.getFullYear().toString();
-const month = stringTo2Digits(today.getMonth() + 1);
-const day = stringTo2Digits(today.getDate());
-const tomorrow = stringTo2Digits(today.getDate() === daysInMonth(today.getMonth() + 1, today.getFullYear()) ? 1 : today.getDate() + 1); // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+exports.default = _default;
+var today = new Date();
+var year = today.getFullYear().toString();
+var month = (0, _getEventsForTheDate.stringTo2Digits)(today.getMonth() + 1);
+var day = (0, _getEventsForTheDate.stringTo2Digits)(today.getDate());
+var tomorrow = (0, _getEventsForTheDate.stringTo2Digits)(today.getDate() === (0, _getWeeks.daysInMonth)(today.getMonth() + 1, today.getFullYear()) ? 1 : today.getDate() + 1); // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
-const Template = args => /*#__PURE__*/React.createElement(Calendar, args);
+var Template = function Template(args) {
+  return /*#__PURE__*/_react.default.createElement(_index.default, args);
+};
 
-export const OneDayEvent = Template.bind({});
+var OneDayEvent = Template.bind({});
+exports.OneDayEvent = OneDayEvent;
 OneDayEvent.args = {
   events: [{
-    start: `${year}-${month}-${day} 14:30:00`,
-    end: `${year}-${month}-${day} 16:30:00`,
+    start: "".concat(year, "-").concat(month, "-").concat(day, " 14:30:00"),
+    end: "".concat(year, "-").concat(month, "-").concat(day, " 16:30:00"),
     timezone: "America/New_York",
     title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
     url: "https://www.google.com",
@@ -36,7 +55,7 @@ OneDayEvent.args = {
   use24Hour: false,
   enableTimezone: true
 };
-export const MultiDayEvent = Template.bind({}); // TODO:
+var MultiDayEvent = Template.bind({}); // TODO:
 
 /**
  *  DONE: 1. streamline data structure for events
@@ -50,10 +69,11 @@ export const MultiDayEvent = Template.bind({}); // TODO:
  *  DONE: 6. should be able to switch between military / regular time format
  * */
 
+exports.MultiDayEvent = MultiDayEvent;
 MultiDayEvent.args = {
   events: [{
-    start: `${year}-${month}-08 14:30:00`,
-    end: `${year}-${month}-10 16:30:00`,
+    start: "".concat(year, "-").concat(month, "-08 14:30:00"),
+    end: "".concat(year, "-").concat(month, "-10 16:30:00"),
     timezone: "America/New_York",
     title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
     url: "https://www.google.com",
@@ -62,19 +82,20 @@ MultiDayEvent.args = {
   use24Hour: true,
   enableTimezone: false
 };
-export const MobileView = Template.bind({});
+var MobileView = Template.bind({});
+exports.MobileView = MobileView;
 MobileView.args = {
   // events: [...MultiDayEvent.args.events, ...eventsPlaceholder.events]
   events: [{
-    start: `${year}-${month}-08 14:30:00`,
-    end: `${year}-${month}-08 16:30:00`,
+    start: "".concat(year, "-").concat(month, "-08 14:30:00"),
+    end: "".concat(year, "-").concat(month, "-08 16:30:00"),
     timezone: "America/New_York",
     title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
     url: "https://www.google.com",
     imgUrl: "https://source.unsplash.com/random/1200x630"
   }, {
-    start: `${year}-${month}-08 14:30:00`,
-    end: `${year}-${month}-09 16:30:00`,
+    start: "".concat(year, "-").concat(month, "-08 14:30:00"),
+    end: "".concat(year, "-").concat(month, "-09 16:30:00"),
     timezone: "America/New_York",
     title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
     url: "https://www.google.com",
@@ -90,29 +111,30 @@ MobileView.args = {
 };
 MobileView.parameters = {
   viewport: {
-    viewports: INITIAL_VIEWPORTS,
+    viewports: _addonViewport.INITIAL_VIEWPORTS,
     defaultViewport: 'iphonex'
   }
 };
-export const TimezoneAuto = Template.bind({});
+var TimezoneAuto = Template.bind({});
+exports.TimezoneAuto = TimezoneAuto;
 TimezoneAuto.args = {
   events: [{
-    start: `${year}-${month}-08 14:30:00`,
-    end: `${year}-${month}-10 16:30:00`,
+    start: "".concat(year, "-").concat(month, "-08 14:30:00"),
+    end: "".concat(year, "-").concat(month, "-10 16:30:00"),
     timezone: "America/New_York",
     title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
     url: "https://www.google.com",
     imgUrl: "https://source.unsplash.com/random/1200x630"
   }, {
-    start: `${year}-${month}-02 10:30:00`,
-    end: `${year}-${month}-02 12:30:00`,
+    start: "".concat(year, "-").concat(month, "-02 10:30:00"),
+    end: "".concat(year, "-").concat(month, "-02 12:30:00"),
     timezone: "America/New_York",
     title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
     url: "https://www.google.com",
     imgUrl: "https://source.unsplash.com/random/1200x630"
   }, {
-    start: `${year}-${month}-05 12:30:00`,
-    end: `${year}-${month}-05 15:30:00`,
+    start: "".concat(year, "-").concat(month, "-05 12:30:00"),
+    end: "".concat(year, "-").concat(month, "-05 15:30:00"),
     timezone: "America/New_York",
     title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
     url: "https://www.google.com",

@@ -1,45 +1,61 @@
-import { eventsPlaceholder } from "@root/libs/placeholder";
-import { atom, selector, DefaultValue } from "recoil";
-import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
-import moment from "moment-timezone";
-const calendarStart = atom({
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.enableTimezoneAtom = exports.use24HourAtom = exports.clientTimezoneSelector = exports.clientTimezone = exports.calendarView = exports.isViewSelectorHidden = exports.normalEventsAtom = exports.multiDayEventsAtom = exports.isMonthSelectorHidden = exports.eventsDataAtom = exports.eventsBufferAtom = exports.selectedDay = exports.targetYear = exports.targetMonth = exports.calendarStart = void 0;
+
+var _placeholder = require("@root/libs/placeholder");
+
+var _recoil = require("recoil");
+
+var _getEventsForTheDate = require("@root/libs/getEventsForTheDate");
+
+var _momentTimezone = _interopRequireDefault(require("moment-timezone"));
+
+var calendarStart = (0, _recoil.atom)({
   key: "calendarStart",
   default: 0
 }); // 0 => Sunday, 1 => Monday
 
-const today = new Date();
-const targetMonthAtom = atom({
+exports.calendarStart = calendarStart;
+var today = new Date();
+var targetMonthAtom = (0, _recoil.atom)({
   key: "targetMonthAtom",
   default: today.getMonth() + 1
 });
-const targetMonth = selector({
+var targetMonth = (0, _recoil.selector)({
   key: "targetMonth",
-  get: ({
-    get
-  }) => get(targetMonthAtom),
-  set: ({
-    set,
-    get
-  }, method) => {
-    const currentTargetMonth = get(targetMonthAtom);
+  get: function get(_ref) {
+    var _get = _ref.get;
+    return _get(targetMonthAtom);
+  },
+  set: function set(_ref2, method) {
+    var _set = _ref2.set,
+        get = _ref2.get;
+    var currentTargetMonth = get(targetMonthAtom);
 
     switch (true) {
       case method === "nextMonth":
         if (currentTargetMonth === 12) {
-          set(targetMonthAtom, 1);
-          set(targetYearAtom, get(targetYearAtom) + 1);
+          _set(targetMonthAtom, 1);
+
+          _set(targetYearAtom, get(targetYearAtom) + 1);
         } else {
-          set(targetMonthAtom, currentTargetMonth + 1);
+          _set(targetMonthAtom, currentTargetMonth + 1);
         }
 
         return;
 
       case method === "prevMonth":
         if (currentTargetMonth === 1) {
-          set(targetMonthAtom, 12);
-          set(targetYearAtom, get(targetYearAtom) - 1);
+          _set(targetMonthAtom, 12);
+
+          _set(targetYearAtom, get(targetYearAtom) - 1);
         } else {
-          set(targetMonthAtom, currentTargetMonth - 1);
+          _set(targetMonthAtom, currentTargetMonth - 1);
         }
 
         return;
@@ -47,12 +63,13 @@ const targetMonth = selector({
       case /month:/.test(method):
         // console.log('regex working!')
         // console.log(method.split(':')[1])
-        set(targetMonthAtom, method.split(":")[1]);
+        _set(targetMonthAtom, method.split(":")[1]);
+
         break;
 
       default:
-        if (method instanceof DefaultValue) {
-          set(targetMonthAtom, method);
+        if (method instanceof _recoil.DefaultValue) {
+          _set(targetMonthAtom, method);
         } // set(DefaultValue);
 
 
@@ -60,135 +77,155 @@ const targetMonth = selector({
     }
   }
 });
-const targetYearAtom = atom({
+exports.targetMonth = targetMonth;
+var targetYearAtom = (0, _recoil.atom)({
   key: "targetYearAtom",
   default: today.getFullYear()
 });
-const targetYear = selector({
+var targetYear = (0, _recoil.selector)({
   key: "targetYear",
-  get: ({
-    get
-  }) => get(targetYearAtom),
-  set: ({
-    set,
-    get
-  }, method) => {
-    const currentTargetYear = get(targetYearAtom);
+  get: function get(_ref3) {
+    var _get2 = _ref3.get;
+    return _get2(targetYearAtom);
+  },
+  set: function set(_ref4, method) {
+    var _set2 = _ref4.set,
+        get = _ref4.get;
+    var currentTargetYear = get(targetYearAtom);
 
     switch (method) {
       case "prevYear":
-        set(targetYearAtom, currentTargetYear - 1);
+        _set2(targetYearAtom, currentTargetYear - 1);
+
         return;
 
       case "nextYear":
-        set(targetYearAtom, currentTargetYear + 1);
+        _set2(targetYearAtom, currentTargetYear + 1);
+
         return;
 
       default:
-        if (method instanceof DefaultValue) {
-          set(targetYearAtom, method);
+        if (method instanceof _recoil.DefaultValue) {
+          _set2(targetYearAtom, method);
         }
 
         return;
     }
   }
 });
-const selectedDay = atom({
+exports.targetYear = targetYear;
+var selectedDay = (0, _recoil.atom)({
   key: "selectedDay",
   default: {
-    month: stringTo2Digits(today.getMonth() + 1),
-    date: stringTo2Digits(today.getDate()),
+    month: (0, _getEventsForTheDate.stringTo2Digits)(today.getMonth() + 1),
+    date: (0, _getEventsForTheDate.stringTo2Digits)(today.getDate()),
     year: today.getFullYear().toString()
   }
 });
-const eventsBufferAtom = atom({
+exports.selectedDay = selectedDay;
+var eventsBufferAtom = (0, _recoil.atom)({
   key: "eventsBufferAtom",
   default: {}
 });
-const eventsDataAtom = atom({
+exports.eventsBufferAtom = eventsBufferAtom;
+var eventsDataAtom = (0, _recoil.atom)({
   key: "eventsDataAtom",
-  default: eventsPlaceholder.events
+  default: _placeholder.eventsPlaceholder.events
 });
-const isMonthSelectorHidden = atom({
+exports.eventsDataAtom = eventsDataAtom;
+var isMonthSelectorHidden = (0, _recoil.atom)({
   key: "isMonthSelectorHidden",
   default: true
 });
-const multiDayEventsAtom = atom({
+exports.isMonthSelectorHidden = isMonthSelectorHidden;
+var multiDayEventsAtom = (0, _recoil.atom)({
   key: "multiDayEventsAtom",
   default: []
 });
-const normalEventsAtom = atom({
+exports.multiDayEventsAtom = multiDayEventsAtom;
+var normalEventsAtom = (0, _recoil.atom)({
   key: "normalEventsAtom",
   default: []
 });
-const isViewSelectorHidden = atom({
+exports.normalEventsAtom = normalEventsAtom;
+var isViewSelectorHidden = (0, _recoil.atom)({
   key: "isViewSelectorHidden",
   default: true
 });
-const calendarViewAtom = atom({
+exports.isViewSelectorHidden = isViewSelectorHidden;
+var calendarViewAtom = (0, _recoil.atom)({
   key: "calendarViewAtom",
   default: 'MONTH'
 });
-const calendarView = selector({
+var calendarView = (0, _recoil.selector)({
   key: "calendarView",
-  get: ({
-    get
-  }) => get(calendarViewAtom),
-  set: ({
-    set,
-    get
-  }, view) => {
+  get: function get(_ref5) {
+    var _get3 = _ref5.get;
+    return _get3(calendarViewAtom);
+  },
+  set: function set(_ref6, view) {
+    var _set3 = _ref6.set,
+        get = _ref6.get;
+
     switch (view) {
       case "LIST":
         // console.log("list selected")
-        set(calendarViewAtom, "LIST");
+        _set3(calendarViewAtom, "LIST");
+
         break;
 
       case "MONTH":
         // console.log("month selected")
-        set(calendarViewAtom, "MONTH");
+        _set3(calendarViewAtom, "MONTH");
+
         break;
 
       default:
-        if (view instanceof DefaultValue) {
-          set(calendarViewAtom, view);
+        if (view instanceof _recoil.DefaultValue) {
+          _set3(calendarViewAtom, view);
         }
 
         break;
     }
   }
 });
-const clientTimezone = atom({
+exports.calendarView = calendarView;
+var clientTimezone = (0, _recoil.atom)({
   key: "clientTimezone",
-  default: moment.tz.guess()
+  default: _momentTimezone.default.tz.guess()
 });
-const clientTimezoneSelector = selector({
+exports.clientTimezone = clientTimezone;
+var clientTimezoneSelector = (0, _recoil.selector)({
   key: "clientTimezoneSelector",
-  get: ({
-    get
-  }) => get(clientTimezone),
-  set: ({
-    set,
-    get
-  }, timezoneObject) => {
-    if (timezoneObject instanceof DefaultValue) {
-      set(clientTimezone, timezoneObject);
+  get: function get(_ref7) {
+    var _get4 = _ref7.get;
+    return _get4(clientTimezone);
+  },
+  set: function set(_ref8, timezoneObject) {
+    var _set4 = _ref8.set,
+        get = _ref8.get;
+
+    if (timezoneObject instanceof _recoil.DefaultValue) {
+      _set4(clientTimezone, timezoneObject);
+
       return;
     }
 
-    if (timezoneObject?.value) {
-      set(clientTimezone, timezoneObject?.value);
+    if (timezoneObject === null || timezoneObject === void 0 ? void 0 : timezoneObject.value) {
+      _set4(clientTimezone, timezoneObject === null || timezoneObject === void 0 ? void 0 : timezoneObject.value);
     } else {
       console.error("There is something wrong with the timezone selector");
     }
   }
 });
-const use24HourAtom = atom({
+exports.clientTimezoneSelector = clientTimezoneSelector;
+var use24HourAtom = (0, _recoil.atom)({
   key: "use24Hour",
   default: false
 });
-const enableTimezoneAtom = atom({
+exports.use24HourAtom = use24HourAtom;
+var enableTimezoneAtom = (0, _recoil.atom)({
   key: "enableTimezone",
   default: true
 });
-export { calendarStart, targetMonth, targetYear, selectedDay, eventsBufferAtom, eventsDataAtom, isMonthSelectorHidden, multiDayEventsAtom, normalEventsAtom, isViewSelectorHidden, calendarView, clientTimezone, clientTimezoneSelector, use24HourAtom, enableTimezoneAtom };
+exports.enableTimezoneAtom = enableTimezoneAtom;

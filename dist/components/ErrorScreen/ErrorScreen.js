@@ -1,10 +1,20 @@
-import React from "react";
-export default function ErrorScreen() {
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = ErrorScreen;
+
+var _react = _interopRequireDefault(require("react"));
+
+function ErrorScreen() {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "absolute w-full h-full grid place-items-center bg-white"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: ""
-  }, /*#__PURE__*/React.createElement("h1", {
+  }, /*#__PURE__*/_react.default.createElement("h1", {
     className: "txt-red-600"
   }, "There is an error when fetching the data, please refresh the page to try again"))));
 }
