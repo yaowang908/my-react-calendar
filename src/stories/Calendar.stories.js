@@ -57,22 +57,23 @@ export const MultiDayEvent = Template.bind({});
  *      DONE: 1. auto generate multi_day attributes
  *      DONE: 2. rename the attributes, make it short
  *  DONE: 2. timezone conversion
- *            1. when set to auto, only show timezone, not changing it
+ *            DONE: 1. when set to auto, only show timezone, not changing it
  *  DONE: 3. handle empty input or in-valid ones
  *  DONE: 4. update README file
- *  5. dark theme support
+ *  TODO: 5. dark theme support
  *  DONE: 6. should be able to switch between military / regular time format
- *  7. add support for fetch new data
+ *  TODO: 7. add support for fetch new data
  *      1. accept an identifier, fetching or error or succeed
  *      2. accept an function, will call this function when target month or year changed.
  *      3. when accepting new events data, data will append to existing array, not replacing it.
- *  8. combine settings into options object
+ *  TODO: 8. combine settings into options object
  *      {
  *          use24Hour: false,
  *          enableTimezone: "auto",
- *          status: "fetching",
- *          onChange: function() { targetYear, targetMonth }
+ *  !       status: "fetching", // if undefined disable this feature
  *      }
+ *      onChange: function() { targetYear, targetMonth }
+ *
  * */
 
 MultiDayEvent.args = {
