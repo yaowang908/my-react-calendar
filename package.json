@@ -27,7 +27,7 @@
         "eject": "react-scripts eject",
         "storybook": "start-storybook -p 6006 -s public",
         "build-storybook": "build-storybook -s public -o ./docs",
-        "prepublish": "rm -rf dist && mkdir dist && NODE_ENV=production babel ./src/ -d dist --copy-files"
+        "prepublish": "rm -rf dist && mkdir dist && NODE_ENV=production babel ./src/ -d dist --copy-files && del dist/**/*.test.js dist/**/*.stories.js dist/stories"
     },
     "babel": {
         "presets": [
@@ -51,6 +51,9 @@
                     }
                 }
             ]
+        ],
+        "ignore": [
+            "src/stories/*"
         ]
     },
     "eslintConfig": {
@@ -93,6 +96,7 @@
         "autoprefixer": "^9",
         "babel-plugin-module-resolver": "^4.1.0",
         "craco-alias": "^3.0.1",
+        "del-cli": "^4.0.0",
         "gulp": "^4.0.2",
         "gulp-inline-source": "^4.0.0",
         "gulp-replace": "^1.1.3",
