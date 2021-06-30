@@ -2,15 +2,15 @@ import React from "react";
 import { nanoid } from "nanoid";
 import { useRecoilValue } from "recoil";
 
-import Week from "components/Week/Week";
-import weeksGenerator from "libs/getWeeks";
+import Week from "@root/components/Week/Week";
+import weeksGenerator from "@root/libs/getWeeks";
 import {
     calendarStart as calendarStartState,
     targetMonth as targetMonthState,
     targetYear as targetYearState,
-} from "Recoil/calendar.atom";
-import useWindowSize from "hooks/useWindowSize";
-import { eventsPlaceholder as eventsPlaceHolder } from "libs/placeholder";
+} from "@root/Recoil/calendar.atom";
+import useWindowSize from "@root/hooks/useWindowSize";
+import { eventsPlaceholder as eventsPlaceHolder } from "@root/libs/placeholder";
 
 export default function CalendarView({ eventsData = null, otherProps }) {
     const [cellWidth, setCellWidth] = React.useState(20);

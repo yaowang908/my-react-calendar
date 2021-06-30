@@ -3,12 +3,12 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import renderHTML from "react-render-html";
 import { nanoid } from "nanoid";
 
-import { 
+import {
     selectedDay as selectedDayState,
-    use24HourAtom
- } from "Recoil/calendar.atom";
-import EventEntry from "components/EventEntry/EventEntry";
-import { getEventEntryTime } from "libs/getEventEntryTime";
+    use24HourAtom,
+} from "@root/Recoil/calendar.atom";
+import EventEntry from "@root/components/EventEntry/EventEntry";
+import { getEventEntryTime } from "@root/libs/getEventEntryTime";
 
 export default function Day({
     date = 1,
@@ -110,10 +110,10 @@ export default function Day({
     //         return moment(timeString, "HH:mm", true).format("hh:mm A"); //HH stands for 24hour format
     //     }
 
-    //     const _start = use24HourState 
-    //                     ? `${event?.start_date_details?.hour}:${event?.start_date_details?.minute}` 
+    //     const _start = use24HourState
+    //                     ? `${event?.start_date_details?.hour}:${event?.start_date_details?.minute}`
     //                     : momentParser(`${event?.start_date_details?.hour}:${event?.start_date_details?.minute}`);
-    //     const _end = use24HourState 
+    //     const _end = use24HourState
     //                     ? `${event?.end_date_details?.hour}:${event?.end_date_details?.minute}`
     //                     : momentParser(`${event?.end_date_details?.hour}:${event?.end_date_details?.minute}`);
 

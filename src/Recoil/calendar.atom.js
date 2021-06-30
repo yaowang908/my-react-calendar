@@ -1,6 +1,6 @@
-import { eventsPlaceholder } from "libs/placeholder";
+import { eventsPlaceholder } from "@root/libs/placeholder";
 import { atom, selector, DefaultValue } from "recoil";
-import { stringTo2Digits } from "libs/getEventsForTheDate";
+import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
 import moment from "moment-timezone";
 
 const calendarStart = atom({

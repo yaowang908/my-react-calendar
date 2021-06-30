@@ -9,7 +9,7 @@ const {
     weeksGenerator,
     weeksSun,
     weeksMon,
-} = require("libs/getWeeks");
+} = require("@root/libs/getWeeks");
 
 test("daysInMonth should return a number", () => {
     expect(daysInMonth(5, 2021)).toBe(31);

@@ -1,20 +1,20 @@
 import React from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 
-import { monthArray } from "libs/getWeeks";
+import { monthArray } from "@root/libs/getWeeks";
 import {
     selectedDay as selectedDayState,
     eventsDataAtom,
     multiDayEventsAtom,
     normalEventsAtom,
     calendarView as calendarViewSelector,
-} from "Recoil/calendar.atom";
-import MobileEvents from "components/MobileEvents/MobileEvents";
-import { getEventsForTheDate } from "libs/getEventsForTheDate";
-import CalendarView from "components/Calendar/CalendarView";
-import MultiDayEventsMobile from "components/MobileEvents/MultiDayEventsMobile";
-import ListView from "components/ListView/ListView";
-import DayNames from "components/DayNames/DayNames";
+} from "@root/Recoil/calendar.atom";
+import MobileEvents from "@root/components/MobileEvents/MobileEvents";
+import { getEventsForTheDate } from "@root/libs/getEventsForTheDate";
+import CalendarView from "@root/components/Calendar/CalendarView";
+import MultiDayEventsMobile from "@root/components/MobileEvents/MultiDayEventsMobile";
+import ListView from "@root/components/ListView/ListView";
+import DayNames from "@root/components/DayNames/DayNames";
 // import { stringTo2Digits } from 'libs/getEventsForTheDate';
 
 export default function Calendar({events, otherProps}) {

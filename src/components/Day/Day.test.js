@@ -2,9 +2,9 @@ import { act, render, screen } from "@testing-library/react";
 
 import { snapshot_UNSTABLE } from "recoil";
 
-import { selectedDay as selectedDayState } from "Recoil/calendar.atom";
-import Day from "components/Day/Day";
-import { eventsPlaceholder } from "libs/placeholder";
+import { selectedDay as selectedDayState } from "@root/Recoil/calendar.atom";
+import Day from "@root/components/Day/Day";
+import { eventsPlaceholder } from "@root/libs/placeholder";
 
 test("normal day component should have classes", () => {
     render(

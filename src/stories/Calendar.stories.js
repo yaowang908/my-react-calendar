@@ -1,11 +1,11 @@
 import React from 'react'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
-import Calendar from 'index.js'
-import { stringTo2Digits } from 'libs/getEventsForTheDate'
-import { daysInMonth } from 'libs/getWeeks'
+import Calendar from "@root/index.js";
+import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
+import { daysInMonth } from "@root/libs/getWeeks";
 
-import "index.css";
+import "@root/index.css";
 
 export default {
     component: Calendar,
@@ -45,7 +45,7 @@ OneDayEvent.args = {
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
-    use24Hour: false, 
+    use24Hour: false,
     enableTimezone: true,
 };
 
@@ -76,7 +76,7 @@ MultiDayEvent.args = {
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
-    use24Hour: true, 
+    use24Hour: true,
     enableTimezone: false,
 };
 
@@ -154,7 +154,7 @@ TimezoneAuto.args = {
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
     ],
-    use24Hour: false, 
+    use24Hour: false,
     enableTimezone: 'auto',
 };
 

@@ -2,9 +2,9 @@ import React from "react";
 import { nanoid } from "nanoid";
 import { useRecoilValue } from "recoil";
 
-import MobileEventEntry from "components/MobileEvents/MobileEventEntry";
-import { multiDayEventsAtom } from "Recoil/calendar.atom";
-import { stringTo2Digits } from "libs/getEventsForTheDate";
+import MobileEventEntry from "@root/components/MobileEvents/MobileEventEntry";
+import { multiDayEventsAtom } from "@root/Recoil/calendar.atom";
+import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
 
 export default function MultiDayEventsMobile({ selectedDay, ...otherProps }) {
     const multiDayEventsState = useRecoilValue(multiDayEventsAtom);

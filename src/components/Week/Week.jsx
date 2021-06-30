@@ -6,10 +6,13 @@ import renderHTML from "react-render-html";
 import {
     selectedDay as selectedDayState,
     multiDayEventsAtom,
-} from "Recoil/calendar.atom";
-import Day from "components/Day/Day";
-import { getEventsForTheDate, stringTo2Digits } from "libs/getEventsForTheDate";
-import MultiDayEvent from "components/MultiDayEvents/MultiDayEvent";
+} from "@root/Recoil/calendar.atom";
+import Day from "@root/components/Day/Day";
+import {
+    getEventsForTheDate,
+    stringTo2Digits,
+} from "@root/libs/getEventsForTheDate";
+import MultiDayEvent from "@root/components/MultiDayEvents/MultiDayEvent";
 
 export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
     const selectedDay = useRecoilValue(selectedDayState);

@@ -15,10 +15,10 @@ import {
     calendarView as calendarViewSelector,
     clientTimezoneSelector,
     enableTimezoneAtom,
-} from "Recoil/calendar.atom";
-import { monthArray } from "libs/getWeeks";
-import MonthSelector from "components/MonthSelector/MonthSelector";
-import ViewSelector from "components/ViewSelector/ViewSelector";
+} from "@root/Recoil/calendar.atom";
+import { monthArray } from "@root/libs/getWeeks";
+import MonthSelector from "@root/components/MonthSelector/MonthSelector";
+import ViewSelector from "@root/components/ViewSelector/ViewSelector";
 
 export default function Header() {
     const [targetMonth, setTargetMonth] = useRecoilState(targetMonthState);

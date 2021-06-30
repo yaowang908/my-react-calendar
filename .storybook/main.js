@@ -28,6 +28,12 @@ module.exports = {
             ],
             include: path.resolve(__dirname, "../"),
         });
-        return config;
+        return {
+            ...config,
+            resolve: {
+                ...config.resolve,
+                alias: { "@root": path.resolve(__dirname, "../src") },
+            },
+        };
     },
 };

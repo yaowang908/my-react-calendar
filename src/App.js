@@ -2,15 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 
-import Header from "components/Header/Header";
-import Calendar from "components/Calendar/Calendar";
-import "index.css";
-import { stringTo2Digits } from "libs/getEventsForTheDate";
-import { 
+import Header from "@root/components/Header/Header";
+import Calendar from "@root/components/Calendar/Calendar";
+import "@root/index.css";
+import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
+import {
     clientTimezone as clientTimezoneState,
     use24HourAtom,
     enableTimezoneAtom,
-} from "Recoil/calendar.atom";
+} from "@root/Recoil/calendar.atom";
 import moment from "moment-timezone";
 
 function App({ events, ...otherProps }) {
@@ -81,7 +81,7 @@ function App({ events, ...otherProps }) {
          *      url: "https://www.google.com"
          * enableTimezone = enableTimezoneState
          * targetTimezone = clientTimezone e.g. America/New_York
-         * 
+         *
          * moment-timezone is also required here
          */
         const result = [];
@@ -97,14 +97,14 @@ function App({ events, ...otherProps }) {
                 if(event.timezone !== targetTimezone) {
                     const _startMoment = moment.tz(event.start, "YYYY-MM-DD HH:mm:ss", event.timezone);
                     const _endMoment = moment.tz(event.end, "YYYY-MM-DD HH:mm:ss", event.timezone);
-    
+
                     const _startMomentAtTargetTimezone = _startMoment.tz(targetTimezone).format("YYYY-MM-DD HH:mm:ss");
                     const _endMomentAtTargetTimezone = _endMoment.tz(targetTimezone).format("YYYY-MM-DD HH:mm:ss");
-    
+
                     // console.log("startMoment", _startMomentAtTargetTimezone)
 
                     result.push(Object.assign({}, event, {end: _endMomentAtTargetTimezone, start: _startMomentAtTargetTimezone, targetTimezone: targetTimezone }))
-                    
+
                 } else {
                     result.push(event);
                 }

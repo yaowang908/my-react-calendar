@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 import { useRecoilValue } from "recoil";
 
-import MobileEventEntry from "components/MobileEvents/MobileEventEntry";
-import { 
-    use24HourAtom
- } from "Recoil/calendar.atom";
-import { getEventEntryTime } from "libs/getEventEntryTime";
+import MobileEventEntry from "@root/components/MobileEvents/MobileEventEntry";
+import { use24HourAtom } from "@root/Recoil/calendar.atom";
+import { getEventEntryTime } from "@root/libs/getEventEntryTime";
 
 export default function MobileEvents({
     events,

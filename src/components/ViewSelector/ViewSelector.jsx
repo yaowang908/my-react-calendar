@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import {
     isViewSelectorHidden as isViewSelectorHiddenState,
     calendarView,
-} from "Recoil/calendar.atom";
+} from "@root/Recoil/calendar.atom";
 
 export default function ViewSelector() {
     const [isViewSelectorHidden, setIsViewSelectorHidden] = useRecoilState(

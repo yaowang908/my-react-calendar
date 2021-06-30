@@ -5,8 +5,8 @@ import { useRecoilValue } from "recoil";
 import {
     targetYear as targetYearState,
     targetMonth as targetMonthState,
-} from "Recoil/calendar.atom";
-import ListEntry from "components/ListEntry/ListEntry";
+} from "@root/Recoil/calendar.atom";
+import ListEntry from "@root/components/ListEntry/ListEntry";
 
 export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
     // const normalEvents = useRecoilValue(normalEventsAtom);

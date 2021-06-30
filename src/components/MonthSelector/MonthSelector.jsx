@@ -7,7 +7,7 @@ import {
     targetYear as targetYearState,
     targetMonth as targetMonthState,
     isMonthSelectorHidden as isMonthSelectorHiddenState,
-} from "Recoil/calendar.atom";
+} from "@root/Recoil/calendar.atom";
 
 export default function MonthSelector() {
     const [targetYear, setTargetYear] = useRecoilState(targetYearState);
