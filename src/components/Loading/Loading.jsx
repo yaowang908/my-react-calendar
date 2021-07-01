@@ -3,7 +3,7 @@ import React from "react";
 export default function Loading() {
     return (
         <>
-            <div className="absolute w-full h-full grid place-items-center bg-white z-40">
+            <div className="max-w-1080 mt-36 w-full h-full grid place-items-center bg-white z-40">
                 <div className="">
                     <svg
                         className="animate-spin -ml-1 mr-3 h-24 w-24 text-red-600"

@@ -51,31 +51,6 @@ OneDayEvent.args = {
 
 export const MultiDayEvent = Template.bind({});
 
-// TODO:
-/**
- *  DONE: 1. streamline data structure for events
- *      DONE: 1. auto generate multi_day attributes
- *      DONE: 2. rename the attributes, make it short
- *  DONE: 2. timezone conversion
- *            DONE: 1. when set to auto, only show timezone, not changing it
- *  DONE: 3. handle empty input or in-valid ones
- *  DONE: 4. update README file
- *  TODO: 5. dark theme support
- *  DONE: 6. should be able to switch between military / regular time format
- *  TODO: 7. add support for fetch new data
- *      1. accept an identifier, fetching or error or succeed
- *      2. accept an function, will call this function when target month or year changed.
- *      3. when accepting new events data, data will append to existing array, not replacing it.
- *  TODO: 8. combine settings into options object
- *      {
- *          use24Hour: false,
- *          enableTimezone: "auto",
- *  !       status: "fetching", // if undefined disable this feature
- *      }
- *      onChange: function() { targetYear, targetMonth }
- *
- * */
-
 MultiDayEvent.args = {
     events: [
         {
@@ -170,6 +145,52 @@ TimezoneAuto.args = {
     enableTimezone: 'auto',
 };
 
+export const Fetching = Template.bind({});
+
+Fetching.args = {
+    events: [...TimezoneAuto.args.events],
+    use24Hour: false,
+    enableTimezone: 'auto',
+    status: 'FETCHING',
+}
+
+export const ErrorScreen = Template.bind({});
+
+ErrorScreen.args = {
+    events: [...TimezoneAuto.args.events],
+    use24Hour: false,
+    enableTimezone: "auto",
+    status: "ERROR",
+};
+
+
+
+// TODO:
+/**
+ *  DONE: 1. streamline data structure for events
+ *      DONE: 1. auto generate multi_day attributes
+ *      DONE: 2. rename the attributes, make it short
+ *  DONE: 2. timezone conversion
+ *            DONE: 1. when set to auto, only show timezone, not changing it
+ *  DONE: 3. handle empty input or in-valid ones
+ *  DONE: 4. update README file
+ *  TODO: 5. dark theme support
+ *  DONE: 6. should be able to switch between military / regular time format
+ *  TODO: 7. add support for fetch new data
+ *      DONE: 1. accept an identifier, fetching or error or succeed
+ *      2. accept an function, will call this function when target month or year changed.
+ *      3. when accepting new events data, data will append to existing array, not replacing it.
+ *  TODO: 8. combine settings into options object
+ *      {
+ *          use24Hour: false,
+ *          enableTimezone: "auto",
+ *          status: "fetching", // if undefined disable this feature
+ *      }
+ *      onChange: function() { targetYear, targetMonth }
+ *
+ * */
+
+// Fun fact: in the multiline comments above, you can NOT add ! ahead, this will break the storybook preview build
 
 // {
 //     id: event.id,

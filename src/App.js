@@ -10,6 +10,7 @@ import {
     clientTimezone as clientTimezoneState,
     use24HourAtom,
     enableTimezoneAtom,
+    statusSelector,
 } from "@root/Recoil/calendar.atom";
 import moment from "moment-timezone";
 
@@ -17,22 +18,30 @@ function App({ events, ...otherProps }) {
     const [formattedEvents, setFormattedEvents] = React.useState([]);
     const clientTimezone = useRecoilValue(clientTimezoneState);
     const setUse24HourState = useSetRecoilState(use24HourAtom);
+    const setStatus = useSetRecoilState(statusSelector);
     const [enableTimezoneState, setEnableTimezoneAtom] = useRecoilState(enableTimezoneAtom);
-    const { use24Hour, enableTimezone } = {...otherProps};
+    const { use24Hour, enableTimezone, status } = {...otherProps};
 
     React.useEffect(() => {
         // console.log(use24Hour)
         setUse24HourState(!!use24Hour); //if it's undefined, !!undefined is false
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [use24Hour])
 
     React.useEffect(() => {
         // console.log(enableTimezone)
-        if(enableTimezone === 'auto') {
-            setEnableTimezoneAtom('auto');
+        if (enableTimezone === "auto") {
+            setEnableTimezoneAtom("auto");
         } else {
             setEnableTimezoneAtom(!!enableTimezone); //if it's undefined, !!undefined is false
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [enableTimezone])
+
+    React.useEffect(() => {
+        setStatus(status);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [status])
 
     /**
      *  start(year,month,day,hour,minute), end(...), title, link, imgUrl, timezone
