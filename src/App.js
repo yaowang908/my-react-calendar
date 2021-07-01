@@ -50,7 +50,7 @@ function App({ events, ...otherProps }) {
     }, [status]);
 
     React.useEffect(() => {
-        if (onChange) {
+        if (typeof onChange === 'function') {
             onChange({
                 targetMonth: Number(targetMonth),
                 targetYear: Number(targetYear)
