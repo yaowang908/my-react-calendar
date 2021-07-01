@@ -70,11 +70,13 @@ export const MultiDayEvent = Template.bind({});
  *      {
  *          use24Hour: false,
  *          enableTimezone: "auto",
- *  !       status: "fetching", // if undefined disable this feature
+ *          status: "fetching", // if undefined disable this feature
  *      }
  *      onChange: function() { targetYear, targetMonth }
  *
  * */
+
+// Fun fact: in the multiline comments above, you can NOT add ! ahead, this will break the storybook preview build
 
 MultiDayEvent.args = {
     events: [
