@@ -30,5 +30,5 @@ const placeholder = [{
 
 ReactDOM.render(
     <Calendar events={placeholder} use24Hour={false} enableTimezone={'auto'}/>,
-    document.getElementById("calendar_root")
+    document.getElementById("root")
 );
