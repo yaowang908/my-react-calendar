@@ -3,7 +3,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import Calendar from "@root/index.js";
 import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
-import { daysInMonth } from "@root/libs/getWeeks";
+// import { daysInMonth } from "@root/libs/getWeeks";
 
 import "@root/index.css";
 
@@ -16,7 +16,7 @@ const today = new Date();
 const year = today.getFullYear().toString();
 const month = stringTo2Digits(today.getMonth()+1);
 const day = stringTo2Digits(today.getDate());
-const tomorrow = stringTo2Digits(today.getDate()===daysInMonth(today.getMonth()+1, today.getFullYear()) ? 1 : today.getDate()+1);
+// const tomorrow = stringTo2Digits(today.getDate()===daysInMonth(today.getMonth()+1, today.getFullYear()) ? 1 : today.getDate()+1);
 
 // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
@@ -163,48 +163,17 @@ ErrorScreen.args = {
     status: "ERROR",
 };
 
+export const Callback = Template.bind({});
 
+const _callback = (target) => {
+    console.log("target", target);
+}
 
-// TODO:
-/**
- *  DONE: 1. streamline data structure for events
- *      DONE: 1. auto generate multi_day attributes
- *      DONE: 2. rename the attributes, make it short
- *  DONE: 2. timezone conversion
- *            DONE: 1. when set to auto, only show timezone, not changing it
- *  DONE: 3. handle empty input or in-valid ones
- *  DONE: 4. update README file
- *  TODO: 5. dark theme support
- *  DONE: 6. should be able to switch between military / regular time format
- *  TODO: 7. add support for fetch new data
- *      DONE: 1. accept an identifier, fetching or error or succeed
- *      2. accept an function, will call this function when target month or year changed.
- *      3. when accepting new events data, data will append to existing array, not replacing it.
- *  TODO: 8. combine settings into options object
- *      {
- *          use24Hour: false,
- *          enableTimezone: "auto",
- *          status: "fetching", // if undefined disable this feature
- *      }
- *      onChange: function() { targetYear, targetMonth }
- *
- * */
+Callback.args = {
+    events: [...TimezoneAuto.args.events],
+    use24Hour: false,
+    enableTimezone: "auto",
+    status: "SUCCEED",
+    onChange: _callback,
+};
 
-// Fun fact: in the multiline comments above, you can NOT add ! ahead, this will break the storybook preview build
-
-// {
-//     id: event.id,
-//     status: event.status,
-//     date: event.date,
-//     date_utc: event.date_utc,
-//     url: event.url,
-//     title: event.title,
-//     image: {url: ''},
-//     imgUrl: "https://source.unsplash.com/random/1200x630",
-//     start_date: "2021-06-20",
-//     start_date_details: {year, month, day, hour, minutes},
-//     end_date: event.end_date,
-//     end_date_details: {year, month, day, hour, minutes},
-//     timezone: event.timezone,
-//     multi_day: _multiDay,
-// };

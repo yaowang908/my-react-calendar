@@ -8,6 +8,8 @@ import "@root/index.css";
 import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
 import {
     clientTimezone as clientTimezoneState,
+    targetMonth as targetMonthState,
+    targetYear as targetYearState,
     use24HourAtom,
     enableTimezoneAtom,
     statusSelector,
@@ -19,14 +21,18 @@ function App({ events, ...otherProps }) {
     const clientTimezone = useRecoilValue(clientTimezoneState);
     const setUse24HourState = useSetRecoilState(use24HourAtom);
     const setStatus = useSetRecoilState(statusSelector);
-    const [enableTimezoneState, setEnableTimezoneAtom] = useRecoilState(enableTimezoneAtom);
-    const { use24Hour, enableTimezone, status } = {...otherProps};
+    const [enableTimezoneState, setEnableTimezoneAtom] = useRecoilState(
+        enableTimezoneAtom
+    );
+    const { use24Hour, enableTimezone, status, onChange } = { ...otherProps };
+    const targetMonth = useRecoilValue(targetMonthState);
+    const targetYear = useRecoilValue(targetYearState);
 
     React.useEffect(() => {
         // console.log(use24Hour)
         setUse24HourState(!!use24Hour); //if it's undefined, !!undefined is false
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [use24Hour])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [use24Hour]);
 
     React.useEffect(() => {
         // console.log(enableTimezone)
@@ -36,12 +42,48 @@ function App({ events, ...otherProps }) {
             setEnableTimezoneAtom(!!enableTimezone); //if it's undefined, !!undefined is false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [enableTimezone])
+    }, [enableTimezone]);
 
     React.useEffect(() => {
         setStatus(status);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [status])
+    }, [status]);
+
+    React.useEffect(() => {
+        if (onChange) {
+            onChange({
+                targetMonth: Number(targetMonth),
+                targetYear: Number(targetYear)
+            });
+        }
+        // console.log("changed")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [targetMonth, targetYear]);
+
+    // TODO:
+    /**
+     *  DONE: 1. streamline data structure for events
+     *      DONE: 1. auto generate multi_day attributes
+     *      DONE: 2. rename the attributes, make it short
+     *  DONE: 2. timezone conversion
+     *            DONE: 1. when set to auto, only show timezone, not changing it
+     *  DONE: 3. handle empty input or in-valid ones
+     *  DONE: 4. update README file
+     *  TODO: 5. dark theme support
+     *  DONE: 6. should be able to switch between military / regular time format
+     *  DONE: 7. add support for fetch new data
+     *      DONE: 1. accept an identifier, fetching or error or succeed
+     *      DONE: 2. accept an function, will call this function when target month or year changed.
+     *      ~~DEPRECATED: 3. when accepting new events data, data will append to existing array, not replacing it.~~
+     *  TODO: 8. combine settings into options object
+     *      {
+     *          use24Hour: false,
+     *          enableTimezone: "auto",
+     *          status: "fetching", // if undefined disable this feature
+     *      }
+     *      onChange: function() { targetYear, targetMonth }
+     *
+     * */
 
     /**
      *  start(year,month,day,hour,minute), end(...), title, link, imgUrl, timezone
@@ -79,7 +121,7 @@ function App({ events, ...otherProps }) {
         return true;
     };
 
-    const converTimeOnTimezone = (events, enableTimezone, targetTimezone) => {
+    const convertTimeOnTimezone = (events, enableTimezone, targetTimezone) => {
         /**
          * events = events
          *      end: "2021-06-29 16:30:00"
@@ -94,46 +136,68 @@ function App({ events, ...otherProps }) {
          * moment-timezone is also required here
          */
         const result = [];
-        if(!enableTimezone) {
-           // return original data
-           return events
+        if (!enableTimezone) {
+            // return original data
+            return events;
         } else {
             // enableTimezone: true or auto
-            if(enableTimezone === 'auto') console.log('Using default timezone setting, but not showing')
+            if (enableTimezone === "auto")
+                console.log("Using default timezone setting, but not showing");
             // DONE: calculate time base on timezone
             //REFERENCE: var b = moment.tz("May 12th 2014 8PM", "MMM Do YYYY hA", "America/Toronto");
             events.map((event) => {
-                if(event.timezone !== targetTimezone) {
-                    const _startMoment = moment.tz(event.start, "YYYY-MM-DD HH:mm:ss", event.timezone);
-                    const _endMoment = moment.tz(event.end, "YYYY-MM-DD HH:mm:ss", event.timezone);
+                if (event.timezone !== targetTimezone) {
+                    const _startMoment = moment.tz(
+                        event.start,
+                        "YYYY-MM-DD HH:mm:ss",
+                        event.timezone
+                    );
+                    const _endMoment = moment.tz(
+                        event.end,
+                        "YYYY-MM-DD HH:mm:ss",
+                        event.timezone
+                    );
 
-                    const _startMomentAtTargetTimezone = _startMoment.tz(targetTimezone).format("YYYY-MM-DD HH:mm:ss");
-                    const _endMomentAtTargetTimezone = _endMoment.tz(targetTimezone).format("YYYY-MM-DD HH:mm:ss");
+                    const _startMomentAtTargetTimezone = _startMoment
+                        .tz(targetTimezone)
+                        .format("YYYY-MM-DD HH:mm:ss");
+                    const _endMomentAtTargetTimezone = _endMoment
+                        .tz(targetTimezone)
+                        .format("YYYY-MM-DD HH:mm:ss");
 
                     // console.log("startMoment", _startMomentAtTargetTimezone)
 
-                    result.push(Object.assign({}, event, {end: _endMomentAtTargetTimezone, start: _startMomentAtTargetTimezone, targetTimezone: targetTimezone }))
-
+                    result.push(
+                        Object.assign({}, event, {
+                            end: _endMomentAtTargetTimezone,
+                            start: _startMomentAtTargetTimezone,
+                            targetTimezone: targetTimezone,
+                        })
+                    );
                 } else {
                     result.push(event);
                 }
-            })
+            });
             return result;
         }
-    }
+    };
 
     React.useEffect(() => {
         // DONE: convert timezone here, if necessary
         const temp = [];
         // console.log("Events: ", events);
 
-        const eventsConvertedToClientTimezone = converTimeOnTimezone(events,enableTimezoneState,clientTimezone);
+        const eventsConvertedToClientTimezone = convertTimeOnTimezone(
+            events,
+            enableTimezoneState,
+            clientTimezone
+        );
         // console.log("!!!", eventsConvertedToClientTimezone)
 
         eventsConvertedToClientTimezone.map((event) => {
             const _startDetails = getTimeDetails(event?.start);
             const _endDetails = getTimeDetails(event?.end);
-            if(isMultiDay(_startDetails, _endDetails)) {
+            if (isMultiDay(_startDetails, _endDetails)) {
                 temp.push({
                     date: `${_endDetails?.year}-${_endDetails?.month}-${_endDetails?.date}`,
                     url: event?.url,
@@ -158,7 +222,7 @@ function App({ events, ...otherProps }) {
                     multi_day: false,
                 });
             }
-            return <></>
+            return <></>;
         });
         // console.log('temp: ', temp)
         setFormattedEvents(temp);
