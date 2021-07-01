@@ -8,6 +8,7 @@ import {
     multiDayEventsAtom,
     normalEventsAtom,
     calendarView as calendarViewSelector,
+    statusSelector,
 } from "@root/Recoil/calendar.atom";
 import MobileEvents from "@root/components/MobileEvents/MobileEvents";
 import { getEventsForTheDate } from "@root/libs/getEventsForTheDate";
@@ -15,6 +16,8 @@ import CalendarView from "@root/components/Calendar/CalendarView";
 import MultiDayEventsMobile from "@root/components/MobileEvents/MultiDayEventsMobile";
 import ListView from "@root/components/ListView/ListView";
 import DayNames from "@root/components/DayNames/DayNames";
+import ErrorScreen from "../ErrorScreen/ErrorScreen";
+import Loading from "../Loading/Loading";
 // import { stringTo2Digits } from 'libs/getEventsForTheDate';
 
 export default function Calendar({events, otherProps}) {
@@ -24,6 +27,7 @@ export default function Calendar({events, otherProps}) {
         useRecoilState(multiDayEventsAtom);
     const [normalEvents, setNormalEvents] = useRecoilState(normalEventsAtom);
     const calendarView = useRecoilValue(calendarViewSelector);
+    const calendarStatus = useRecoilValue(statusSelector)
 
     const getMobileViewMonthName = (selected) => {
         // console.log('monthName', selected)
@@ -73,7 +77,15 @@ export default function Calendar({events, otherProps}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [eventsData, setMultiDayEventsState]);
 
-    if (calendarView === "MONTH") {
+    if (calendarStatus === "ERROR") {
+        return <ErrorScreen />
+    }
+
+    if (calendarStatus === "FETCHING") {
+        return <Loading />
+    }
+
+    if (calendarStatus === "SUCCEED" && calendarView === "MONTH") {
         return (
             <>
                 <DayNames />
@@ -92,10 +104,13 @@ export default function Calendar({events, otherProps}) {
             </>
         );
     }
-    if (calendarView === "LIST") {
+    if (calendarStatus === "SUCCEED" && calendarView === "LIST") {
         return (
             <>
-                <ListView eventsData={normalEvents} multiDayEvents={multiDayEvents}/>
+                <ListView
+                    eventsData={normalEvents}
+                    multiDayEvents={multiDayEvents}
+                />
             </>
         );
     }

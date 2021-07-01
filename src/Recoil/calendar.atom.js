@@ -176,6 +176,35 @@ const enableTimezoneAtom = atom({
     default: true,
 })
 
+const statusAtom = atom({
+    key: "statusAtom",
+    default: "SUCCEED",
+})
+
+const statusSelector = selector({
+    key: "statusSelector",
+    get: ({get}) => get(statusAtom),
+    set: ({set, get}, newStatus) => {
+        if (newStatus instanceof DefaultValue) {
+            set(statusAtom, "SUCCEED");
+            return;
+        }
+        if (newStatus === "ERROR") {
+            set(statusAtom, "ERROR");
+            return;
+        }
+        if (newStatus === "FETCHING") {
+            set(statusAtom, "FETCHING");
+            return;
+        }
+        if (newStatus === "SUCCEED") {
+            set(statusAtom, "SUCCEED");
+            return;
+        }
+        console.error("Unrecognized Status code: calendar status can only be one of the following: ['SUCCEED', 'ERROR', 'FETCHING']");
+    }
+})
+
 export {
     calendarStart,
     targetMonth,
@@ -192,4 +221,5 @@ export {
     clientTimezoneSelector,
     use24HourAtom,
     enableTimezoneAtom,
+    statusSelector,
 };
