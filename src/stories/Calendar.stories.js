@@ -179,7 +179,7 @@ ErrorScreen.args = {
  *  TODO: 7. add support for fetch new data
  *      DONE: 1. accept an identifier, fetching or error or succeed
  *      2. accept an function, will call this function when target month or year changed.
- *      3. when accepting new events data, data will append to existing array, not replacing it.
+ *      ~~DEPRECATED: 3. when accepting new events data, data will append to existing array, not replacing it.~~
  *  TODO: 8. combine settings into options object
  *      {
  *          use24Hour: false,
