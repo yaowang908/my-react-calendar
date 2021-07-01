@@ -3,7 +3,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import Calendar from "@root/index.js";
 import { stringTo2Digits } from "@root/libs/getEventsForTheDate";
-import { daysInMonth } from "@root/libs/getWeeks";
+// import { daysInMonth } from "@root/libs/getWeeks";
 
 import "@root/index.css";
 
@@ -16,7 +16,7 @@ const today = new Date();
 const year = today.getFullYear().toString();
 const month = stringTo2Digits(today.getMonth()+1);
 const day = stringTo2Digits(today.getDate());
-const tomorrow = stringTo2Digits(today.getDate()===daysInMonth(today.getMonth()+1, today.getFullYear()) ? 1 : today.getDate()+1);
+// const tomorrow = stringTo2Digits(today.getDate()===daysInMonth(today.getMonth()+1, today.getFullYear()) ? 1 : today.getDate()+1);
 
 // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
