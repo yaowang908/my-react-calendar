@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.enableTimezoneAtom = exports.use24HourAtom = exports.clientTimezoneSelector = exports.clientTimezone = exports.calendarView = exports.isViewSelectorHidden = exports.normalEventsAtom = exports.multiDayEventsAtom = exports.isMonthSelectorHidden = exports.eventsDataAtom = exports.eventsBufferAtom = exports.selectedDay = exports.targetYear = exports.targetMonth = exports.calendarStart = void 0;
+exports.statusSelector = exports.enableTimezoneAtom = exports.use24HourAtom = exports.clientTimezoneSelector = exports.clientTimezone = exports.calendarView = exports.isViewSelectorHidden = exports.normalEventsAtom = exports.multiDayEventsAtom = exports.isMonthSelectorHidden = exports.eventsDataAtom = exports.eventsBufferAtom = exports.selectedDay = exports.targetYear = exports.targetMonth = exports.calendarStart = void 0;
 
 var _placeholder = require("../libs/placeholder");
 
@@ -229,3 +229,45 @@ var enableTimezoneAtom = (0, _recoil.atom)({
   default: true
 });
 exports.enableTimezoneAtom = enableTimezoneAtom;
+var statusAtom = (0, _recoil.atom)({
+  key: "statusAtom",
+  default: "SUCCEED"
+});
+var statusSelector = (0, _recoil.selector)({
+  key: "statusSelector",
+  get: function get(_ref9) {
+    var _get5 = _ref9.get;
+    return _get5(statusAtom);
+  },
+  set: function set(_ref10, newStatus) {
+    var _set5 = _ref10.set,
+        get = _ref10.get;
+
+    if (newStatus instanceof _recoil.DefaultValue) {
+      _set5(statusAtom, "SUCCEED");
+
+      return;
+    }
+
+    if (newStatus === "ERROR") {
+      _set5(statusAtom, "ERROR");
+
+      return;
+    }
+
+    if (newStatus === "FETCHING") {
+      _set5(statusAtom, "FETCHING");
+
+      return;
+    }
+
+    if (newStatus === "SUCCEED") {
+      _set5(statusAtom, "SUCCEED");
+
+      return;
+    }
+
+    console.error("Unrecognized Status code: calendar status can only be one of the following: ['SUCCEED', 'ERROR', 'FETCHING']");
+  }
+});
+exports.statusSelector = statusSelector;

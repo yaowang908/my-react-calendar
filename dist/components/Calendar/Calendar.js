@@ -29,6 +29,10 @@ var _ListView = _interopRequireDefault(require("../ListView/ListView"));
 
 var _DayNames = _interopRequireDefault(require("../DayNames/DayNames"));
 
+var _ErrorScreen = _interopRequireDefault(require("../ErrorScreen/ErrorScreen"));
+
+var _Loading = _interopRequireDefault(require("../Loading/Loading"));
+
 // import { stringTo2Digits } from 'libs/getEventsForTheDate';
 function Calendar(_ref) {
   var events = _ref.events,
@@ -51,6 +55,7 @@ function Calendar(_ref) {
       setNormalEvents = _useRecoilState6[1];
 
   var calendarView = (0, _recoil.useRecoilValue)(_calendar.calendarView);
+  var calendarStatus = (0, _recoil.useRecoilValue)(_calendar.statusSelector);
 
   var getMobileViewMonthName = function getMobileViewMonthName(selected) {
     // console.log('monthName', selected)
@@ -97,7 +102,15 @@ function Calendar(_ref) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventsData, setMultiDayEventsState]);
 
-  if (calendarView === "MONTH") {
+  if (calendarStatus === "ERROR") {
+    return /*#__PURE__*/_react.default.createElement(_ErrorScreen.default, null);
+  }
+
+  if (calendarStatus === "FETCHING") {
+    return /*#__PURE__*/_react.default.createElement(_Loading.default, null);
+  }
+
+  if (calendarStatus === "SUCCEED" && calendarView === "MONTH") {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_DayNames.default, null), /*#__PURE__*/_react.default.createElement(_CalendarView.default, {
       eventsData: normalEvents
     }), /*#__PURE__*/_react.default.createElement(_MultiDayEventsMobile.default, {
@@ -109,7 +122,7 @@ function Calendar(_ref) {
     }));
   }
 
-  if (calendarView === "LIST") {
+  if (calendarStatus === "SUCCEED" && calendarView === "LIST") {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ListView.default, {
       eventsData: normalEvents,
       multiDayEvents: multiDayEvents

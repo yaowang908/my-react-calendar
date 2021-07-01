@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 function ErrorScreen() {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "absolute w-full h-full grid place-items-center bg-white"
+    className: "mt-32 max-w-1080 w-full h-full grid place-items-center bg-white"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: ""
   }, /*#__PURE__*/_react.default.createElement("h1", {

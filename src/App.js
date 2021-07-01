@@ -142,7 +142,7 @@ function App({ events, ...otherProps }) {
         } else {
             // enableTimezone: true or auto
             if (enableTimezone === "auto")
-                console.log("Using default timezone setting, but not showing");
+                console.log("enableTimezone: auto");
             // DONE: calculate time base on timezone
             //REFERENCE: var b = moment.tz("May 12th 2014 8PM", "MMM Do YYYY hA", "America/Toronto");
             events.map((event) => {

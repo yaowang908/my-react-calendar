@@ -50,4 +50,4 @@ _reactDom.default.render( /*#__PURE__*/_react.default.createElement(Calendar, {
   events: placeholder,
   use24Hour: false,
   enableTimezone: 'auto'
-}), document.getElementById("calendar_root"));
+}), document.getElementById("root"));

@@ -44,6 +44,7 @@ function App(_ref) {
 
   var clientTimezone = (0, _recoil.useRecoilValue)(_calendar.clientTimezone);
   var setUse24HourState = (0, _recoil.useSetRecoilState)(_calendar.use24HourAtom);
+  var setStatus = (0, _recoil.useSetRecoilState)(_calendar.statusSelector);
 
   var _useRecoilState = (0, _recoil.useRecoilState)(_calendar.enableTimezoneAtom),
       _useRecoilState2 = (0, _slicedToArray2.default)(_useRecoilState, 2),
@@ -52,21 +53,68 @@ function App(_ref) {
 
   var _otherProps = (0, _objectSpread2.default)({}, otherProps),
       use24Hour = _otherProps.use24Hour,
-      enableTimezone = _otherProps.enableTimezone;
+      enableTimezone = _otherProps.enableTimezone,
+      status = _otherProps.status,
+      onChange = _otherProps.onChange;
+
+  var targetMonth = (0, _recoil.useRecoilValue)(_calendar.targetMonth);
+  var targetYear = (0, _recoil.useRecoilValue)(_calendar.targetYear);
 
   _react.default.useEffect(function () {
     // console.log(use24Hour)
     setUse24HourState(!!use24Hour); //if it's undefined, !!undefined is false
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [use24Hour]);
 
   _react.default.useEffect(function () {
     // console.log(enableTimezone)
-    if (enableTimezone === 'auto') {
-      setEnableTimezoneAtom('auto');
+    if (enableTimezone === "auto") {
+      setEnableTimezoneAtom("auto");
     } else {
       setEnableTimezoneAtom(!!enableTimezone); //if it's undefined, !!undefined is false
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [enableTimezone]);
+
+  _react.default.useEffect(function () {
+    setStatus(status); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  _react.default.useEffect(function () {
+    if (typeof onChange === 'function') {
+      onChange({
+        targetMonth: Number(targetMonth),
+        targetYear: Number(targetYear)
+      });
+    } // console.log("changed")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, [targetMonth, targetYear]); // TODO:
+
+  /**
+   *  DONE: 1. streamline data structure for events
+   *      DONE: 1. auto generate multi_day attributes
+   *      DONE: 2. rename the attributes, make it short
+   *  DONE: 2. timezone conversion
+   *            DONE: 1. when set to auto, only show timezone, not changing it
+   *  DONE: 3. handle empty input or in-valid ones
+   *  DONE: 4. update README file
+   *  TODO: 5. dark theme support
+   *  DONE: 6. should be able to switch between military / regular time format
+   *  DONE: 7. add support for fetch new data
+   *      DONE: 1. accept an identifier, fetching or error or succeed
+   *      DONE: 2. accept an function, will call this function when target month or year changed.
+   *      ~~DEPRECATED: 3. when accepting new events data, data will append to existing array, not replacing it.~~
+   *  TODO: 8. combine settings into options object
+   *      {
+   *          use24Hour: false,
+   *          enableTimezone: "auto",
+   *          status: "fetching", // if undefined disable this feature
+   *      }
+   *      onChange: function() { targetYear, targetMonth }
+   *
+   * */
+
   /**
    *  start(year,month,day,hour,minute), end(...), title, link, imgUrl, timezone
    */
@@ -110,7 +158,7 @@ function App(_ref) {
     return true;
   };
 
-  var converTimeOnTimezone = function converTimeOnTimezone(events, enableTimezone, targetTimezone) {
+  var convertTimeOnTimezone = function convertTimeOnTimezone(events, enableTimezone, targetTimezone) {
     /**
      * events = events
      *      end: "2021-06-29 16:30:00"
@@ -131,7 +179,7 @@ function App(_ref) {
       return events;
     } else {
       // enableTimezone: true or auto
-      if (enableTimezone === 'auto') console.log('Using default timezone setting, but not showing'); // DONE: calculate time base on timezone
+      if (enableTimezone === "auto") console.log("enableTimezone: auto"); // DONE: calculate time base on timezone
       //REFERENCE: var b = moment.tz("May 12th 2014 8PM", "MMM Do YYYY hA", "America/Toronto");
 
       events.map(function (event) {
@@ -162,7 +210,7 @@ function App(_ref) {
     // DONE: convert timezone here, if necessary
     var temp = []; // console.log("Events: ", events);
 
-    var eventsConvertedToClientTimezone = converTimeOnTimezone(events, enableTimezoneState, clientTimezone); // console.log("!!!", eventsConvertedToClientTimezone)
+    var eventsConvertedToClientTimezone = convertTimeOnTimezone(events, enableTimezoneState, clientTimezone); // console.log("!!!", eventsConvertedToClientTimezone)
 
     eventsConvertedToClientTimezone.map(function (event) {
       var _startDetails = getTimeDetails(event === null || event === void 0 ? void 0 : event.start);
