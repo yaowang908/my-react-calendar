@@ -29,12 +29,24 @@ const events = [
     ];
 
 const Calendar = () => (
-    <Calendar events={events} use24Hour={false} enableTimezone={true}/>
+    <Calendar events={events} use24Hour={false} enableTimezone={true} status={"SUCCEED"} onChange={onChange}}/>
 )
+
+const onChange = (target) => {
+    /**
+     *  target : {targetMonth: 5, targetYear: 2021}
+     */
+    // do something
+}
+
 // use24Hour: true, false
 
 // enableTimezone: true, false, auto
 // true: user can select timezone, false: disable timezone function, auto: only show client timezone without changing
+
+// status only accept three code: ["SUCCEED", "FETCHING", "ERROR"];
+
+// onChange accept function as argument, will be called when user switches month or year
 ```
 
 ### `yarn build`
