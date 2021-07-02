@@ -194,6 +194,7 @@ function Week(_ref) {
       key: (0, _nanoid.nanoid)()
     }, (0, _reactRenderHtml.default)(x.title));
   })), datesArray.map(function (x) {
+    var eventsGroupMarginTopClassArr = ['mt-6', 'mt-12', 'mt-18', 'mt-24', 'mt-30'];
     return /*#__PURE__*/_react.default.createElement(_Day.default // date={x.date}
     // month={x.month}
     , (0, _extends2.default)({
@@ -202,7 +203,7 @@ function Week(_ref) {
       isPast: isDayPast(x.month, x.date, x.year),
       isSelected: isSelected(x.month, x.date, x.year, selectedDay),
       eventsProp: (0, _getEventsForTheDate.getEventsForTheDate)(x.month, x.date, x.year, events),
-      eventsGroupMarginTop: "".concat(localMultiDayEvents.length ? "mt-" + localMultiDayEvents.length * 6 : "") // DONE: this margin top should change base on how many bars in this day block
+      eventsGroupMarginTop: "".concat(localMultiDayEvents.length ? eventsGroupMarginTopClassArr[localMultiDayEvents.length - 1] : "") // DONE: this margin top should change base on how many bars in this day block
 
     }, x, {
       key: (0, _nanoid.nanoid)()
