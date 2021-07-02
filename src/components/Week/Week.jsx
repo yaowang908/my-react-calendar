@@ -213,6 +213,7 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
                 })}
             </div>
             {datesArray.map((x) => {
+                const eventsGroupMarginTopClassArr = ['mt-6','mt-12','mt-18', 'mt-24', 'mt-30'];
                 return (
                     <Day
                         // date={x.date}
@@ -234,7 +235,7 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
                         )}
                         eventsGroupMarginTop={`${
                             localMultiDayEvents.length
-                                ? "mt-" + localMultiDayEvents.length * 6
+                                ? eventsGroupMarginTopClassArr[localMultiDayEvents.length - 1]
                                 : ""
                         }`}
                         // DONE: this margin top should change base on how many bars in this day block
