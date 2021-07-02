@@ -962,6 +962,12 @@ video {
   gap: 1rem;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -1345,4 +1351,4 @@ video {
 @media (min-width: 1536px) {
 }
 
-/*# sourceMappingURL=main.7a435179.chunk.css.map*/
+/*# sourceMappingURL=main.37f25a4f.chunk.css.map*/

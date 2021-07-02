@@ -52,7 +52,7 @@ function MultiDayEvent(_ref) {
   };
 
   return /*#__PURE__*/_react.default.createElement("div", (0, _extends2.default)({
-    className: "border ".concat(borderColor, " ").concat(backgroundColor, " ").concat(textColor, " h-1 md:h-6 top-2 px-5 cursor-auto pointer-events-none md:cursor-pointer md:pointer-events-auto text-xxs md:text-sm ").concat(barWidthClass ? barWidthClass : "w-full"),
+    className: "border ".concat(borderColor, " ").concat(backgroundColor, " ").concat(textColor, " h-1 md:h-6 top-2 px-5 truncate cursor-auto pointer-events-none md:cursor-pointer md:pointer-events-auto text-xxs md:text-sm ").concat(barWidthClass ? barWidthClass : "w-full"),
     style: getLeftMargin(),
     onClick: clickHandler
   }, otherProps), /*#__PURE__*/_react.default.createElement("span", {
