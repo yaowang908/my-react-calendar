@@ -55,6 +55,15 @@ MultiDayEvent.args = {
     events: [
         {
             start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-08 16:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: `${year}-${month}-08 14:30:00`,
             end: `${year}-${month}-10 16:30:00`,
             timezone: "America/New_York",
             title:
