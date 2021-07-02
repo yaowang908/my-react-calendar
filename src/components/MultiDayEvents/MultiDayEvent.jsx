@@ -38,7 +38,7 @@ export default function MultiDayEvent({
 
     return (
         <div
-            className={`border ${borderColor} ${backgroundColor} ${textColor} h-1 md:h-6 top-2 px-5 cursor-auto pointer-events-none md:cursor-pointer md:pointer-events-auto text-xxs md:text-sm ${
+            className={`border ${borderColor} ${backgroundColor} ${textColor} h-1 md:h-6 top-2 px-5 truncate cursor-auto pointer-events-none md:cursor-pointer md:pointer-events-auto text-xxs md:text-sm ${
                 barWidthClass ? barWidthClass : "w-full"
             }`}
             style={getLeftMargin()}
