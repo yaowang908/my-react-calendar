@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My React Calendar</title>
+        <link
+            href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.0.1/styles/default.min.css">
+    <script src="//unpkg.com/@highlightjs/cdn-assets@11.0.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script> -->
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css"
+            integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"
+            integrity="sha512-axJX7DJduStuBB8ePC8ryGzacZPr3rdLaIDZitiEgWWk2gsXxEFlm4UW0iNzj2h3wp5mOylgHAzBzM4nRSvTZA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"
+            integrity="sha512-xCfKr8zIONbip3Q1XG/u5x40hoJ0/DtP1bxyMEi0GWzUFoUffE+Dfw1Br8j55RRt9qG7bGKsh+4tSb1CvFHPSA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+    </head>
+    <body class="w-full m-0 p-0 bg-blue-900 text-gray-200">
+        <header class="w-full bg-blue-700 h-16 p-5">
+            <h1 class="text-xl text-white font-mono">My React Calendar</h1>
+        </header>
+        <section class="flex flex-col items-center mt-10 max-w-4xl mx-auto">
+            <p class="text-lg max-w-5xl px-10 mb-5 w-full text-left">
+                My React Calendar(MRC) is a simple React Component to display
+                events on calendar view.
+            </p>
+            <p class="text-lg max-w-5xl px-10 mb-5 w-full text-left">
+                MRC is using TailwindCSS, if your project are also using
+                TailwindCSS, you need to add MRC to your purge array.
+            </p>
+            <pre class="max-w-full md:max-w-4xl w-full py-1">
+<code class="language-javascript max-w-full max-h-96">
+module.exports = {
+    ...
+        purge: [
+            "./src/**/*.{js,jsx,ts,tsx}",
+            "./public/index.html",
+            "./node_modules/my-react-calendar/dist/components/**/*.{js,jsx}"
+        ],
+    ...
+}
+</code>
+        </pre>
+            <pre class="max-w-full md:max-w-4xl w-full py-1">
+            <code class="language-javascript min-w-full max-h-96">
+import Calendar from "my-react-calendar";
+
+export default function Wrapper() {
+
+    return (
+        &lt;Calendar
+            events={eventsData}
+            use24Hour={false}
+            enableTimezone={true}
+            status={fetchStatus}
+            onChange={onUserChange}
+        /&gt;
+    )
+}
+            </code>
+        </pre>
+        </section>
+        <section class="flex flex-col max-w-4xl mx-auto justify-center">
+            <h2 class="text-2xl -ml-10 mt-10 mb-10 font-black text-left">
+                <span class="border-b-4 border-gray-200"> Basic Usage </span>
+            </h2>
+            <img
+                src="./assets/basic_usage.jpg"
+                alt="basic_usage"
+                class="max-w-full md:max-w-4xl mx-auto px-10 md:px-0"
+            />
+            <pre class="w-full py-1 mx-auto">
+<code class="language-javascript max-w-full max-h-96">
+{
+    events: [
+        {
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-08 16:30:00`,
+            timezone: "America/New_York",
+            title:
+            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-10 16:30:00`,
+            timezone: "America/New_York",
+            title:
+            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: `${year}-${month}-07 14:30:00`,
+            end: `${year}-${month}-09 16:30:00`,
+            timezone: "America/New_York",
+            title:
+            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+    ],
+    use24Hour: true,
+    enableTimezone: false,
+};
+</code>
+        </pre>
+        </section>
+        <section class="flex flex-col max-w-4xl mx-auto justify-center">
+            <h2 class="text-2xl -ml-10 mt-10 mb-10 font-black text-left">
+                <span class="border-b-4 border-gray-200">
+                    Receive Fetching status
+                </span>
+            </h2>
+            <img
+                src="./assets/fetching.jpg"
+                alt="error"
+                class="max-w-full md:max-w-4xl mx-auto px-10 md:px-0"
+            />
+            <pre class="max-w-full md:max-w-4xl py-1 mx-auto">
+                <code class="language-javascript max-w-full max-h-96">
+    {
+        events: [...],
+        use24Hour: true,
+        enableTimezone: false,
+        status: "FETCHING"
+    };
+                </code>
+            </pre>
+        </section>
+        <section class="flex flex-col max-w-4xl mx-auto justify-center">
+            <h2 class="text-2xl -ml-10 mt-10 mb-10 font-black text-left">
+                <span class="border-b-4 border-gray-200">
+                    Receive Error status
+                </span>
+            </h2>
+            <img
+                src="./assets/error.jpg"
+                alt="error"
+                class="max-w-full md:max-w-4xl mx-auto px-10 md:px-0"
+            />
+            <pre class="max-w-full md:max-w-4xl py-1 mx-auto">
+            <code class="language-javascript max-w-full max-h-96">
+{
+    events: [...],
+    use24Hour: true,
+    enableTimezone: false,
+    status: "ERROR"
+};
+            </code>
+        </pre>
+        </section>
+    </body>
+</html>

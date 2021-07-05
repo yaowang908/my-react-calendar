@@ -12,7 +12,6 @@
         "react",
         "calendar"
     ],
-    "homepage": "https://github.com/yaowang908/my-react-calendar",
     "dependencies": {
         "@babel/runtime": "^7.14.6",
         "@craco/craco": "^6.1.2",
