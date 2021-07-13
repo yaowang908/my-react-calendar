@@ -55,7 +55,7 @@ function EventEntry(_ref) {
       eventImage.current.classList.remove("hidden");
 
       if (isRightHalf) {
-        eventImage.current.classList.add("block", "-ml-32");
+        eventImage.current.classList.add("block", "-ml-64");
       } else {
         eventImage.current.classList.add("block");
       }
@@ -79,8 +79,11 @@ function EventEntry(_ref) {
     onMouseEnter: mouseEnterHandler,
     onMouseLeave: mouseLeaveHandler
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "hidden w-72 h-auto absolute z-50",
-    ref: eventImage
+    className: "hidden w-96 cursor-pointer h-auto absolute z-50",
+    ref: eventImage,
+    onClick: function onClick() {
+      if (link) window.open(link);
+    }
   }, /*#__PURE__*/_react.default.createElement("img", {
     className: "w-full h-auto",
     src: localImgSrc,

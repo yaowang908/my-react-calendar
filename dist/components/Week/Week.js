@@ -191,6 +191,7 @@ function Week(_ref) {
       barWidthClass: "".concat(x.barPositionInThisWeek ? "w-" + (x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1) + "/7" : ""),
       link: x.url,
       bar_with: x.barPositionInThisWeek ? x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1 : "",
+      image: x === null || x === void 0 ? void 0 : x.imgUrl,
       key: (0, _nanoid.nanoid)()
     }, (0, _reactRenderHtml.default)(x.title));
   })), datesArray.map(function (x) {
