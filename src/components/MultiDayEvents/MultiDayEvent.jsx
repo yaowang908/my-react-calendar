@@ -18,6 +18,7 @@ export default function MultiDayEvent({
     const backgroundColor = "bg-blue-400";
     const textColor = "text-white";
     const eventImage = React.useRef(null);
+    const multidayEventsContainer = React.useRef(null);
     const [localImgSrc, setLocalImgSrc] = React.useState(image);
 
     React.useEffect(() => {
@@ -48,13 +49,17 @@ export default function MultiDayEvent({
 
     const mouseEnterHandler = (event) => {
         // console.log('Enter', link, event);
-        if (localImgSrc){
+        if (localImgSrc && eventImage && multidayEventsContainer){
             const cursorX = event.clientX;
             const cursorY = event.clientY;
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
+            const container = multidayEventsContainer.current.getBoundingClientRect();
+            const containerLeft = container.left;
+            const containerRight = container.right;
             // console.log('Cursor', cursorX, cursorY);
             // console.log('Screen', screenWidth, screenHeight);
+            // console.log('Container', containerLeft, containerRight);
             const isRightHalf = screenWidth / 2 < cursorX ? true : false;
             const isTopHalf = screenHeight / 2 < cursorY ? false : true;
 
@@ -66,10 +71,10 @@ export default function MultiDayEvent({
 
             if (isRightHalf) {
                 eventImage.current.classList.add("block", "mr-16");
-                eventImage.current.style.right = (screenWidth - cursorX) +'px';
+                eventImage.current.style.right = (containerRight - cursorX) +'px';
             } else {
                 eventImage.current.classList.add("block", "ml-16");
-                eventImage.current.style.left = cursorX +'px';
+                eventImage.current.style.left = (cursorX - containerLeft) +'px';
             }
 
             if (isTopHalf) {
@@ -109,6 +114,7 @@ export default function MultiDayEvent({
             }`}
             style={getLeftMargin()}
             onClick={clickHandler}
+            ref={multidayEventsContainer}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
             {...otherProps}
