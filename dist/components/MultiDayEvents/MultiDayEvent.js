@@ -36,6 +36,8 @@ function MultiDayEvent(_ref) {
 
   var eventImage = _react.default.useRef(null);
 
+  var multidayEventsContainer = _react.default.useRef(null);
+
   var _React$useState = _react.default.useState(image),
       _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
       localImgSrc = _React$useState2[0],
@@ -69,12 +71,16 @@ function MultiDayEvent(_ref) {
 
   var mouseEnterHandler = function mouseEnterHandler(event) {
     // console.log('Enter', link, event);
-    if (localImgSrc) {
+    if (localImgSrc && eventImage && multidayEventsContainer) {
       var cursorX = event.clientX;
       var cursorY = event.clientY;
       var screenWidth = window.innerWidth;
-      var screenHeight = window.innerHeight; // console.log('Cursor', cursorX, cursorY);
+      var screenHeight = window.innerHeight;
+      var container = multidayEventsContainer.current.getBoundingClientRect();
+      var containerLeft = container.left;
+      var containerRight = container.right; // console.log('Cursor', cursorX, cursorY);
       // console.log('Screen', screenWidth, screenHeight);
+      // console.log('Container', containerLeft, containerRight);
 
       var isRightHalf = screenWidth / 2 < cursorX ? true : false;
       var isTopHalf = screenHeight / 2 < cursorY ? false : true;
@@ -85,10 +91,10 @@ function MultiDayEvent(_ref) {
 
       if (isRightHalf) {
         eventImage.current.classList.add("block", "mr-16");
-        eventImage.current.style.right = screenWidth - cursorX + 'px';
+        eventImage.current.style.right = containerRight - cursorX + 'px';
       } else {
         eventImage.current.classList.add("block", "ml-16");
-        eventImage.current.style.left = cursorX + 'px';
+        eventImage.current.style.left = cursorX - containerLeft + 'px';
       }
 
       if (isTopHalf) {
@@ -116,6 +122,7 @@ function MultiDayEvent(_ref) {
     className: "border ".concat(borderColor, " ").concat(backgroundColor, " ").concat(textColor, " h-1 md:h-6 top-2 px-5 truncate cursor-auto pointer-events-none md:cursor-pointer md:pointer-events-auto text-xxs md:text-sm ").concat(barWidthClass ? barWidthClass : "w-full"),
     style: getLeftMargin(),
     onClick: clickHandler,
+    ref: multidayEventsContainer,
     onMouseEnter: mouseEnterHandler,
     onMouseLeave: mouseLeaveHandler
   }, otherProps), /*#__PURE__*/_react.default.createElement("div", {
