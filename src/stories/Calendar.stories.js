@@ -44,6 +44,24 @@ OneDayEvent.args = {
             url: "https://www.google.com",
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
+        {
+            start: `${year}-${month}-11 14:30:00`,
+            end: `${year}-${month}-11 16:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: `${year}-${month}-17 14:30:00`,
+            end: `${year}-${month}-17 16:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
     ],
     use24Hour: false,
     enableTimezone: true,
@@ -63,7 +81,7 @@ MultiDayEvent.args = {
             imgUrl: "https://source.unsplash.com/random/1200x630",
         },
         {
-            start: `${year}-${month}-08 14:30:00`,
+            start: `${year}-${month}-04 14:30:00`,
             end: `${year}-${month}-10 16:30:00`,
             timezone: "America/New_York",
             title:

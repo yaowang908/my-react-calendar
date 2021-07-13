@@ -37,7 +37,7 @@ export default function EventEntry({
 
             eventImage.current.classList.remove("hidden");
             if (isRightHalf) {
-                eventImage.current.classList.add("block", "-ml-32");
+                eventImage.current.classList.add("block", "-ml-64");
             } else {
                 eventImage.current.classList.add("block");
             }

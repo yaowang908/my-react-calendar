@@ -205,6 +205,7 @@ export default function Week({ datesArray, cellWidth, events, ...otherProps }) {
                             barWidthClass={`${ x.barPositionInThisWeek ? "w-" + (x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1) + "/7" : "" }`}
                             link={x.url}
                             bar_with={ x.barPositionInThisWeek ? x.barPositionInThisWeek[1] - x.barPositionInThisWeek[0] + 1 : "" }
+                            image={x?.imgUrl}
                             key={nanoid()}
                         >
                             {renderHTML(x.title)}
