@@ -66,7 +66,7 @@ export default function EventEntry({
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
         >
-            <div className="hidden w-72 h-auto absolute z-50" ref={eventImage}>
+            <div className="hidden w-96 cursor-pointer h-auto absolute z-50" ref={eventImage} onClick={()=> {if(link) window.open(link);}}>
                 <img className="w-full h-auto" src={localImgSrc} alt={title} />
             </div>
             <div className="mb-1">{time.toUpperCase()}</div>
