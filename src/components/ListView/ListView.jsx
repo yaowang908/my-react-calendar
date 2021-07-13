@@ -66,8 +66,9 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                             targetYear
                         )
                     ) {
-                        console.log("targetDate: ", targetMonth, targetYear);
-                        console.log("multi: ", multi)
+                        // console.log("targetDate: ", targetMonth, targetYear);
+                        // console.log("multi: ", multi)
+                        // TODO: show time here
                         return (
                             <ListEntry
                                 key={nanoid()}
