@@ -213,6 +213,43 @@ Callback.args = {
     onChange: _callback,
 };
 
+export const ListView = Template.bind({});
+
+ListView.args = {
+    // events: [...MultiDayEvent.args.events, ...eventsPlaceholder.events]
+    events: [
+        {
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-08 16:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-09 16:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            start: "2008-11-22 14:30:00",
+            end: "2008-11-23 16:30:00",
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+    ],
+    use24Hour: false,
+    enableTimezone: "auto",
+    calendarView: "LIST",
+}; 
 
 
 

@@ -132,7 +132,7 @@ const calendarView = selector({
                 // console.log("list selected")
                 set(calendarViewAtom, "LIST");
                 break;
-                case "MONTH":
+            case "MONTH":
                 // console.log("month selected")
                 set(calendarViewAtom, "MONTH");
                 break;

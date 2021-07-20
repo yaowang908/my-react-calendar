@@ -12,6 +12,7 @@ import {
     targetYear as targetYearState,
     use24HourAtom,
     enableTimezoneAtom,
+    calendarView as calendarViewSelector,
     statusSelector,
 } from "@root/Recoil/calendar.atom";
 import moment from "moment-timezone";
@@ -24,9 +25,18 @@ function App({ events, ...otherProps }) {
     const [enableTimezoneState, setEnableTimezoneAtom] = useRecoilState(
         enableTimezoneAtom
     );
-    const { use24Hour, enableTimezone, status, onChange } = { ...otherProps };
+    const { use24Hour, enableTimezone, status, onChange, calendarView } = { ...otherProps };
     const targetMonth = useRecoilValue(targetMonthState);
     const targetYear = useRecoilValue(targetYearState);
+    const setCalendarView = useSetRecoilState(calendarViewSelector);
+
+    React.useEffect(() => {
+        if(calendarView && (calendarView === "LIST" || calendarView === "MONTH")) {
+            setCalendarView(calendarView);
+        } else {
+            console.error("Wrong 'calendarView' value ", calendarView);
+        }
+    }, [calendarView]);
 
     React.useEffect(() => {
         // console.log(use24Hour)
