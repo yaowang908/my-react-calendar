@@ -5,14 +5,17 @@ import { useRecoilValue } from "recoil";
 import {
     targetYear as targetYearState,
     targetMonth as targetMonthState,
+    use24HourAtom,
 } from "@root/Recoil/calendar.atom";
 import ListEntry from "@root/components/ListEntry/ListEntry";
+import { getEventEntryTime } from "@root/libs/getEventEntryTime";
 
 export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
     // const normalEvents = useRecoilValue(normalEventsAtom);
     // const multiDayEvents = useRecoilValue(multiDayEventsAtom);
     const targetMonth = useRecoilValue(targetMonthState);
     const targetYear = useRecoilValue(targetYearState);
+    const use24HourState = useRecoilValue(use24HourAtom);
 
     const [normal, setNormal] = React.useState(eventsData);
     const [multi, setMulti] = React.useState(multiDayEvents);
@@ -73,6 +76,7 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                             <ListEntry
                                 key={nanoid()}
                                 date={`${x?.start_date_details?.year}-${x?.start_date_details?.month}-${x?.start_date_details?.date} - ${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.date}`}
+                                time={getEventEntryTime(x, use24HourState)}
                                 link={x?.url}
                                 title={x?.title}
                                 imgSrc={x?.imgUrl}
@@ -92,6 +96,7 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                             <ListEntry
                                 key={nanoid()}
                                 date={`${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.date}`}
+                                time={getEventEntryTime(x, use24HourState)}
                                 link={x?.url}
                                 title={x?.title}
                                 imgSrc={x?.imgUrl}
