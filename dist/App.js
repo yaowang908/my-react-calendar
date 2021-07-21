@@ -67,7 +67,8 @@ function App(_ref) {
       setCalendarView(calendarView);
     } else {
       console.error("Wrong 'calendarView' value ", calendarView);
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [calendarView]);
 
   _react.default.useEffect(function () {
@@ -177,6 +178,7 @@ function App(_ref) {
      *      timezone: "America/New_York"
      *      title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur"
      *      url: "https://www.google.com"
+     *      allDay: true | false | undefined
      * enableTimezone = enableTimezoneState
      * targetTimezone = clientTimezone e.g. America/New_York
      *
@@ -191,6 +193,7 @@ function App(_ref) {
       // enableTimezone: true or auto
       if (enableTimezone === "auto") console.log("enableTimezone: auto"); // DONE: calculate time base on timezone
       //REFERENCE: var b = moment.tz("May 12th 2014 8PM", "MMM Do YYYY hA", "America/Toronto");
+      // eslint-disable-next-line array-callback-return
 
       events.map(function (event) {
         if (event.timezone !== targetTimezone) {
@@ -229,6 +232,7 @@ function App(_ref) {
 
       if (isMultiDay(_startDetails, _endDetails)) {
         temp.push({
+          allDay: event === null || event === void 0 ? void 0 : event.allDay,
           date: "".concat(_endDetails === null || _endDetails === void 0 ? void 0 : _endDetails.year, "-").concat(_endDetails === null || _endDetails === void 0 ? void 0 : _endDetails.month, "-").concat(_endDetails === null || _endDetails === void 0 ? void 0 : _endDetails.date),
           url: event === null || event === void 0 ? void 0 : event.url,
           title: event === null || event === void 0 ? void 0 : event.title,
@@ -242,6 +246,7 @@ function App(_ref) {
         });
       } else {
         temp.push({
+          allDay: event === null || event === void 0 ? void 0 : event.allDay,
           date: "".concat(_endDetails === null || _endDetails === void 0 ? void 0 : _endDetails.year, "-").concat(_endDetails === null || _endDetails === void 0 ? void 0 : _endDetails.month, "-").concat(_endDetails === null || _endDetails === void 0 ? void 0 : _endDetails.date),
           url: event === null || event === void 0 ? void 0 : event.url,
           title: event === null || event === void 0 ? void 0 : event.title,

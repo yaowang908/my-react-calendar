@@ -73,11 +73,10 @@ function ListView(_ref) {
 
       // console.log("targetDate: ", targetMonth, targetYear);
       // console.log("multi: ", multi)
-      // TODO: show time here
+      // DONE: show time here
       return /*#__PURE__*/_react.default.createElement(_ListEntry.default, {
         key: (0, _nanoid.nanoid)(),
         date: "".concat(x === null || x === void 0 ? void 0 : (_x$start_date_details = x.start_date_details) === null || _x$start_date_details === void 0 ? void 0 : _x$start_date_details.year, "-").concat(x === null || x === void 0 ? void 0 : (_x$start_date_details2 = x.start_date_details) === null || _x$start_date_details2 === void 0 ? void 0 : _x$start_date_details2.month, "-").concat(x === null || x === void 0 ? void 0 : (_x$start_date_details3 = x.start_date_details) === null || _x$start_date_details3 === void 0 ? void 0 : _x$start_date_details3.date, " - ").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details = x.end_date_details) === null || _x$end_date_details === void 0 ? void 0 : _x$end_date_details.year, "-").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details2 = x.end_date_details) === null || _x$end_date_details2 === void 0 ? void 0 : _x$end_date_details2.month, "-").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details3 = x.end_date_details) === null || _x$end_date_details3 === void 0 ? void 0 : _x$end_date_details3.date),
-        time: (0, _getEventEntryTime.getEventEntryTime)(x, use24HourState),
         link: x === null || x === void 0 ? void 0 : x.url,
         title: x === null || x === void 0 ? void 0 : x.title,
         imgSrc: x === null || x === void 0 ? void 0 : x.imgUrl
@@ -96,7 +95,7 @@ function ListView(_ref) {
       return /*#__PURE__*/_react.default.createElement(_ListEntry.default, {
         key: (0, _nanoid.nanoid)(),
         date: "".concat(x === null || x === void 0 ? void 0 : (_x$end_date_details6 = x.end_date_details) === null || _x$end_date_details6 === void 0 ? void 0 : _x$end_date_details6.year, "-").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details7 = x.end_date_details) === null || _x$end_date_details7 === void 0 ? void 0 : _x$end_date_details7.month, "-").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details8 = x.end_date_details) === null || _x$end_date_details8 === void 0 ? void 0 : _x$end_date_details8.date),
-        time: (0, _getEventEntryTime.getEventEntryTime)(x, use24HourState),
+        time: (x === null || x === void 0 ? void 0 : x.allDay) ? undefined : (0, _getEventEntryTime.getEventEntryTime)(x, use24HourState),
         link: x === null || x === void 0 ? void 0 : x.url,
         title: x === null || x === void 0 ? void 0 : x.title,
         imgSrc: x === null || x === void 0 ? void 0 : x.imgUrl
