@@ -9,6 +9,7 @@ import Calendar from "my-react-calendar/src"
 
 const events = [
         {
+            allDay: true,
             start: `${year}-${month}-${day} 14:30:00`,
             end: `${year}-${month}-${day} 16:30:00`,
             timezone: "America/New_York",
