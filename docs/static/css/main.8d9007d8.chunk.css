@@ -615,12 +615,24 @@ video {
   z-index: 50;
 }
 
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
 .col-span-4 {
   grid-column: span 4 / span 4;
 }
 
 .col-span-8 {
   grid-column: span 8 / span 8;
+}
+
+.col-span-9 {
+  grid-column: span 9 / span 9;
+}
+
+.col-span-12 {
+  grid-column: span 12 / span 12;
 }
 
 .m-0 {
@@ -1437,6 +1449,10 @@ video {
     display: flex;
   }
 
+  .md\:grid {
+    display: grid;
+  }
+
   .md\:hidden {
     display: none;
   }
@@ -1538,4 +1554,4 @@ video {
 @media (min-width: 1536px) {
 }
 
-/*# sourceMappingURL=main.0f10b21e.chunk.css.map*/
+/*# sourceMappingURL=main.8d9007d8.chunk.css.map*/
