@@ -55,10 +55,20 @@ function App(_ref) {
       use24Hour = _otherProps.use24Hour,
       enableTimezone = _otherProps.enableTimezone,
       status = _otherProps.status,
-      onChange = _otherProps.onChange;
+      onChange = _otherProps.onChange,
+      calendarView = _otherProps.calendarView;
 
   var targetMonth = (0, _recoil.useRecoilValue)(_calendar.targetMonth);
   var targetYear = (0, _recoil.useRecoilValue)(_calendar.targetYear);
+  var setCalendarView = (0, _recoil.useSetRecoilState)(_calendar.calendarView);
+
+  _react.default.useEffect(function () {
+    if (calendarView && (calendarView === "LIST" || calendarView === "MONTH")) {
+      setCalendarView(calendarView);
+    } else {
+      console.error("Wrong 'calendarView' value ", calendarView);
+    }
+  }, [calendarView]);
 
   _react.default.useEffect(function () {
     // console.log(use24Hour)

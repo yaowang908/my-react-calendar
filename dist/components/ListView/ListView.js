@@ -21,6 +21,8 @@ var _calendar = require("../../Recoil/calendar.atom");
 
 var _ListEntry = _interopRequireDefault(require("../ListEntry/ListEntry"));
 
+var _getEventEntryTime = require("../../libs/getEventEntryTime");
+
 var _excluded = ["eventsData", "multiDayEvents"];
 
 function ListView(_ref) {
@@ -31,6 +33,7 @@ function ListView(_ref) {
   // const multiDayEvents = useRecoilValue(multiDayEventsAtom);
   var targetMonth = (0, _recoil.useRecoilValue)(_calendar.targetMonth);
   var targetYear = (0, _recoil.useRecoilValue)(_calendar.targetYear);
+  var use24HourState = (0, _recoil.useRecoilValue)(_calendar.use24HourAtom);
 
   var _React$useState = _react.default.useState(eventsData),
       _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
@@ -68,11 +71,13 @@ function ListView(_ref) {
     if (shouldMultiDayEventShow(x === null || x === void 0 ? void 0 : x.start_date_details, x === null || x === void 0 ? void 0 : x.end_date_details, targetMonth, targetYear)) {
       var _x$start_date_details, _x$start_date_details2, _x$start_date_details3, _x$end_date_details, _x$end_date_details2, _x$end_date_details3;
 
-      console.log("targetDate: ", targetMonth, targetYear);
-      console.log("multi: ", multi);
+      // console.log("targetDate: ", targetMonth, targetYear);
+      // console.log("multi: ", multi)
+      // TODO: show time here
       return /*#__PURE__*/_react.default.createElement(_ListEntry.default, {
         key: (0, _nanoid.nanoid)(),
         date: "".concat(x === null || x === void 0 ? void 0 : (_x$start_date_details = x.start_date_details) === null || _x$start_date_details === void 0 ? void 0 : _x$start_date_details.year, "-").concat(x === null || x === void 0 ? void 0 : (_x$start_date_details2 = x.start_date_details) === null || _x$start_date_details2 === void 0 ? void 0 : _x$start_date_details2.month, "-").concat(x === null || x === void 0 ? void 0 : (_x$start_date_details3 = x.start_date_details) === null || _x$start_date_details3 === void 0 ? void 0 : _x$start_date_details3.date, " - ").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details = x.end_date_details) === null || _x$end_date_details === void 0 ? void 0 : _x$end_date_details.year, "-").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details2 = x.end_date_details) === null || _x$end_date_details2 === void 0 ? void 0 : _x$end_date_details2.month, "-").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details3 = x.end_date_details) === null || _x$end_date_details3 === void 0 ? void 0 : _x$end_date_details3.date),
+        time: (0, _getEventEntryTime.getEventEntryTime)(x, use24HourState),
         link: x === null || x === void 0 ? void 0 : x.url,
         title: x === null || x === void 0 ? void 0 : x.title,
         imgSrc: x === null || x === void 0 ? void 0 : x.imgUrl
@@ -91,6 +96,7 @@ function ListView(_ref) {
       return /*#__PURE__*/_react.default.createElement(_ListEntry.default, {
         key: (0, _nanoid.nanoid)(),
         date: "".concat(x === null || x === void 0 ? void 0 : (_x$end_date_details6 = x.end_date_details) === null || _x$end_date_details6 === void 0 ? void 0 : _x$end_date_details6.year, "-").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details7 = x.end_date_details) === null || _x$end_date_details7 === void 0 ? void 0 : _x$end_date_details7.month, "-").concat(x === null || x === void 0 ? void 0 : (_x$end_date_details8 = x.end_date_details) === null || _x$end_date_details8 === void 0 ? void 0 : _x$end_date_details8.date),
+        time: (0, _getEventEntryTime.getEventEntryTime)(x, use24HourState),
         link: x === null || x === void 0 ? void 0 : x.url,
         title: x === null || x === void 0 ? void 0 : x.title,
         imgSrc: x === null || x === void 0 ? void 0 : x.imgUrl

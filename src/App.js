@@ -36,6 +36,7 @@ function App({ events, ...otherProps }) {
         } else {
             console.error("Wrong 'calendarView' value ", calendarView);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [calendarView]);
 
     React.useEffect(() => {
@@ -155,6 +156,7 @@ function App({ events, ...otherProps }) {
                 console.log("enableTimezone: auto");
             // DONE: calculate time base on timezone
             //REFERENCE: var b = moment.tz("May 12th 2014 8PM", "MMM Do YYYY hA", "America/Toronto");
+            // eslint-disable-next-line array-callback-return
             events.map((event) => {
                 if (event.timezone !== targetTimezone) {
                     const _startMoment = moment.tz(

@@ -15,11 +15,12 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactRenderHtml = _interopRequireDefault(require("react-render-html"));
 
-var _excluded = ["date", "title", "link", "imgSrc"];
+var _excluded = ["date", "time", "title", "link", "imgSrc"];
 var local_default_image = null;
 
 function ListEntry(_ref) {
   var date = _ref.date,
+      time = _ref.time,
       title = _ref.title,
       link = _ref.link,
       imgSrc = _ref.imgSrc,
@@ -38,13 +39,13 @@ function ListEntry(_ref) {
     }
   }, [imgSrc]);
 
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "py-4 px-4 md:px-12 border-b border-gray-300 w-10/12 mx-auto grid grid-cols-12 gap-4"
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "hidden md:grid py-4 px-4 md:px-12 border-b border-gray-300 w-10/12 mx-auto grid grid-cols-12 gap-4"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "col-span-8 flex flex-col flex-wrap justify-between"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "text-sm"
-  }, date), /*#__PURE__*/_react.default.createElement("div", {
+  }, date, " ", (0, _reactRenderHtml.default)("<br/>"), time ? "".concat(time) : ""), /*#__PURE__*/_react.default.createElement("div", {
     className: "font-bold text-base md:text-xl max-w-lg"
   }, /*#__PURE__*/_react.default.createElement("a", {
     className: "",
@@ -60,5 +61,27 @@ function ListEntry(_ref) {
     className: "w-full",
     src: localImgSrc,
     alt: title
-  }))));
+  })))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "md:hidden py-4 px-4 md:px-12 border-b border-gray-300 w-10/12 mx-auto grid grid-cols-12 gap-4"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "col-span-9 flex flex-col flex-wrap justify-between"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "text-sm"
+  }, date, " ", (0, _reactRenderHtml.default)("<br/>"), time ? "".concat(time) : "")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "col-span-3 w-auto md:w-48"
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    className: "w-full",
+    href: link,
+    alt: "event title"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    className: "w-full",
+    src: localImgSrc,
+    alt: title
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "col-span-12 font-bold text-base md:text-xl max-w-lg"
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    className: "",
+    href: link,
+    alt: "event title"
+  }, (0, _reactRenderHtml.default)(title)))));
 }
