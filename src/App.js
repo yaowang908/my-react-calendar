@@ -141,6 +141,7 @@ function App({ events, ...otherProps }) {
          *      timezone: "America/New_York"
          *      title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur"
          *      url: "https://www.google.com"
+         *      allDay: true | false | undefined
          * enableTimezone = enableTimezoneState
          * targetTimezone = clientTimezone e.g. America/New_York
          *
@@ -211,6 +212,7 @@ function App({ events, ...otherProps }) {
             const _endDetails = getTimeDetails(event?.end);
             if (isMultiDay(_startDetails, _endDetails)) {
                 temp.push({
+                    allDay: event?.allDay,
                     date: `${_endDetails?.year}-${_endDetails?.month}-${_endDetails?.date}`,
                     url: event?.url,
                     title: event?.title,
@@ -224,6 +226,7 @@ function App({ events, ...otherProps }) {
                 });
             } else {
                 temp.push({
+                    allDay: event?.allDay,
                     date: `${_endDetails?.year}-${_endDetails?.month}-${_endDetails?.date}`,
                     url: event?.url,
                     title: event?.title,

@@ -71,12 +71,11 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                     ) {
                         // console.log("targetDate: ", targetMonth, targetYear);
                         // console.log("multi: ", multi)
-                        // TODO: show time here
+                        // DONE: show time here
                         return (
                             <ListEntry
                                 key={nanoid()}
                                 date={`${x?.start_date_details?.year}-${x?.start_date_details?.month}-${x?.start_date_details?.date} - ${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.date}`}
-                                time={getEventEntryTime(x, use24HourState)}
                                 link={x?.url}
                                 title={x?.title}
                                 imgSrc={x?.imgUrl}
@@ -96,7 +95,7 @@ export default function ListView({ eventsData, multiDayEvents, ...otherProps}) {
                             <ListEntry
                                 key={nanoid()}
                                 date={`${x?.end_date_details?.year}-${x?.end_date_details?.month}-${x?.end_date_details?.date}`}
-                                time={getEventEntryTime(x, use24HourState)}
+                                time={x?.allDay ? undefined : getEventEntryTime(x, use24HourState)}
                                 link={x?.url}
                                 title={x?.title}
                                 imgSrc={x?.imgUrl}

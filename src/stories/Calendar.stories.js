@@ -219,6 +219,17 @@ ListView.args = {
     // events: [...MultiDayEvent.args.events, ...eventsPlaceholder.events]
     events: [
         {
+            allDay: true,
+            start: `${year}-${month}-08 14:30:00`,
+            end: `${year}-${month}-08 16:30:00`,
+            timezone: "America/New_York",
+            title:
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur",
+            url: "https://www.google.com",
+            imgUrl: "https://source.unsplash.com/random/1200x630",
+        },
+        {
+            allDay: false,
             start: `${year}-${month}-08 14:30:00`,
             end: `${year}-${month}-08 16:30:00`,
             timezone: "America/New_York",
@@ -249,7 +260,7 @@ ListView.args = {
     use24Hour: false,
     enableTimezone: "auto",
     calendarView: "LIST",
-}; 
+};
 
 
 
