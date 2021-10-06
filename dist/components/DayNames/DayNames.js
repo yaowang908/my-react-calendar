@@ -13,6 +13,9 @@ var _nanoid = require("nanoid");
 
 function DayNames() {
   var days = [{
+    fullName: "Sunday",
+    abbr: "Sun."
+  }, {
     fullName: "Monday",
     abbr: "Mon."
   }, {
@@ -30,9 +33,6 @@ function DayNames() {
   }, {
     fullName: "Saturday",
     abbr: "Sat."
-  }, {
-    fullName: "Sunday",
-    abbr: "Sun."
   }];
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "grid grid-cols-7 w-full h-10 mt-5"

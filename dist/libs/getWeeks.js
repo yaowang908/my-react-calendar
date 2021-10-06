@@ -146,7 +146,7 @@ var completeWeek = function completeWeek(arr, startingIndex, currentYear) {
   // the added days should have the last month, dates depends on the last month max day number
 
 
-  var _lastMonthLastDay = daysInMonth(_firstDay.month, currentYear);
+  var _lastMonthLastDay = daysInMonth(_firstDay.month - 1, currentYear);
 
   for (var _i = 0; _i < missingDays; _i++) {
     // console.log(_lastMonthLastDay - i);
