@@ -4,6 +4,10 @@ import { nanoid } from "nanoid";
 export default function DayNames() {
     const days = [
         {
+            fullName: "Sunday",
+            abbr: "Sun.",
+        },
+        {
             fullName: "Monday",
             abbr: "Mon.",
         },
@@ -26,10 +30,6 @@ export default function DayNames() {
         {
             fullName: "Saturday",
             abbr: "Sat.",
-        },
-        {
-            fullName: "Sunday",
-            abbr: "Sun.",
         },
     ];
 

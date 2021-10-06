@@ -133,7 +133,7 @@ const completeWeek = (arr, startingIndex, currentYear) => {
     // missing days at the beginning
     // this could only happen at the beginning of each month
     // the added days should have the last month, dates depends on the last month max day number
-    const _lastMonthLastDay = daysInMonth(_firstDay.month, currentYear);
+    const _lastMonthLastDay = daysInMonth(_firstDay.month - 1, currentYear);
     for (let i = 0; i < missingDays; i++) {
         // console.log(_lastMonthLastDay - i);
         _arr.unshift({
