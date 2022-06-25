@@ -2,7 +2,7 @@
 
 This project is created by Create-react-app, using TailwindCSS for styling, gulp for bundling files.
 
-[Demo](http://www.yaow.me/my-react-calendar/)
+[Demo](https://yaowang908.github.io/my-react-calendar/)
 
 ```js
 import Calendar from "my-react-calendar/src"
